@@ -1,9 +1,6 @@
 ﻿<meta charset="UTF-8">
 <?php
-$dblocation = "localhost";
-$dbuser = "root";
-$dbpasswd = "dlit";
-$link = mysqli_connect($dblocation, $dbuser, $dbpasswd);
+include 'db_connect.php';
 $q = "CREATE DATABASE IF NOT EXISTS itslibro1";
 mysqli_query($link, $q);
 mysqli_select_db($link, "itslibro1");
@@ -13,7 +10,8 @@ $q1 = "CREATE TABLE IF NOT EXISTS `itslibro1`.`users` (
   `nick` VARCHAR(45) NOT NULL,
   `email` VARCHAR(45) NULL,
   `u_password` VARCHAR(45) NULL,
-  `avatar` VARCHAR(45) NULL,
+  `age` DATE NULL,
+  `avatar` VARCHAR(500) NULL,
   `about_user` VARCHAR(256) NULL,
   `u_status` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id_user`),
@@ -178,7 +176,7 @@ ENGINE = InnoDB CHARACTER SET cp1251";
 
 for ($i = 1; $i <= 9; $i++) {
   $q = ${ 'q' . $i};
-  var_dump(mysqli_query($link, $q));
+  mysqli_query($link, $q);
   echo '<br>';
 }
 echo '<br>';
@@ -196,12 +194,7 @@ $q5 = "INSERT INTO users (nick, email, u_password, avatar, about_user, u_status)
 
 for ($i = 1; $i <= 5; $i++) {
   $q = ${ 'q' . $i};
-  $mq = mysqli_query($link, $q);
-  if ($mq) {
-    echo "true";
-  } else
-    echo "false";
-  echo '<br>';
+  mysqli_query($link, $q);
 }
 echo '<br>';
 
@@ -216,7 +209,7 @@ b_description, category, views_count, in_list_count, rating, ratings_count) VALU
 
 for ($i = 1; $i <= 3; $i++) {
   $q = ${ 'q' . $i};
-  var_dump(mysqli_query($link, $q));
+  mysqli_query($link, $q);
   echo '<br>';
 }
 echo '<br>';
@@ -234,7 +227,7 @@ $q5 = "INSERT INTO list_readed VALUES ('5', '2')";
 
 for ($i = 1; $i <= 5; $i++) {
   $q = ${ 'q' . $i};
-  var_dump(mysqli_query($link, $q));
+  mysqli_query($link, $q);
   echo '<br>';
 }
 echo '<br>';
@@ -254,7 +247,7 @@ $q6 = "INSERT INTO comments (id_commenter, id_book, date_comment, c_comment, lik
 
 for ($i = 1; $i <= 6; $i++) {
   $q = ${ 'q' . $i};
-  var_dump(mysqli_query($link, $q));
+  mysqli_query($link, $q);
   echo '<br>';
 }
 echo '<br>';
