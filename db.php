@@ -10,7 +10,7 @@ $q1 = "CREATE TABLE IF NOT EXISTS `itslibro1`.`users` (
   `nick` VARCHAR(45) NOT NULL,
   `email` VARCHAR(45) NULL,
   `u_password` VARCHAR(45) NULL,
-  `age` DATE NULL,
+  `age` VARCHAR(45) NULL,
   `avatar` VARCHAR(500) NULL,
   `about_user` VARCHAR(256) NULL,
   `u_status` VARCHAR(45) NOT NULL,

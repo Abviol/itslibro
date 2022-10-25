@@ -23,13 +23,13 @@ input {
    margin: 10px 0;
    padding: 10px;
    border: unset;
-   border-bottom: 2px solid #ffbb00;
+   border-bottom: 2px solid #fad77b;
    outline: none;
 }
 
 button {
    padding: 10px;
-   background: #ffbb00;
+   background: #ffb800;
    border: unset;
    border-radius: 10px;
    cursor: pointer;

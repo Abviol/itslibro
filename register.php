@@ -16,10 +16,10 @@ session_start();
    <!-- форма авторизации -->
    <form action="signup.php" method="post">
 
-      <label for="">Ваш e-mail</label>
+      <label>Ваш e-mail</label>
       <input type="e-mail" name="email" id="" placeholder="Вкажіть e-mail">
 
-      <label for="">Нікнейм</label>
+      <label>Нікнейм</label>
       <input type="text" name="nick" placeholder="Придумайте свій нікнейм">
 
       <!-- <label for="">Ім’я</label>
@@ -28,16 +28,16 @@ session_start();
       <label for="">Прізвище</label>
       <input type="text" name="email" placeholder="Вкажіть ваше прізвище"> -->
 
-      <label for="">Вік</label>
-      <input type="date" name="age" placeholder="Вкажіть ваш ік">
+      <label>Вік</label>
+      <input type="text" name="age" placeholder="Вкажіть ваш ік">
 
-      <label for="">Пароль</label>
+      <label>Пароль</label>
       <input type="password" name="pwd" placeholder="Придумайте пароль">
 
-      <label for="">Підтвердження паролю</label>
+      <label>Підтвердження паролю</label>
       <input type="password" name="pwd_conf" placeholder="Ще раз введіть пароль">
 
-      <button>Зареєструватися</button>
+      <button type="submit">Зареєструватися</button>
       <p>Вже маєте акаунт? - <a href="login.php">увійдіть у систему!</a></p>
 
       <?php

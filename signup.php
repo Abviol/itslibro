@@ -13,14 +13,21 @@ $pwd_conf = $_POST['pwd_conf'];
 if ($pwd === $pwd_conf) {
 
 
-   mysqli_query($link, "INSERT INTO 'user's ('id', 'nick', 'email', 'age', 'u_password', 'u_status') VALUES (NULL, '$nick', '$email', '$age', '$pwd', 'user')");
 
+   $q = "INSERT INTO users (nick, email, age, u_password, u_status) VALUES ('" . $nick . "', '" . $email . "', '" . $age . "', '" . $pwd . "', 'user')";
+
+   mysqli_query($link, $q);
 
    $_SESSION['message'] = 'Дякуємо за рееєстрацію!';
    header('Location: login.php');
+
 
 } else {
    $_SESSION['message'] = 'Паролі на співпадають';
    header('Location: register.php');
 }
+
+/* if (!$email && !$nick && !$age && !$pwd && !$pwd_conf) {
+ $_SESSION['message'] = 'Паролі на співпадають';
+ } */
 ?>
