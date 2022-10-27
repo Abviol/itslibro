@@ -13,6 +13,7 @@ session_start();
 </head>
 
 <body>
+
    <!-- форма авторизации -->
    <form action="signup.php" method="post">
 
