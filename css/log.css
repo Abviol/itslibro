@@ -43,12 +43,14 @@ a {
    text-decoration: none;
 }
 
-p{
-   margin: 10px 0;
-}
-
 label {
    font-weight: 500;
+}
+
+.bad {
+   font-size: 10px;
+   color: red;
+   margin: 10px 0;
 }
 
 .msg {
@@ -57,4 +59,5 @@ label {
    padding: 10px;
    text-align: center;
    font-weight: bold;
+   margin: 10px 0;
 }

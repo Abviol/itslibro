@@ -18,19 +18,13 @@ session_start();
    <form action="signup.php" method="post">
 
       <label>Ваш e-mail</label>
-      <input type="e-mail" name="email" id="" placeholder="Вкажіть e-mail">
+      <input type="e-mail" name="email" id="" placeholder="Вкажіть e-mail" value=<?php echo $_SESSION['email']; ?>>
 
       <label>Нікнейм</label>
-      <input type="text" name="nick" placeholder="Придумайте свій нікнейм">
-
-      <!-- <label for="">Ім’я</label>
-      <input type="text" name="name" placeholder="Вкажіть ваше ім’я">
-
-      <label for="">Прізвище</label>
-      <input type="text" name="email" placeholder="Вкажіть ваше прізвище"> -->
+      <input type="text" name="nick" placeholder="Придумайте свій нікнейм" value=<?php echo $_SESSION['nick']; ?>>
 
       <label>Вік</label>
-      <input type="text" name="age" placeholder="Вкажіть ваш ік">
+      <input type="text" name="age" placeholder="Вкажіть ваш ік" value=<?php echo $_SESSION['age']; ?>>
 
       <label>Пароль</label>
       <input type="password" name="pwd" placeholder="Придумайте пароль">
@@ -42,10 +36,14 @@ session_start();
       <p>Вже маєте акаунт? - <a href="login.php">увійдіть у систему!</a></p>
 
       <?php
-      if ($_SESSION['message']) {
-         echo '<p class="msg">' . $_SESSION['message'] . '</p>';
-      }
-      unset($_SESSION['message']);
+         if ($_SESSION['message']) {
+            echo '<p class="msg">' . $_SESSION['message'] . '</p>';
+         }
+         unset($_SESSION['message']);
+
+         unset($_SESSION['email']);
+         unset($_SESSION['nick']);
+         unset($_SESSION['age']);
       ?>
 
    </form>
