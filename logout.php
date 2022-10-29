@@ -6,5 +6,7 @@ $_SESSION['email'] = "";
 $_SESSION['age'] = "";
 $_SESSION['u_status'] = "";
 $_SESSION['about_user'] = "";
+$_SESSION['pwd'] = "";
+$_SESSION['avatar'] = "";
 header('Location: index.php');
 ?>

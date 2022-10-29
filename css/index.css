@@ -662,3 +662,162 @@ body._touch .menu__list>li._active .menu__arrow {
    transform: scale(1.2);
    transition: all 0.3s ease 0s;
 }
+
+/* --------- ПРОФІЛЬ -------------- */
+
+.profile__profile {
+      margin: 100px 0;
+}
+
+.profile__container {
+
+}
+
+.profile__paragraph {
+   height: 100px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   background-color: #fff;
+   border-radius: 10px;
+}
+
+.profile__paragraph-text {
+   font-weight: 600;
+   font-size: 32px;
+   line-height: 38px;
+}
+
+.profile__main-info {
+   margin-top: 20px;
+   width: 100%;
+   display: flex;
+   justify-content: space-between;
+}
+
+.avnick {
+   text-align: center;
+   align-items: center;
+   justify-content: center;
+}
+
+.profile__avnick {
+   margin-right: 20px;
+   width: 300px;
+   height: 200px;
+   background-color: rgb(255, 255, 255);
+   border-radius: 10px;
+   display: flex;
+   justify-content: center;
+   z-index: 10;
+}
+
+.avnick__backgr {
+   position: absolute;
+   height: 75px;
+   width: 300px;
+   border-radius: 10px 10px 0 0;
+   background-color: #000000;
+   z-index: -1;
+}
+
+.avnick__backgr-blur {
+   width: 100%;
+   height: 100%;
+   border-radius: 10px 10px 0 0;
+   background: rgba(255, 255, 255, 0.49);
+   backdrop-filter: blur(10px);
+}
+
+.avnick__avatar {
+   margin: 25px 0 20px 0;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+.avnick__avatar > div {
+   border-radius: 100px;
+   width: 100px;
+   height: 100px;
+}
+
+.avnick__nick > p {
+   font-weight: 600;
+   font-size: 20px;
+   line-height: 22px;
+   color: #A96C25;
+}
+
+.profile__details {
+   max-width: 90%;
+   background-color: #fff;
+   border-radius: 10px;
+   flex: 1;
+   display: flex;
+   
+   justify-content: space-between;
+}
+
+.detail__row {
+   width: 100%;
+}
+
+.detail__name {
+   font-weight: 400;
+   font-size: 14px;
+   line-height: 15px;
+   color: #A96C25;
+}
+
+.details__decoration {
+   position: relative;
+   right: 0;
+   height: 200px;
+   width: 60px;
+   border-radius: 0 10px 10px 0;
+   background-color: #ffdc80;
+   z-index: 0;
+}
+
+.details__column {
+   margin: 25px 0 25px 25px;
+   justify-content: space-between;
+   display: flex;
+   flex-direction: column;
+}
+
+.detail__info {
+   margin-top: 5px;
+   padding-left: 10px;
+   opacity: 0.8;
+   border-bottom: 1px solid rgba(204, 146, 58, 0.25);
+   font-weight: 500;
+   font-size: 16px;
+   line-height: 17px;
+}
+
+.profile__about {
+   width: 100%;
+   padding: 25px;
+   margin-top: 20px;
+   background-color: #fff;
+   border-radius: 10px;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+}
+
+.about__text {
+   font-weight: 600;
+   font-size: 24px;
+   line-height: 23px;
+   margin-bottom: 10px;
+}
+
+.about__info {
+   font-weight: 400;
+   font-size: 16px;
+   line-height: 17px;
+}

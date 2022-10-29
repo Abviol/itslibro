@@ -9,30 +9,175 @@ session_start();
 <head>
    <meta charset="UTF-8">
    <title>Вхід</title>
-   <link href="css/log.css" rel="stylesheet" />
+   <link href="css/index.css" rel="stylesheet" />
 </head>
 
 <body>
-   <!-- форма профиля -->
-   <form action="signin.php" method="post">
-      <p>
-         <?= $_SESSION['nick'] ?>
-      </p>
-      <p>
-         <?= $_SESSION['email'] ?>
-      </p>
-      <p>
-         <?= $_SESSION['age'] ?>
-      </p>
-      <p>
-         <?= $_SESSION['u_status'] ?>
-      </p>
-      <p>
-         <?= $_SESSION['about_user'] ?>
-      </p>
+   <div class="wrapper">
+      <!------------------- HEADER -------------------------->
+      <header class="header">
+         <div class="header__container _container">
+            <a href="index.php"><img class="header__logo" src="img/logo.svg"></img></a>
+            <ul class="menu__search">
+               <li class="menu__item">
+                  <input type="text" class="input__search" placeholder="Пошук...">
+               </li>
+               <li class="menu__item">
+                  <input type="image" src="img/search.svg" height="20" alt="Кнопка «input»">
+               </li>
+            </ul>
+            <div class="menu__icon">
+               <span></span>
+            </div>
+            <nav class="header__menu menu">
+               <ul class="menu__list">
+                  <li class="menu__item">
+                     <a href="" class="menu__link">Бібліотека</a>
+                  </li>
+                  <li class="menu__item">
+                     <a href="" class="menu__link">Про сайт</a>
+                  </li>
+                  <li class="menu__item">
+                     <a href="" class="menu__link">Підписка</a>
+                     <span class="menu__arrow"></span>
+                     <ul class="menu__sub-list">
+                        <li>
+                           <a href="" class="menu__sub-link">Оформити підписку</a>
+                        </li>
+                        <li>
+                           <a href="" class="menu__sub-link">Ввести промокод</a>
+                        </li>
+                     </ul>
+                  </li>
+                  <?php if (!empty($_SESSION['nick'])) { ?>
+                  <li class="menu__item">
+                     <a href="#" class="menu__link">Мої книжки</a>
+                  </li>
+                  <?php } ?>
+                  <li class="menu__item">
+                     <?php if (empty($_SESSION['nick'])) { ?>
+                     <a href="login.php" class="menu__link">Увійти</a>
+                     <?php } else { ?>
+                     <a class="menu__link menu__login">
+                        <?php echo $_SESSION['nick']; ?>
+                     </a>
+                     <span class="menu__arrow"></span>
+                     <ul class="menu__sub-list">
+                        <li>
+                           <a href="profile.php" class="menu__sub-link">Профіль</a>
+                        </li>
+                        <li>
+                           <a href="my_books.php" class="menu__sub-link">Мої книжки</a>
+                        </li>
+                        <?php if ($_SESSION['c_status'] == 'админ') { ?>
+                        <li>
+                           <a href="admin.php" class="menu__sub-link">Сторінка адміністратора</a>
+                        </li>
+                        <?php } ?>
+                        <li>
+                           <a href="logout.php" class="menu__sub-link">Вийти з акаунту</a>
+                        </li>
+                     </ul>
+                     <?php } ?>
+                  </li>
+               </ul>
+            </nav>
+         </div>
+      </header>
+      <!------------------- Page -------------------------->
+      <main class="page">
+         <div class="profile__container _container">
+            <div class="profile__profile">
+               <div class="profile__paragraph">
+                  <h1 class="profile__paragraph-text">Профіль</h1>
+               </div>
+               <div class="profile__main-info">
+                  <div class="profile__avnick">
+                     <div class="avnick__backgr"
+                        style="background: url(<?php echo $_SESSION['avatar'] ?>);  background-repeat: no-repeat; background-size: cover; background-position: center;">
+                        <div class="avnick__backgr-blur"></div>
 
-      <a href="logout.php">Вийти</a>
-   </form>
+                     </div>
+                     <ul class="avnick">
+                        <li class="avnick__avatar">
+                           <div
+                              style="background: url(<?php echo $_SESSION['avatar'] ?>); background-position: center; background-size: cover;">
+                        </li>
+                        <li class="avnick__nick">
+                           <p>
+                              <?php echo $_SESSION['nick'] ?>
+                           </p>
+                        </li>
+                     </ul>
+                  </div>
+
+                  <div class="profile__details">
+                     <div class="details__column">
+                        <div class="detail__row">
+                           <p class="detail__name">E-mail:</p>
+                           <input type="text" class="detail__info" value=<?php echo $_SESSION['email'] ?>>
+                        </div>
+                        <div class="detail__row">
+                           <p class="detail__name">Вік:</p>
+                           <input type="text" class="detail__info" value=<?php echo $_SESSION['age'] ?>>
+                        </div>
+                        <div class="detail__row">
+                           <p class="detail__name">Пароль:</p>
+                           <input type="password" class="detail__info" value=<?php echo $_SESSION['u_password'] ?>>
+                        </div>
+                     </div>
+                     <div class="details__decoration"></div>
+                  </div>
+               </div>
+               <div class="profile__about">
+                  <h2 class="about__text">Про себе</h2>
+                  <p class="about__info">
+                     <?php if (!empty($_SESSION['about_user'])) {
+                        echo $_SESSION['about_user'];
+                     } else {
+                        echo "Читач сайту Itslibro";
+                     } ?>
+                  </p>
+               </div>
+            </div>
+         </div>
+      </main>
+      <!------------------- FOOTER -------------------------->
+      <footer class="footer">
+         <nav class="footer__container _container">
+            <div class="footer__column">
+               <h5>Про проект</h5>
+               <ul>
+                  <li><a href="">Що таке Itslibro?</a></li>
+               </ul>
+            </div>
+            <div class="footer__column">
+               <h5>Підписка</h5>
+               <ul>
+                  <li><a href="">Оформити підписку</a></li>
+                  <li><a href="">Ввести промокод</a></li>
+               </ul>
+            </div>
+            <div class="footer__column">
+               <h5>Служба підтримки</h5>
+               <ul>
+                  <li><a href="">+(38) 095 489 16 59</a></li>
+                  <li><a href="">libhelp@gmail.com</a></li>
+               </ul>
+            </div>
+            <div class="footer__column">
+               <h5>Слідкуйте за новинами</h5>
+               <div class="footer__icons">
+                  <a href="https://www.instagram.com/abviol999/"><img src="img/inst.svg" alt=""></a>
+                  <a href="https://www.youtube.com/channel/UCC7NAPBjk0yZ4ee6WtH0ZCQ"><img src="img/yt.svg" alt=""></a>
+                  <a href="https://t.me/abviol"><img src="img/tg.svg" alt=""></a>
+                  <a href="https://www.facebook.com/profile.php?id=100059965062647"><img src="img/fb.svg" alt=""></a>
+               </div>
+            </div>
+         </nav>
+      </footer>
+   </div>
+   <script src="js/script.js"></script>
 </body>
 
 </html>

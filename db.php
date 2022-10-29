@@ -182,15 +182,15 @@ for ($i = 1; $i <= 9; $i++) {
 echo '<br>';
 
 //users
-$q1 = "INSERT INTO users (nick, email, u_password, avatar, about_user, u_status) VALUES ('Abviol', 'kyselov_n@dlit.dp.ua', 'admin', '1', 'Полюбляю наукову фантастику й бойовики', 'admin')";
+$q1 = "INSERT INTO users (nick, email, u_password, age, avatar, about_user, u_status) VALUES ('Abviol', 'kyselov_n@dlit.dp.ua', 'admin2006', '16', 'img/avatars/Abviol.jpg', 'Полюбляю наукову фантастику й бойовики', 'admin')";
 
-$q2 = "INSERT INTO users (nick, email, u_password, avatar, about_user, u_status) VALUES ('Патріот', 'iloveuA@gmail.com', 'uawillwin', '', '', 'user')";
+$q2 = "INSERT INTO users (nick, email, u_password, age, avatar, about_user, u_status) VALUES ('Патріот', 'iloveuA@gmail.com', 'uawillwin', '21', '', '', 'user')";
 
-$q3 = "INSERT INTO users (nick, email, u_password, avatar, about_user, u_status) VALUES ('Артур Пирожков', 'pyro2018@gmail.com', 'songpong11', '3', 'Обожнюю бабусині приіжки', 'user')";
+$q3 = "INSERT INTO users (nick, email, u_password, age, avatar, about_user, u_status) VALUES ('Артур Пирожков', 'pyro2018@gmail.com', 'songpong11', '13', '3', 'Обожнюю бабусині приіжки', 'user')";
 
-$q4 = "INSERT INTO users (nick, email, u_password, avatar, about_user, u_status) VALUES ('Іван', 'ivan_lit@gmail.com', '120934', '', '', 'user')";
+$q4 = "INSERT INTO users (nick, email, u_password, age, avatar, about_user, u_status) VALUES ('Іван', 'ivan_lit@gmail.com', '120934111', '19', '', '', 'user')";
 
-$q5 = "INSERT INTO users (nick, email, u_password, avatar, about_user, u_status) VALUES ('про100ліцеїст', 'lyceum_best@gmail.com', '1234', '', 'про100ліцеїст, ЛІТ', 'user')";
+$q5 = "INSERT INTO users (nick, email, u_password, age, avatar, about_user, u_status) VALUES ('про100ліцеїст', 'lyceum_best@gmail.com', '12341234', '17', '', 'про100ліцеїст, ЛІТ', 'user')";
 
 for ($i = 1; $i <= 5; $i++) {
   $q = ${ 'q' . $i};

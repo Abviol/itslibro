@@ -23,7 +23,7 @@ session_start();
       <!------------------- HEADER -------------------------->
       <header class="header">
          <div class="header__container _container">
-            <a href="index.html"><img class="header__logo" src="img/logo.svg"></img></a>
+            <a href="index.php"><img class="header__logo" src="img/logo.svg"></img></a>
             <ul class="menu__search">
                <li class="menu__item">
                   <input type="text" class="input__search" placeholder="Пошук...">
@@ -55,9 +55,11 @@ session_start();
                         </li>
                      </ul>
                   </li>
+                  <?php if (!empty($_SESSION['nick'])) { ?>
                   <li class="menu__item">
-                     <a href="" class="menu__link">Мої книжки</a>
+                     <a href="#" class="menu__link">Мої книжки</a>
                   </li>
+                  <?php } ?>
                   <li class="menu__item">
                      <?php if (empty($_SESSION['nick'])) { ?>
                      <a href="login.php" class="menu__link">Увійти</a>
@@ -769,5 +771,3 @@ session_start();
    </div>
    <script src="js/script.js"></script> <!-- скрипт находится сдесь для более быстрой загрузки сайта -->
 </body>
-
-</html>
