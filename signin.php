@@ -2,7 +2,6 @@
 ini_set('session.save_path', getcwd() . '\sessions');
 session_start();
 include 'db_connect.php';
-include 'function.php';
 
 
 $nick = $_POST['nick'];
@@ -27,16 +26,9 @@ if ($nick == "" || $pwd == "") {
       $_SESSION['u_status'] = $user['u_status'];
       $_SESSION['about_user'] = $user['about_user'];
       $_SESSION['u_password'] = $user['u_password'];
-
-      if (empty($user['avatar'])) {
-         $_SESSION['avatar'] = make_avatar(strtoupper($_SESSION['nick'][0]));
-      } else {
-         $_SESSION['avatar'] = $user['avatar'];
-      }
+      $_SESSION['avatar'] = $user['avatar'];
 
       header('Location: index.php');
-
-      $user_avatar = make_avatar(strtoupper($_SESSION['nick'][0]));
 
    } else {
       $_SESSION['message'] = 'Невірно введено логін або пароль!';

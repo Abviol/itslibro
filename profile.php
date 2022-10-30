@@ -1,6 +1,24 @@
 ﻿<?php
 ini_set('session.save_path', getcwd() . '\sessions');
 session_start();
+include 'db_connect.php';
+include 'upload_avatar.php';
+
+function loadAvatar($avatar)
+{
+   $path = 'img/avatar/' . $_SESSION['nick'] . '.jpg';
+   unlink($path);
+   $path = 'img/avatars' . $_SESSION['nick'] . '.jpg';
+   move_uploaded_file($_FILES['avatar']['tmp_name'], $path);
+   /* $q = "UPDATE users SET avatar='" . $path . "' WHERE nick = '" . $_SESSION['nick'] . "'";
+    mysqli_query($link, $q); */
+}
+
+if (avatarSecurity($_FILES['avatar'])) {
+   loadAvatar($$_FILES['avatar']);
+} else {
+   echo "<script> alert('Дата заїзду повинна бути меншою за дату виїзду. Вкажіть правильні дати.'); </script>";
+}
 ?>
 
 <!DOCTYPE html>
@@ -10,6 +28,8 @@ session_start();
    <meta charset="UTF-8">
    <title>Вхід</title>
    <link href="css/index.css" rel="stylesheet" />
+   <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+   <link rel="icon" href="img/favicon.ico" type="image/x-icon">
 </head>
 
 <body>
@@ -92,24 +112,30 @@ session_start();
                   <h1 class="profile__paragraph-text">Профіль</h1>
                </div>
                <div class="profile__main-info">
-                  <div class="profile__avnick">
+                  <form class="profile__avnick" enctype="multipart/form-data" action="upload_avatar.php">
                      <div class="avnick__backgr"
-                        style="background: url(<?php echo $_SESSION['avatar'] ?>);  background-repeat: no-repeat; background-size: cover; background-position: center;">
+                        style="background: url(<?php echo $_SESSION['avatar'] ?> );  background-repeat: no-repeat; background-size: cover; background-position: center;">
                         <div class="avnick__backgr-blur"></div>
-
                      </div>
                      <ul class="avnick">
                         <li class="avnick__avatar">
                            <div
                               style="background: url(<?php echo $_SESSION['avatar'] ?>); background-position: center; background-size: cover;">
+                           </div>
                         </li>
                         <li class="avnick__nick">
                            <p>
                               <?php echo $_SESSION['nick'] ?>
                            </p>
                         </li>
+                        <li class="avnick__upload">
+                           <label class="avnick__upload-label">
+                              Оновити аватар
+                              <input type="file" name="avatar" id="" class="avatar__upload">
+                           </label>
+                        </li>
                      </ul>
-                  </div>
+                  </form>
 
                   <div class="profile__details">
                      <div class="details__column">
@@ -177,7 +203,9 @@ session_start();
          </nav>
       </footer>
    </div>
-   <script src="js/script.js"></script>
-</body>
+   <script src="js/script.js">
+   < /script < /
+   body >
 
-</html>
+      <
+      /html>

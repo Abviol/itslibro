@@ -182,7 +182,7 @@ for ($i = 1; $i <= 9; $i++) {
 echo '<br>';
 
 //users
-$q1 = "INSERT INTO users (nick, email, u_password, age, avatar, about_user, u_status) VALUES ('Abviol', 'kyselov_n@dlit.dp.ua', 'admin2006', '16', 'img/avatars/Abviol.jpg', 'Полюбляю наукову фантастику й бойовики', 'admin')";
+$q1 = "INSERT INTO users (nick, email, u_password, age, avatar, about_user, u_status) VALUES ('Abviol', 'kyselov_n@dlit.dp.ua', 'admin2006', '16', 'img/avatars/Abviol.jpg', 'Полюбляю наукову фантастику й бойовики', 'adm')";
 
 $q2 = "INSERT INTO users (nick, email, u_password, age, avatar, about_user, u_status) VALUES ('Патріот', 'iloveuA@gmail.com', 'uawillwin', '21', '', '', 'user')";
 

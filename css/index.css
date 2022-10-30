@@ -696,6 +696,7 @@ body._touch .menu__list>li._active .menu__arrow {
 }
 
 .avnick {
+   
    text-align: center;
    align-items: center;
    justify-content: center;
@@ -704,7 +705,7 @@ body._touch .menu__list>li._active .menu__arrow {
 .profile__avnick {
    margin-right: 20px;
    width: 300px;
-   height: 200px;
+   height: 245px;
    background-color: rgb(255, 255, 255);
    border-radius: 10px;
    display: flex;
@@ -736,6 +737,35 @@ body._touch .menu__list>li._active .menu__arrow {
    justify-content: center;
 }
 
+.avnick__upload {
+   margin-top: 20px;
+}
+
+.avnick__upload-label {
+   font-size: 16px;
+   font-weight: 600;
+   line-height: 22px;
+   color: #A96C25;
+   border: solid 2px #A96C25;
+   border-radius: 10px;
+   padding: 2px 5px;
+   transition: all 0.3s ease 0s;
+   cursor: pointer;
+   display: block;
+}
+
+.avnick__upload-label:hover {
+   color: #fff;
+   background-color: #A96C25;
+   transition: all 0.3s ease 0s;
+   cursor: pointer;
+}
+
+.avatar__upload[type=file] {
+   display: none;
+}
+
+
 .avnick__avatar > div {
    border-radius: 100px;
    width: 100px;
@@ -765,7 +795,7 @@ body._touch .menu__list>li._active .menu__arrow {
 
 .detail__name {
    font-weight: 400;
-   font-size: 14px;
+   font-size: 16px;
    line-height: 15px;
    color: #A96C25;
 }
@@ -773,7 +803,7 @@ body._touch .menu__list>li._active .menu__arrow {
 .details__decoration {
    position: relative;
    right: 0;
-   height: 200px;
+   height: 245 px;
    width: 60px;
    border-radius: 0 10px 10px 0;
    background-color: #ffdc80;
@@ -788,12 +818,12 @@ body._touch .menu__list>li._active .menu__arrow {
 }
 
 .detail__info {
-   margin-top: 5px;
+   margin-top: 10px;
    padding-left: 10px;
    opacity: 0.8;
    border-bottom: 1px solid rgba(204, 146, 58, 0.25);
    font-weight: 500;
-   font-size: 16px;
+   font-size: 18px;
    line-height: 17px;
 }
 

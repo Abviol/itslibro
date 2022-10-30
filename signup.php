@@ -2,6 +2,7 @@
 ini_set('session.save_path', getcwd() . '\sessions');
 session_start();
 include 'db_connect.php';
+include 'function.php';
 
 
 $email = $_POST['email'];
@@ -39,9 +40,10 @@ if ($nick == "" || $pwd == "" || $age == "" || $email == "" || $pwd_conf == "") 
          } else {
             if ($pwd === $pwd_conf) {
 
+               $_SESSION['avatar'] = make_avatar(strtoupper($_SESSION['nick'][0]));
+               $avatar = $_SESSION['avatar'];
 
-
-               $q = "INSERT INTO users (nick, email, age, u_password, u_status) VALUES ('" . $nick . "', '" . $email . "', '" . $age . "', '" . $pwd . "', 'user')";
+               $q = "INSERT INTO users (nick, email, age, avatar, u_password, u_status) VALUES ('" . $nick . "', '" . $email . "', '" . $age . "', '" . $avatar . "', '" . $pwd . "', 'user')";
 
                mysqli_query($link, $q);
 
