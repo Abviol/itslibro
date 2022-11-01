@@ -9,6 +9,8 @@ session_start();
 <head>
    <meta charset="UTF-8">
    <meta http-equv="X-UA-Compatible" content="IE=edge">
+   <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+   <link rel="icon" href="img/favicon.ico" type="image/x-icon">
    <link
       href="https://fonts.googleapis.com/css?family=Roboto:100,100italic,300,300italic,regular,italic,500,500italic,700,700italic,900,900italic"
       rel="stylesheet" />

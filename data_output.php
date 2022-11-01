@@ -60,7 +60,7 @@
                   <td>Назва книги</td>
                   <td>Оригинальна назва</td>
                   <td>Автор</td>
-                  <td>Обкладанка</td>
+                  <!-- <td>Обкладанка</td> -->
                   <td>Дата написання</td>
                   <td>Дата публікації</td>
                   <td>Жанри</td>
@@ -70,25 +70,26 @@
                   <td>Кількість переглядів</td>
                   <td>Кількість у списках</td>
                   <td>Оцінка</td>
+                  <td>Кількість оцінок</td>
                </tr>
 
                <?php
-        include 'cnct.php';
+                  include 'db_connect.php';
 
-        //виведення даних користувачів з таблиці books
-        echo "</br>";
-        mysqli_select_db($link, 'itslibro1');
-        $q = "SELECT * FROM books";
-        $book = mysqli_query($link, $q);
-        $book = mysqli_fetch_all($book);
-        foreach ($book as $book) 
-        { ?>
+                  //виведення даних користувачів з таблиці books
+                  echo "</br>";
+                  mysqli_select_db($link, 'itslibro1');
+                  $q = "SELECT * FROM books";
+                  $book = mysqli_query($link, $q);
+                  $book = mysqli_fetch_all($book);
+                  foreach ($book as $book) 
+      { ?>
                <tr>
                   <td><?=   $book[0]  ?></td>
                   <td><?=   $book[1]  ?></td>
                   <td><?=   $book[2]  ?></td>
                   <td><?=   $book[3]  ?></td>
-                  <td><?=   $book[5]  ?></td>
+                  <td><?=   $book[4]  ?></td>
                   <td><?=   $book[6]  ?></td>
                   <td><?=   $book[7]  ?></td>
                   <td><?=   $book[8]  ?></td>
@@ -97,6 +98,12 @@
                   <td><?=   $book[12]  ?></td>
                   <td><?=   $book[13]  ?></td>
                   <td><?=   $book[14]  ?></td>
+                  <td>
+                     <?= $book[15] ?>
+                  </td>
+                  <td>
+                     <?= $book[16] ?>
+                  </td>
                </tr>
                <?php
         }

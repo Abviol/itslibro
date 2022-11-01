@@ -1,8 +1,8 @@
 ﻿<?php
 ini_set('session.save_path', getcwd() . '\sessions');
 session_start();
-include 'db_connect.php';
-include 'upload_avatar.php';
+/* include 'db_connect.php';
+ include 'upload_avatar.php'; */
 
 function loadAvatar($avatar)
 {
@@ -14,11 +14,11 @@ function loadAvatar($avatar)
     mysqli_query($link, $q); */
 }
 
-if (avatarSecurity($_FILES['avatar'])) {
-   loadAvatar($$_FILES['avatar']);
-} else {
-   echo "<script> alert('Дата заїзду повинна бути меншою за дату виїзду. Вкажіть правильні дати.'); </script>";
-}
+/* if (avatarSecurity($_FILES['avatar'])) {
+ loadAvatar($$_FILES['avatar']);
+ } else {
+ /* echo "<script> alert('Дата заїзду повинна бути меншою за дату виїзду. Вкажіть правильні дати.'); </script>"; 
+ } */
 ?>
 
 <!DOCTYPE html>
@@ -203,9 +203,7 @@ if (avatarSecurity($_FILES['avatar'])) {
          </nav>
       </footer>
    </div>
-   <script src="js/script.js">
-   < /script < /
-   body >
+   <script src="js/script.js"></script>
+</body>
 
-      <
-      /html>
+</html>
