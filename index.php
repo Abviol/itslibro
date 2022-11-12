@@ -40,7 +40,7 @@ session_start();
             <nav class="header__menu menu">
                <ul class="menu__list">
                   <li class="menu__item">
-                     <a href="" class="menu__link">Бібліотека</a>
+                     <a href="all_books.php" class="menu__link">Бібліотека</a>
                   </li>
                   <li class="menu__item">
                      <a href="" class="menu__link">Про сайт</a>
@@ -725,7 +725,7 @@ session_start();
             </div>
          </div>
          <div class="page__all-books _container">
-            <a href="#">
+            <a href="all_books.php">
                <div class="books__more">
                   <div class="books__more-text">Всі книги</div>
                   <div class="books__more-arrow">

@@ -1,99 +1,81 @@
 ﻿<?php
 
-class DocxConversion
-{
-   private $filename;
-
-   public function __construct($filePath)
-   {
-      $this->filename = $filePath;
-   }
-
-   private function read_doc()
-   {
-      $fileHandle = fopen($this->filename, "r");
-      $line = @fread($fileHandle, filesize($this->filename));
-      $lines = explode(chr(0x0D), $line);
-      $outtext = "";
-      foreach ($lines as $thisline) {
-         $pos = strpos($thisline, chr(0x00));
-         if (($pos !== FALSE) || (strlen($thisline) == 0)) {
-         } else {
-            $outtext .= $thisline . '</br>';
-         }
-      }
-      $outtext = preg_replace("/[^a-zA-Z0-9\s\,\.\-\n\r\t@\/\_\(\)]/", "", $outtext);
-      return $outtext;
-   }
-
-   private function read_docx()
-   {
-
-      $striped_content = '';
-      $content = '';
-
-      $zip = zip_open($this->filename);
-
-      if (!$zip || is_numeric($zip))
-         return false;
-
-      while ($zip_entry = zip_read($zip)) {
-
-         if (zip_entry_open($zip, $zip_entry) == FALSE)
-            continue;
-
-         if (zip_entry_name($zip_entry) != "word/document.xml")
-            continue;
-
-         $content .= zip_entry_read($zip_entry, zip_entry_filesize($zip_entry));
-
-         zip_entry_close($zip_entry);
-      } // end while
-
-      zip_close($zip);
-
-      $content = str_replace('</w:r></w:p></w:tc><w:tc>', " ", $content);
-      $content = '<p style="margin-bottom: 5px;">' . str_replace('</w:r></w:p>', '<br>', $content) . '</p>';
-      $striped_content = $content;
-
-      return $striped_content;
-   }
-
-   public function convertToText()
-   {
-
-      if (isset($this->filename) && !file_exists($this->filename)) {
-         return "File Not exists";
-      }
-
-      $fileArray = pathinfo($this->filename);
-      $file_ext = $fileArray['extension'];
-      if ($file_ext == "doc" || $file_ext == "docx") {
-         if ($file_ext == "doc") {
-            return $this->read_doc();
-         } elseif ($file_ext == "docx") {
-            return $this->read_docx();
-         } else {
-            return "Invalid File Type";
-         }
-      }
-   }
-}
-
 $path1 = "books/test_doc.doc";
-$path2 = 'books/test_txt.txt';
 $path3 = 'books/test_docx.docx';
 $path4 = 'books/1.docx';
-$result = file_get_contents($path2);
-/* echo $result;
- $f = fopen($path1, 'r');
- while (!feof($f)) {
- echo fgets($f) . '<br>';
- }
- fclose($f);
- */
-$docObj = new DocxConversion($path3);
+$path5 = 'books/test_htm.htm';
+$path2 = 'books/1.txt';
+$path6 = 'books/taras.txt';
 
+function wholeWordTruncate($s, $characterCount)
+{
+   $return = $s;
+
+   if (preg_match("/^.{1,$characterCount}\b\W*/su", $s, $match))
+      return $match[0];
+   else
+      return mb_substr($return, 0, $characterCount);
+
+}
+
+function read_txt($path, $page_number, $rows_on_page) // чтение .txt файла
+{
+   $f = fopen($path, 'r');
+   $text = '';
+   $row_start = $rows_on_page * ($page_number - 1);
+   $row_end = $rows_on_page * $page_number;
+   $row_count = 1;
+   while (!feof($f)) {
+      $str = fgets($f); //получение строки
+      if ($str != '') {
+         $str_in = $str;
+         $str_out = '';
+         while ($str_in !== '') {
+            $match = wholeWordTruncate($str_in, 135); // чтение до первых 135 символов без разрыва слов
+            $i = iconv_strlen($match); // кол-во символов в прочитанной строке
+            $str_in = mb_substr($str_in, $i); // удаляем прочитанную строку
+            if ($row_count <= $row_end && $row_count > $row_start) // проверка на принадлежность выбранной странице
+               $str_out .= $match . '\n'; // конкотенация прочитанной строки к переменной со всем параграфом
+            $row_count++;
+         }
+         $str_out = str_replace('\n', '<br>', $str_out);
+         $str = str_replace('<b</p><p style="margin-bottom: 15px;">', '', $str);
+         $row_bool = true;
+         if ($str_out !== '' && $row_bool != false) {
+            $text .= '<p style="margin-bottom: 15px;">' . substr($str_out, 0, -2) . '</p>';
+            $row_bool = false;
+         } else {
+            $row_bool = true;
+         }
+      }
+   }
+   fclose($f);
+   return $text;
+}
+
+function check_row_count_txt($path) // получение количество строк во всем тексте
+{
+   $f = fopen($path, 'r');
+   $row_count = 1;
+   while (!feof($f)) {
+      $str = fgets($f);
+      if ($str !== '') {
+         $str_in = $str;
+         $str_out = '';
+         while ($str_in !== '') {
+            $match = wholeWordTruncate($str_in, 135);
+            $i = iconv_strlen($match);
+            $str_in = mb_substr($str_in, $i);
+            $row_count++;
+         }
+         $str_out = str_replace('\n', '<br>', $str_out);
+         $text .= '<p style="margin-bottom: 15px;">' . substr($str_out, 0, -2) . '</p>';
+      }
+   }
+   return $row_count;
+}
+$path = $path2;
+$rows_on_page = 100;
 ?>
 
 <!DOCTYPE html>
@@ -101,19 +83,109 @@ $docObj = new DocxConversion($path3);
 
 <head>
    <meta charset="UTF-8">
-   <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
-   <link href="css/all_books.css" rel="stylesheet">
-   <title>Document</title>
+   <link href="css/reading.css" rel="stylesheet">
+   <title>451° за фаренгейтом</title>
 </head>
+
+<?php
+$page_count = ceil(check_row_count_txt($path) / $rows_on_page);
+if (isset($_GET['p'])) {
+   $page = isset($_GET['p']) ? (int) $_GET['p'] : 0;
+} else {
+   $page = 1;
+}
+
+?>
 
 <body>
    <div class="wrapper">
       <div class="_container">
+         <div class="pagination" style="margin: 40px 0;">
+            <?php
+            if ($page > 1) {?>
+            <a href="?p=<?= $page - 1 ?>">Попередня</a>
+            <?php }
+            if ($page > 3) { ?>
+            <a href="?p=1">1</a>
+            <?php
+               if ($page > 4) { ?> <a class="etc">...</a>
+            <?php }
+            }
+            $j = $page + 2;
+            $i = $page - 2;
+            if ($page < 3) {
+               $i = 1;
+            }
+            if ($page > $page_count - 2) {
+               $j = $page_count;
+            }
+            if ($page >= 3 && $page <= $page_count - 2) {
+               $j = $page + 2;
+               $i = $page - 2;
+            }
+            while ($i <= $j) { ?>
+            <a <?php if ($i===$page) echo 'class="active"' ?> href="?p=<?= $i ?>">
+               <?= $i ?>
+            </a>
+            <?php $i++;
+            }
+            if ($page < $page_count - 2) {
+               if ($page < $page_count - 3) ?>
+            <a class="etc">...</a>
+            <a href="?p=<?= $page_count ?>">
+               <?= $page_count ?>
+            </a>
+            <?php }
+            if ($page < $page_count) {?>
+            <a " href=" ?p=<?= $page + 1 ?>">Наступна</a>
+            <?php }?>
+         </div>
          <div class="text__container">
-            <?php echo $docText = $docObj->convertToText(); ?>
+            <?php
+            echo read_txt($path, $page, $rows_on_page); ?>
+         </div>
+         <div class="pagination" style="margin: 25px 0 40px 0;">
+            <?php
+            if ($page > 1) {?>
+            <a href="?p=<?= $page - 1 ?>">Попередня</a>
+            <?php }
+            if ($page > 3) { ?>
+            <a href="?p=1">1</a>
+            <?php
+               if ($page > 4) { ?> <a class="etc">...</a>
+            <?php }
+            }
+            $j = $page + 2;
+            $i = $page - 2;
+            if ($page < 3) {
+               $i = 1;
+            }
+            if ($page > $page_count - 2) {
+               $j = $page_count;
+            }
+            if ($page >= 3 && $page <= $page_count - 2) {
+               $j = $page + 2;
+               $i = $page - 2;
+            }
+            while ($i <= $j) { ?>
+            <a <?php if ($i===$page) echo 'class="active"' ?> href="?p=<?= $i ?>">
+               <?= $i ?>
+            </a>
+            <?php $i++;
+            }
+            if ($page < $page_count - 2) {
+               if ($page < $page_count - 3) ?>
+            <a class="etc">...</a>
+            <a href="?p=<?= $page_count ?>">
+               <?= $page_count ?>
+            </a>
+            <?php }
+            if ($page < $page_count) {?>
+            <a " href=" ?p=<?= $page + 1 ?>">Наступна</a>
+            <?php }?>
          </div>
       </div>
    </div>
