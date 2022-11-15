@@ -36,14 +36,14 @@ session_start();
       <p>Вже маєте акаунт? - <a href="login.php">увійдіть у систему!</a></p>
 
       <?php
-         if ($_SESSION['message']) {
-            echo '<p class="msg">' . $_SESSION['message'] . '</p>';
-         }
-         unset($_SESSION['message']);
+      if ($_SESSION['message']) {
+         echo '<p class="msg">' . $_SESSION['message'] . '</p>';
+      }
+      unset($_SESSION['message']);
 
-         unset($_SESSION['email']);
-         unset($_SESSION['nick']);
-         unset($_SESSION['age']);
+      unset($_SESSION['email']);
+      unset($_SESSION['nick']);
+      unset($_SESSION['age']);
       ?>
 
    </form>

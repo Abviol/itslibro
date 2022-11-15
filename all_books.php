@@ -1,6 +1,7 @@
 ﻿<?php
 ini_set('session.save_path', getcwd() . '\sessions');
 session_start();
+setcookie("id_book", "");
 include 'db_connect.php'; ?>
 
 <!DOCTYPE html>

@@ -17,7 +17,7 @@ session_start();
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
    <link rel="stylesheet" href="css/index.css">
-   <title>Itslibro - головна</title>
+   <title>Itslibro</title>
 </head>
 
 <body>
@@ -77,7 +77,7 @@ session_start();
                         <li>
                            <a href="my_books.php" class="menu__sub-link">Мої книжки</a>
                         </li>
-                        <?php if ($_SESSION['c_status'] == 'админ') { ?>
+                        <?php if ($_SESSION['u_status'] == 'adm') { ?>
                         <li>
                            <a href="admin.php" class="menu__sub-link">Сторінка адміністратора</a>
                         </li>

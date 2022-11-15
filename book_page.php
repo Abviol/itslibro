@@ -1,13 +1,19 @@
 ﻿<?php
 ini_set('session.save_path', getcwd() . '\sessions');
 session_start();
+if (!isset($_SESSION['id_book'])) {
+   $_SESSION['id_book'] = $_POST['id_book'];
+}
+
+setcookie("b_name", '');
 include 'db_connect.php';
 
-$id_book = $_POST['id_book'];
-
+$id_book = $_SESSION['id_book'];
+/* $_SESSION['id_book'] = $id_book; */
 $q = "SELECT * FROM books WHERE id_book = '" . $id_book . "'";
 $book_q = mysqli_query($link, $q);
 $book = mysqli_fetch_assoc($book_q);
+$_SESSION['b_name'] = $book['b_name'];
 ?>
 
 <!DOCTYPE html>
@@ -20,7 +26,9 @@ $book = mysqli_fetch_assoc($book_q);
    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
    <link href="css/book_page.css" rel="stylesheet">
-   <title>Сторінка книжки</title>
+   <title>
+      <?php echo "Детально: " . $book['b_name'] ?>
+   </title>
 </head>
 
 <body>
@@ -82,9 +90,18 @@ $book = mysqli_fetch_assoc($book_q);
                <h3 class="info__about">
                   <?php echo "<b>Вікова категорія: </b>" . $book['category'] ?>
                </h3>
-               <!-- <form action="book_page.php" method="post">
-               </form> -->
+               <form action="reading.php" method="post">
+                  <input type="hidden" name="id_book" value=<?php echo $_SESSION['id_book']; ?>>
+                  <input class="btn" type="submit" value="Читати">
+               </form>
             </div>
          </div>
       </div>
+      <script>
+      if (window.history.replaceState) {
+         window.history.replaceState(null, null, window.location.href);
+      }
+      </script>
 </body>
+
+</html>

@@ -20,6 +20,7 @@ if ($nick == "" || $pwd == "") {
 
       $user = mysqli_fetch_assoc($check_user);
 
+      $_SESSION['id_user'] = $user['id_user'];
       $_SESSION['nick'] = $user['nick'];
       $_SESSION['email'] = $user['email'];
       $_SESSION['age'] = $user['age'];
@@ -37,6 +38,6 @@ if ($nick == "" || $pwd == "") {
 }
 
 /* if (!$email && !$nick && !$age && !$pwd && !$pwd_conf) {
- $_SESSION['message'] = 'Паролі на співпадають';
- } */
+$_SESSION['message'] = 'Паролі на співпадають';
+} */
 ?>

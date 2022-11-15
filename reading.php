@@ -1,11 +1,20 @@
 ﻿<?php
+ini_set('session.save_path', getcwd() . '\sessions');
+session_start();
 
-$path1 = "books/test_doc.doc";
+if (isset($_SESSION['id_book'])) {
+   $path_txt = 'books/'.strval($_SESSION['id_book']).'.txt';
+} else {
+   $path_txt = 'books/'. 2 .'.txt';
+}
+
+
+/* $path1 = "books/test_doc.doc";
 $path3 = 'books/test_docx.docx';
 $path4 = 'books/1.docx';
 $path5 = 'books/test_htm.htm';
 $path2 = 'books/1.txt';
-$path6 = 'books/taras.txt';
+$path6 = 'books/taras.txt'; */
 
 function wholeWordTruncate($s, $characterCount)
 {
@@ -74,7 +83,6 @@ function check_row_count_txt($path) // получение количество �
    }
    return $row_count;
 }
-$path = $path2;
 $rows_on_page = 100;
 ?>
 
@@ -87,65 +95,75 @@ $rows_on_page = 100;
    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
    <link href="css/reading.css" rel="stylesheet">
-   <title>451° за фаренгейтом</title>
+   <title>
+      <?php echo $_SESSION ['b_name'] ?>
+   </title>
 </head>
 
 <?php
-$page_count = ceil(check_row_count_txt($path) / $rows_on_page);
+$page_count = ceil(check_row_count_txt($path_txt) / $rows_on_page);
 if (isset($_GET['p'])) {
    $page = isset($_GET['p']) ? (int) $_GET['p'] : 0;
 } else {
    $page = 1;
 }
-
 ?>
 
 <body>
    <div class="wrapper">
       <div class="_container">
-         <div class="pagination" style="margin: 40px 0;">
-            <?php
-            if ($page > 1) {?>
-            <a href="?p=<?= $page - 1 ?>">Попередня</a>
-            <?php }
-            if ($page > 3) { ?>
-            <a href="?p=1">1</a>
-            <?php
-               if ($page > 4) { ?> <a class="etc">...</a>
-            <?php }
-            }
-            $j = $page + 2;
-            $i = $page - 2;
-            if ($page < 3) {
-               $i = 1;
-            }
-            if ($page > $page_count - 2) {
-               $j = $page_count;
-            }
-            if ($page >= 3 && $page <= $page_count - 2) {
-               $j = $page + 2;
-               $i = $page - 2;
-            }
-            while ($i <= $j) { ?>
-            <a <?php if ($i===$page) echo 'class="active"' ?> href="?p=<?= $i ?>">
-               <?= $i ?>
+         <div class="reading__top">
+            <a href="index.php" class="controls">
+               На головну
             </a>
-            <?php $i++;
-            }
-            if ($page < $page_count - 2) {
-               if ($page < $page_count - 3) ?>
-            <a class="etc">...</a>
-            <a href="?p=<?= $page_count ?>">
-               <?= $page_count ?>
+            <div class="pagination">
+               <?php
+                                             if ($page > 1) {?>
+               <a href="?p=<?= $page - 1 ?>">Попередня</a>
+               <?php }
+                                             if ($page > 3) { ?>
+               <a href="?p=1">1</a>
+               <?php
+                                                if ($page > 4) { ?> <a class="etc">...</a>
+               <?php }
+                                             }
+                                             $j = $page + 2;
+                                             $i = $page - 2;
+                                             if ($page < 3) {
+                                                $i = 1;
+                                             }
+                                             if ($page > $page_count - 2) {
+                                                $j = $page_count;
+                                             }
+                                             if ($page >= 3 && $page <= $page_count - 2) {
+                                                $j = $page + 2;
+                                                $i = $page - 2;
+                                             }
+                                             while ($i <= $j) { ?>
+               <a <?php if ($i===$page) echo 'class="active"' ?> href="?p=<?= $i ?>">
+                  <?= $i ?>
+               </a>
+               <?php $i++;
+                                             }
+                                             if ($page < $page_count - 2) {
+                                                if ($page < $page_count - 3) ?>
+               <a class="etc">...</a>
+               <a href="?p=<?= $page_count ?>">
+                  <?= $page_count ?>
+               </a>
+               <?php }
+                                             if ($page < $page_count) {?>
+               <a " href=" ?p=<?= $page + 1 ?>">Наступна</a>
+               <?php }?>
+            </div>
+            <a href="book_page.php" class="controls">
+               Назад
             </a>
-            <?php }
-            if ($page < $page_count) {?>
-            <a " href=" ?p=<?= $page + 1 ?>">Наступна</a>
-            <?php }?>
          </div>
+
          <div class="text__container">
             <?php
-            echo read_txt($path, $page, $rows_on_page); ?>
+            echo read_txt($path_txt, $page, $rows_on_page); ?>
          </div>
          <div class="pagination" style="margin: 25px 0 40px 0;">
             <?php
@@ -189,6 +207,11 @@ if (isset($_GET['p'])) {
          </div>
       </div>
    </div>
+   <script>
+   if (window.history.replaceState) {
+      window.history.replaceState(null, null, window.location.href);
+   }
+   </script>
 </body>
 
 </html>

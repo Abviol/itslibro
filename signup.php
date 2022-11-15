@@ -62,6 +62,6 @@ if ($nick == "" || $pwd == "" || $age == "" || $email == "" || $pwd_conf == "") 
 
 
 /* if (!$email && !$nick && !$age && !$pwd && !$pwd_conf) {
- $_SESSION['message'] = 'Паролі на співпадають';
- } */
+$_SESSION['message'] = 'Паролі на співпадають';
+} */
 ?>
