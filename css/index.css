@@ -425,7 +425,6 @@ body._touch .menu__list>li._active .menu__arrow {
 
 .slogan__backgr > li {
    height: 199px;
-  
 }
 
 .slogan__backgr > li > img{
@@ -481,7 +480,6 @@ body._touch .menu__list>li._active .menu__arrow {
 
 .books__container {
    margin: 30px auto 0 auto;
-  
 }
 
 .page__books:first-child {
@@ -851,4 +849,51 @@ body._touch .menu__list>li._active .menu__arrow {
    font-weight: 400;
    font-size: 16px;
    line-height: 17px;
+}
+
+/* --------------- Admin page ---------------------- */
+
+.admin__panel {
+   width: 100%;
+   padding: 35px;
+   margin: 100px 0;
+   display: flex;
+   justify-content: space-between;
+   background-color: #fff;
+   border-radius: 10px;
+   flex-direction: column;
+   align-items: center;
+}
+
+.panel__buttons {
+   display: flex;
+   justify-content: space-between;
+   width: 100%;
+}
+
+.panel__button {
+   border: solid 1px #A96C25;
+   border-radius: 10px;
+   padding: 5px;
+   font-size: 16px;
+   color: #A96C25;
+   width: 200px;
+   text-align: center;
+   align-items: center;
+   justify-content: center;
+}
+
+.admin__panel-text {
+   font-size: 20px;
+   font-weight: 600;
+   margin-bottom: 25px;
+}
+
+.admin__message {
+   border: 2px solid #ff7b00;
+   border-radius: 10px;
+   padding: 10px;
+   text-align: center;
+   font-weight: bold;
+   margin: 10px 0;
 }

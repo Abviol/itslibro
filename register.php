@@ -9,6 +9,8 @@ session_start();
 <head>
    <meta charset="UTF-8">
    <title>Вхід</title>
+   <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+   <link rel="icon" href="img/favicon.ico" type="image/x-icon">
    <link href="css/log.css" rel="stylesheet" />
 </head>
 

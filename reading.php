@@ -4,8 +4,6 @@ session_start();
 
 if (isset($_SESSION['id_book'])) {
    $path_txt = 'books/'.strval($_SESSION['id_book']).'.txt';
-} else {
-   $path_txt = 'books/'. 2 .'.txt';
 }
 
 

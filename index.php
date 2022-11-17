@@ -28,7 +28,7 @@ session_start();
             <a href="index.php"><img class="header__logo" src="img/logo.svg"></img></a>
             <ul class="menu__search">
                <li class="menu__item">
-                  <input type="text" class="input__search" placeholder="Пошук...">
+                  <input type="sea" class="input__search" placeholder="Пошук...">
                </li>
                <li class="menu__item">
                   <input type="image" src="img/search.svg" height="20" alt="Кнопка «input»">
@@ -79,7 +79,7 @@ session_start();
                         </li>
                         <?php if ($_SESSION['u_status'] == 'adm') { ?>
                         <li>
-                           <a href="admin.php" class="menu__sub-link">Сторінка адміністратора</a>
+                           <a href="admin_page.php" class="menu__sub-link">Сторінка адміністратора</a>
                         </li>
                         <?php } ?>
                         <li>

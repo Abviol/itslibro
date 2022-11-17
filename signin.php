@@ -36,8 +36,4 @@ if ($nick == "" || $pwd == "") {
       header('Location: login.php');
    }
 }
-
-/* if (!$email && !$nick && !$age && !$pwd && !$pwd_conf) {
-$_SESSION['message'] = 'Паролі на співпадають';
-} */
 ?>

@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 ini_set('session.save_path', getcwd() . '\sessions');
 session_start();
 ?>
@@ -8,25 +8,22 @@ session_start();
 
 <head>
    <meta charset="UTF-8">
-   <title>Вхід</title>
    <link href="css/log.css" rel="stylesheet" />
    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+   <title>Додати адміністратора</title>
 </head>
 
 <body>
-   <!-- форма авторизации -->
-   <form action="signin.php" method="post">
+   <form action="add_admin_handle.php" method="post">
 
       <label>Нікнейм або e-mail</label>
       <input type="text" name="nick" placeholder="Введіть нікнейм чи e-mail">
 
       <label for="">Пароль</label>
-      <input type="password" name="pwd" placeholder="Введіть пароль">
+      <input type="password" name="pwd" placeholder="Вкажіть ВАШ пароль">
 
-      <button type="submit">Увійти</button>
-
-      <p>Ще не зареєструвались? - <a href="register.php">зробіть це зараз!</a></p>
+      <button type="submit">Додати</button>
 
       <?php
       if ($_SESSION['message']) {

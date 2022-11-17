@@ -1,7 +1,7 @@
 ﻿<?php
 ini_set('session.save_path', getcwd() . '\sessions');
 session_start();
-if (!isset($_SESSION['id_book'])) {
+if (isset($_POST['id_book'])) {
    $_SESSION['id_book'] = $_POST['id_book'];
 }
 
