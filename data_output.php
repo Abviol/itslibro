@@ -24,16 +24,16 @@
                </tr>
 
                <?php
-        include 'db_connect.php';
+         include 'db_connect.php';
 
         //виведення даних користувачів з таблиці users
-        echo "</br>";
-        mysqli_select_db($link, 'itslibro1');
-        $q = "SELECT * FROM users";
-        $user = mysqli_query($link, $q);
-        $user = mysqli_fetch_all($user);
-        foreach ($user as $client) 
-        { ?>
+         echo "</br>";
+         mysqli_select_db($link, 'itslibro1');
+         $q = "SELECT * FROM users";
+         $user = mysqli_query($link, $q);
+         $user = mysqli_fetch_all($user);
+         foreach ($user as $client) 
+         { ?>
                <tr>
                   <td><?=   $client[0]  ?></td>
                   <td><?=   $client[1]  ?></td>
@@ -44,9 +44,7 @@
                   <td><?=   $client[6]  ?></td>
                   <td><?=   $client[7]  ?></td>
                </tr>
-               <?php
-        }
-        ?>
+               <?php } ?>
             </table>
          </td>
       </tr>

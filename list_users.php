@@ -3,7 +3,6 @@ ini_set('session.save_path', getcwd() . '\sessions');
 session_start();
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,7 +13,7 @@ session_start();
    <link href="css/index.css" rel="stylesheet" />
    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
-   <title>Панель адміністратора</title>
+   <title>Список користувачів</title>
 </head>
 
 <body>
@@ -91,37 +90,63 @@ session_start();
       <!------------------- Page -------------------------->
       <main class="page">
          <div class="_container">
-            <div class="admin__panel">
-               <h3 class="admin__panel-text">Панель адміністратора</h3>
-               <div class="panel__buttons">
-                  <a href="add_book.php">
-                     <div class="panel__button">Додати книгу</div>
-                  </a>
-                  <a href="list_users.php">
-                     <div class="panel__button">Список користувачів</div>
-                  </a>
-                  <a href="list_books.php">
-                     <div class="panel__button">Список книг</div>
-                  </a>
-                  <a href="add_admin.php">
-                     <div class="panel__button">Додати адміністратора</div>
-                  </a>
-               </div>
-               <div class="panel__buttons_1">
-                  <a href="delete_admin.php">
-                     <div class="panel__button">Видалити адміністратора</div>
-                  </a>
-               </div>
-               <?php
-               if ($_SESSION['message']) {
-                  echo '<h3 class="admin__message">' . $_SESSION['message'] . '</h3>';
-               }
-               unset($_SESSION['message']);
-               ?>
+            <div class="admin__panel" style="justify-content: flex-start;">
+               <h3 class="admin__panel-text">Список користувачів</h3>
+               <table class="panel__table">
+                  <thead>
+                     <tr>
+                        <th>id користувача</th>
+                        <th>Нік</th>
+                        <th>e-mail</th>
+                        <th>Пароль</th>
+                        <th>Вік</th>
+                        <th>Аватар</th>
+                        <th>Про користувача</th>
+                        <th>Статус</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <?php
+                     include 'db_connect.php';
+
+                     //виведення даних користувачів з таблиці users
+                     mysqli_select_db($link, 'itslibro1');
+                     $q = "SELECT * FROM users";
+                     $user = mysqli_query($link, $q);
+                     $user = mysqli_fetch_all($user);
+                     foreach ($user as $client) { ?>
+                     <tr>
+                        <td>
+                           <?= $client[0] ?>
+                        </td>
+                        <td>
+                           <?= $client[1] ?>
+                        </td>
+                        <td>
+                           <?= $client[2] ?>
+                        </td>
+                        <td>
+                           <?= $client[3] ?>
+                        </td>
+                        <td>
+                           <?= $client[4] ?>
+                        </td>
+                        <td>
+                           <?= $client[5] ?>
+                        </td>
+                        <td>
+                           <?= $client[6] ?>
+                        </td>
+                        <td>
+                           <?= $client[7] ?>
+                        </td>
+                     </tr>
+                     <?php } ?>
+                  </tbody>
+               </table>
             </div>
-         </div>
       </main>
-      <!------------------- FOOTER -------------------------->
+      <!------------------- Footer -------------------------->
       <footer class="footer">
          <nav class="footer__container _container">
             <div class="footer__column">

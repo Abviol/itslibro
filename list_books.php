@@ -3,7 +3,6 @@ ini_set('session.save_path', getcwd() . '\sessions');
 session_start();
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,7 +13,7 @@ session_start();
    <link href="css/index.css" rel="stylesheet" />
    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
-   <title>Панель адміністратора</title>
+   <title>Список книг</title>
 </head>
 
 <body>
@@ -90,38 +89,89 @@ session_start();
       </header>
       <!------------------- Page -------------------------->
       <main class="page">
-         <div class="_container">
-            <div class="admin__panel">
-               <h3 class="admin__panel-text">Панель адміністратора</h3>
-               <div class="panel__buttons">
-                  <a href="add_book.php">
-                     <div class="panel__button">Додати книгу</div>
-                  </a>
-                  <a href="list_users.php">
-                     <div class="panel__button">Список користувачів</div>
-                  </a>
-                  <a href="list_books.php">
-                     <div class="panel__button">Список книг</div>
-                  </a>
-                  <a href="add_admin.php">
-                     <div class="panel__button">Додати адміністратора</div>
-                  </a>
-               </div>
-               <div class="panel__buttons_1">
-                  <a href="delete_admin.php">
-                     <div class="panel__button">Видалити адміністратора</div>
-                  </a>
-               </div>
-               <?php
-               if ($_SESSION['message']) {
-                  echo '<h3 class="admin__message">' . $_SESSION['message'] . '</h3>';
-               }
-               unset($_SESSION['message']);
-               ?>
+         <div class="_container" style="min-width: 1400px;">
+            <div class="admin__panel" ">
+               <h3 class=" admin__panel-text">Список книг</h3>
+               <table class="panel__table">
+                  <thead>
+                     <tr>
+                        <th>id книги</th>
+                        <th>id видавеця</th>
+                        <th>Назва книги</th>
+                        <th>Оригинальна назва</th>
+                        <th>Автор</th>
+                        <th>Дата написання</th>
+                        <th>Дата публікації</th>
+                        <th>Жанри</th>
+                        <th>Кількість слів</th>
+                        <th>Категорія</th>
+                        <th>Кількість переглядів</th>
+                        <th>Кількість у списках</th>
+                        <th>Оцінка</th>
+                        <th>Кількість оцінок</td>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <?php
+                     include 'db_connect.php';
+
+                     //виведення даних книг з таблиці users
+                     mysqli_select_db($link, 'itslibro1');
+                     $q = "SELECT * FROM books";
+                     $book = mysqli_query($link, $q);
+                     $book = mysqli_fetch_all($book);
+                     foreach ($book as $book) { ?>
+                     <tr>
+                        <td>
+                           <?= $book[0] ?>
+                        </td>
+                        <td>
+                           <?= $book[1] ?>
+                        </td>
+                        <td>
+                           <?= $book[2] ?>
+                        </td>
+                        <td>
+                           <?= $book[3] ?>
+                        </td>
+                        <td>
+                           <?= $book[4] ?>
+                        </td>
+                        <td>
+                           <?= $book[6] ?>
+                        </td>
+                        <td>
+                           <?= $book[7] ?>
+                        </td>
+                        <td>
+                           <?= $book[8] ?>
+                        </td>
+                        <td>
+                           <?= $book[9] ?>
+                        </td>
+                        <td>
+                           <?= $book[11] ?>
+                        </td>
+                        <td>
+                           <?= $book[12] ?>
+                        </td>
+                        <td>
+                           <?= $book[13] ?>
+                        </td>
+                        <td>
+                           <?= $book[14] ?>
+                        </td>
+                        <td>
+                           <?= $book[15] ?>
+                        </td>
+                     </tr>
+                     <?php } ?>
+                  </tbody>
+               </table>
             </div>
          </div>
       </main>
-      <!------------------- FOOTER -------------------------->
+      <!------------------- Footer -------------------------->
       <footer class="footer">
          <nav class="footer__container _container">
             <div class="footer__column">

@@ -869,7 +869,23 @@ body._touch .menu__list>li._active .menu__arrow {
    display: flex;
    justify-content: space-between;
    width: 100%;
+   margin-top: 25px;
+   align-items: center;
+   align-content: center;
 }
+
+.panel__buttons_1 {
+   display: flex;
+   margin-top: 25px;
+   align-content: center;
+}
+
+.panel__buttons_1 > a > div {
+   word-wrap: unset;
+   width: auto;
+   padding: 5px 10px;
+}
+
 
 .panel__button {
    border: solid 1px #A96C25;
@@ -879,21 +895,74 @@ body._touch .menu__list>li._active .menu__arrow {
    color: #A96C25;
    width: 200px;
    text-align: center;
-   align-items: center;
    justify-content: center;
 }
 
 .admin__panel-text {
    font-size: 20px;
    font-weight: 600;
-   margin-bottom: 25px;
 }
 
 .admin__message {
-   border: 2px solid #ff7b00;
+   border: 2px solid #26bd00;
    border-radius: 10px;
    padding: 10px;
    text-align: center;
    font-weight: bold;
-   margin: 10px 0;
+   margin-top: 25px;
+}
+
+/* ------------- Список юзерів --------------- */
+
+.panel__table {
+   margin-top: 12px;
+   width: auto;
+   border: none;
+}
+
+.panel__table thead th {
+   font-weight: 600;
+   text-align: left;
+   border: none;
+   padding: 10px 15px;
+   background: #d8d8d8;
+   font-size: 12px;
+   text-align: center;
+}
+
+.panel__table thead tr th:first-child {
+   border-radius: 8px 0 0 8px;
+}
+
+.panel__table thead tr th:last-child {
+   border-radius: 0 8px 8px 0;
+}
+
+.panel__table tbody td {
+   text-align: left;
+   border: none;
+   padding: 10px 15px;
+   font-size: 14px;
+   vertical-align: top;
+}
+
+.panel__table tbody tr:nth-child(even) {
+   background: #f3f3f3;
+}
+
+.panel__table tbody tr td:first-child {
+   border-radius: 8px 0 0 8px;
+}
+
+.panel__table tbody tr td {
+   text-align: center;
+   vertical-align: middle
+}
+
+.panel__table tbody tr td:last-child {
+   border-radius: 0 8px 8px 0;
+}
+
+.panel__table tbody tr td {
+   font-size: 12px;
 }

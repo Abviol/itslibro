@@ -112,7 +112,7 @@ if ($b_name == "" || $original_name == "" || $data_writed == "" || $author == ""
          echo '<br>' . $q . '<br>';
          var_dump(mysqli_query($link, $q));
 
-         header('Location: add_book.php');
+         header('Location: admin_page.php');
          $_SESSION['message'] = "Книгу успішно додано до бази даних сайту!";
       }
    }

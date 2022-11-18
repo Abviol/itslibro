@@ -2,7 +2,7 @@
 ini_set('session.save_path', getcwd() . '\sessions');
 session_start();
 /* include 'db_connect.php';
- include 'upload_avatar.php'; */
+include 'upload_avatar.php'; */
 
 function loadAvatar($avatar)
 {
@@ -11,14 +11,14 @@ function loadAvatar($avatar)
    $path = 'img/avatars' . $_SESSION['nick'] . '.jpg';
    move_uploaded_file($_FILES['avatar']['tmp_name'], $path);
    /* $q = "UPDATE users SET avatar='" . $path . "' WHERE nick = '" . $_SESSION['nick'] . "'";
-    mysqli_query($link, $q); */
+   mysqli_query($link, $q); */
 }
 
 /* if (avatarSecurity($_FILES['avatar'])) {
- loadAvatar($$_FILES['avatar']);
- } else {
- /* echo "<script> alert('Дата заїзду повинна бути меншою за дату виїзду. Вкажіть правильні дати.'); </script>"; 
- } */
+loadAvatar($$_FILES['avatar']);
+} else {
+/* echo "<script> alert('Дата заїзду повинна бути меншою за дату виїзду. Вкажіть правильні дати.'); </script>"; 
+} */
 ?>
 
 <!DOCTYPE html>
@@ -40,7 +40,7 @@ function loadAvatar($avatar)
             <a href="index.php"><img class="header__logo" src="img/logo.svg"></img></a>
             <ul class="menu__search">
                <li class="menu__item">
-                  <input type="text" class="input__search" placeholder="Пошук...">
+                  <input type="sea" class="input__search" placeholder="Пошук...">
                </li>
                <li class="menu__item">
                   <input type="image" src="img/search.svg" height="20" alt="Кнопка «input»">
@@ -52,7 +52,7 @@ function loadAvatar($avatar)
             <nav class="header__menu menu">
                <ul class="menu__list">
                   <li class="menu__item">
-                     <a href="" class="menu__link">Бібліотека</a>
+                     <a href="all_books.php" class="menu__link">Бібліотека</a>
                   </li>
                   <li class="menu__item">
                      <a href="" class="menu__link">Про сайт</a>
@@ -89,9 +89,9 @@ function loadAvatar($avatar)
                         <li>
                            <a href="my_books.php" class="menu__sub-link">Мої книжки</a>
                         </li>
-                        <?php if ($_SESSION['c_status'] == 'админ') { ?>
+                        <?php if ($_SESSION['u_status'] == 'adm') { ?>
                         <li>
-                           <a href="admin.php" class="menu__sub-link">Сторінка адміністратора</a>
+                           <a href="admin_page.php" class="menu__sub-link">Сторінка адміністратора</a>
                         </li>
                         <?php } ?>
                         <li>

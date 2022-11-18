@@ -6,7 +6,7 @@ include 'db_connect.php';
 
 $nick = $_POST['nick'];
 $pwd = $_POST['pwd'];
-$_SESSION['add_nick'] = $nick;
+$_SESSION['delete_nick'] = $nick;
 
 $check_user = mysqli_query($link, "SELECT * FROM users WHERE (email = '$nick' OR nick = '$nick')");
 echo mysqli_num_rows($check_user) . "</br>";
@@ -25,16 +25,16 @@ if ($nick == "" || $pwd == "") {
 
       if (mysqli_num_rows($check_admin) > 0) {
 
-         $check_is_admin = mysqli_query($link, "SELECT * FROM users WHERE (email = '$nick' OR nick = '$nick') AND u_status='adm'");
+         $check_is_admin = mysqli_query($link, "SELECT * FROM users WHERE (email = '$nick' OR nick = '$nick') AND u_status='user'");
 
          if (mysqli_num_rows($check_is_admin) > 0) {
-            $_SESSION['message'] = 'Цей користувач вже є адміністратором сайту!';
+            $_SESSION['message'] = 'Не можна позбавити прав aдміністратора того, хто їх не має!';
             header('Location: add_admin.php');
          } else {
-            $q = "UPDATE users SET u_status = 'adm' WHERE nick='" . $nick . "'";
+            $q = "UPDATE users SET u_status = 'user' WHERE nick='" . $nick . "'";
             mysqli_query($link, $q);
-            $_SESSION['message'] = 'Успішно додано нового адміністратора!';
-            unset($_SESSION['add_nick']);
+            $_SESSION['message'] = 'Успішно видалено адміністратора!';
+            unset($_SESSION['delete_nick']);
             header('Location: admin_page.php');
 
          }

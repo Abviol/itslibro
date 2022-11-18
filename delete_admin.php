@@ -11,27 +11,27 @@ session_start();
    <link href="css/log.css" rel="stylesheet" />
    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
-   <title>Додати адміністратора</title>
+   <title>Видалити адміністратора</title>
 </head>
 
 <body>
-   <form action="add_admin_handle.php" method="post">
+   <form action="delete_admin_handle.php" method="post">
 
       <label>Нікнейм або e-mail</label>
       <input type="text" name="nick" placeholder="Введіть нікнейм чи e-mail"
-         value="<?php echo $_SESSION['add_nick']; ?>">
+         value="<?php echo $_SESSION['delete_nick']; ?>">
 
       <label for="">Пароль</label>
       <input type="password" name="pwd" placeholder="Вкажіть ВАШ пароль">
 
-      <button type="submit">Додати</button>
+      <button type="submit">Видалити</button>
 
       <?php
       if ($_SESSION['message']) {
          echo '<p class="msg">' . $_SESSION['message'] . '</p>';
       }
       unset($_SESSION['message']);
-      unset($_SESSION['add_nick']);
+      unset($_SESSION['delete_nick']);
       ?>
    </form>
 </body>
