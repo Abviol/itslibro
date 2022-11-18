@@ -109,6 +109,7 @@ session_start();
                         <th>Кількість у списках</th>
                         <th>Оцінка</th>
                         <th>Кількість оцінок</td>
+                        <th></th>
                      </tr>
                   </thead>
                   <tbody>
@@ -116,7 +117,6 @@ session_start();
                      include 'db_connect.php';
 
                      //виведення даних книг з таблиці users
-                     mysqli_select_db($link, 'itslibro1');
                      $q = "SELECT * FROM books";
                      $book = mysqli_query($link, $q);
                      $book = mysqli_fetch_all($book);
@@ -164,8 +164,23 @@ session_start();
                         <td>
                            <?= $book[15] ?>
                         </td>
+                        <td>
+                           <form action="delete_book.php" method="post">
+                              <input type="hidden" name="id_book" value=<?php echo $book[0]; ?>>
+                              <button type="submit" style="background: none; cursor: pointer;">
+                                 <img src="img/trash.svg" alt="">
+                              </button>
+                           </form>
+                           <form action="edit_book.php" method="post">
+                              <input type="hidden" name="id_book" value=<?php echo $book[0]; ?>>
+                              <button type="submit" style="margin-top: 10px; background: none; cursor: pointer;">
+                                 <img src="img/pencil.svg" alt="">
+                              </button>
+                           </form>
+                        </td>
                      </tr>
-                     <?php } ?>
+                     <?php $i++;
+                     } ?>
                   </tbody>
                </table>
             </div>

@@ -68,12 +68,12 @@ $_SESSION['b_description'] = $b_description;
 /* $_SESSION['cover'] = pathinfo($cover['tmp_name'], PATHINFO_DIRNAME) . $cover['name'];
 $_SESSION['text'] = $text['tmp_name']; */
 
-if ($b_name == "" || $original_name == "" || $data_writed == "" || $author == "" || $genres == "" || $b_description == "" || empty($cover['tmp_name']) || empty($text['tmp_name'])) { //все ли поля  заполнены?
+if ($b_name == "" || $original_name == "" || $data_writed == "" || $author == "" || $genres == "" || $b_description == "" || $category == "" || empty($cover['tmp_name']) || empty($text['tmp_name'])) { //все ли поля  заполнены?
    $_SESSION['message'] = 'Усі поля повинні бути заповнені!';
    header('Location: add_book.php');
 } else {
    if (!is_numeric($data_writed)) {
-      $_SESSION['message'] = $cover;
+      $_SESSION['message'] = "Рік написання має бути числом";
       header('Location: add_book.php');
    } else {
       $check_book = mysqli_query($link, "SELECT * FROM books WHERE b_name = '$b_name' AND original_name = '$original_name' AND author = '$author'");

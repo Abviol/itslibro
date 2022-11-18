@@ -21,11 +21,12 @@ include 'db_connect.php'; ?>
    <div class="wrapper">
       <div class="_container">
          <?php
-         $booksq = mysqli_query($link, "SELECT * FROM books");
-
-         for ($i = 1; $i <= mysqli_num_rows($booksq); $i++) {
-            $q = "SELECT * FROM books WHERE id_book=" . $i;
-            $y = mysqli_query($link, $q);
+         $q = "SELECT * FROM books";
+         $book = mysqli_query($link, $q);
+         $book = mysqli_fetch_all($book);
+         foreach ($book as $book) {
+            $q1 = "SELECT * FROM books WHERE id_book=" . $book[0];
+            $y = mysqli_query($link, $q1);
             $books = mysqli_fetch_assoc($y); ?>
 
          <div class="all-books__book">
@@ -54,7 +55,7 @@ include 'db_connect.php'; ?>
                   </h3>
                </a>
                <form action="book_page.php" method="post">
-                  <input type="hidden" name="id_book" value=<?php echo $i; ?>>
+                  <input type="hidden" name="id_book" value=<?php echo $book[0]; ?>>
                   <input class="btn" type="submit" value="Детальніше">
                </form>
             </div>

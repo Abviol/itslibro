@@ -1,6 +1,14 @@
 ﻿<?php
 ini_set('session.save_path', getcwd() . '\sessions');
 session_start();
+include 'db_connect.php';
+
+$id_book = $_POST['id_book'];
+$_SESSION['id_book'] = $id_book;
+
+$q = "SELECT * FROM books WHERE id_book = '" . $id_book . "'";
+$book_q = mysqli_query($link, $q);
+$book = mysqli_fetch_assoc($book_q);
 ?>
 
 <!DOCTYPE html>
@@ -19,57 +27,48 @@ session_start();
 <body>
    <div class="wrapper">
       <div class="_container">
-         <form action="add_book_handle.php" method="post" enctype="multipart/form-data">
+         <form action="edit_book_handle.php" method="post" enctype="multipart/form-data">
             <label>Назва книги</label>
-            <input type="text" name="b_name" value="<?php echo $_SESSION['b_name']; ?>"
+            <input type="text" name="b_name" value="<?php echo $book['b_name']; ?>"
                placeholder="Вкажіть назву книги українською мовою">
 
             <label>Оригінальна назва</label>
-            <input type="text" name="original_name" value="<?php echo $_SESSION['original_name']; ?>"
+            <input type="text" name="original_name" value="<?php echo $book['original_name']; ?>"
                placeholder="Вкажіть оригінальну назву книги">
 
             <label>Автор</label>
-            <input type="text" name="author" value="<?php echo $_SESSION['author']; ?>"
-               placeholder="Вкажіть ПІБ автора">
-
-            <input type="hidden" name="id_book" value="<?php echo $_SESSION['id_book'] ?>">
-
+            <input type="text" name="author" value="<?php echo $book['author']; ?>" placeholder="Вкажіть ПІБ автора">
 
             <label>Рік написання</label>
-            <input type="text" name="data_writed" value="<?php echo $_SESSION['data_writed']; ?>"
+            <input type="text" name="data_writed" value="<?php echo $book['data_writed']; ?>"
                placeholder="Вкажість рік, коли автор закінчив книгу">
 
             <label>Жанри</label>
-            <input type="text" name="genres" value="<?php echo $_SESSION['genres']; ?>"
+            <input type="text" name="genres" value="<?php echo $book['genres']; ?>"
                placeholder="Вкажіть жанри книги через кому">
 
             <label for="b_description">Опис</label>
             <textarea
                style="resize: none; margin: 10px 0; padding: 10px; border: unset; border: 2px solid #dddddd; outline: none; font-family: Roboto; border-radius: 10px;"
                name="b_description" id="b_description" cols="10" rows="5" placeholder="Коротко опишіть книгу"
-               maxlength="500"><?php echo $_SESSION['b_description']; ?></textarea>
+               maxlength="500"><?php echo $book['b_description']; ?></textarea>
 
             <label>Категорія</label>
-            <label><input type="radio" name="category" <?php if (isset($_SESSION['category']) && $_SESSION['category']=="Для
-                  будь-якого віку") echo "checked"; ?> value="Для
-                  будь-якого віку">Для
+            <label><input type="radio" name="category"
+                  <?php if ($book['category'] == "Для будь-якого віку" || isset($_SESSION['category']) && $_SESSION['category']=="Для будь-якого віку") echo "checked"; ?>
+                  value="Для будь-якого віку">Для
                будь-якого віку
             </label>
-            <label for=""><input type="radio" name="category" <?php if (isset($_SESSION['category']) && $_SESSION['category'] == "12+")
+            <label for=""><input type="radio" name="category" <?php if ($book['category'] == "12+" || isset($_SESSION['category']) && $_SESSION['category'] == "12+")
                      echo
                   "checked"; ?> value="12+">12+
             </label>
-            <label for=""><input type="radio" name="category" <?php if (isset($_SESSION['category']) && $_SESSION['category'] == "18+")
+            <label for=""><input type="radio" name="category" <?php if ($book['category'] == "18+" || isset($_SESSION['category']) && $_SESSION['category'] == "18+")
                      echo
                   "checked"; ?> value="18+">18+
             </label>
-            <label>Обкладанка</label>
-            <input type="file" name="cover" accept="image/png, image/jpeg">
 
-            <label>Файл книги .txt</label>
-            <input type="file" name="text" accept=".txt">
-
-            <button type="submit">Опублікувати</button>
+            <button type="submit">Оновити</button>
 
             <?php
             if ($_SESSION['message']) {
@@ -83,9 +82,7 @@ session_start();
             unset($_SESSION['genres']);
             unset($_SESSION['category']);
             unset($_SESSION['b_description']);
-            /* unset($_SESSION['cover']);
-            unset($_SESSION['text']); */
-                        ?>
+            ?>
 
          </form>
       </div>

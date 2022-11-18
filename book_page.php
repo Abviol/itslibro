@@ -9,7 +9,6 @@ setcookie("b_name", '');
 include 'db_connect.php';
 
 $id_book = $_SESSION['id_book'];
-/* $_SESSION['id_book'] = $id_book; */
 $q = "SELECT * FROM books WHERE id_book = '" . $id_book . "'";
 $book_q = mysqli_query($link, $q);
 $book = mysqli_fetch_assoc($book_q);
@@ -72,11 +71,11 @@ $_SESSION['b_name'] = $book['b_name'];
                </h3>
 
                <h3 class="info__about">
-                  <?php echo "<b>Дата написання: </b>" . $book['data_writed']; ?>
+                  <?php echo "<b>Дата написання: </b>" . $book['data_writed'] . " рік" ?>
                </h3>
 
                <h3 class="info__about">
-                  <?php echo "<b>Дата опублікування: </b>" . mb_substr($book['data_published'], 8, 2) . "." . mb_substr($book['data_published'], 5, 2) . "." . mb_substr($book['data_published'], 0, 4) ?>
+                  <?php echo "<b>Дата опублікування: </b>" . $book['data_published'] ?>
                </h3>
 
                <h3 class="info__about">
@@ -84,7 +83,7 @@ $_SESSION['b_name'] = $book['b_name'];
                </h3>
 
                <h3 class="info__about">
-                  <?php echo "<b>Кількість сторінок: </b>" . $book['page_count'] ?>
+                  <?php echo "<b>Кількість слів : </b>" . $book['words_count'] ?>
                </h3>
 
                <h3 class="info__about">
@@ -98,9 +97,9 @@ $_SESSION['b_name'] = $book['b_name'];
          </div>
       </div>
       <script>
-      if (window.history.replaceState) {
-         window.history.replaceState(null, null, window.location.href);
-      }
+         if (window.history.replaceState) {
+            window.history.replaceState(null, null, window.location.href);
+         }
       </script>
 </body>
 
