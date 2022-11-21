@@ -43,8 +43,8 @@ if ($b_name == "" || $original_name == "" || $data_writed == "" || $author == ""
          $path_cover = 'img/covers/' . $id_book . '.' . $cover_ext;
          move_uploaded_file($cover['tmp_name'], $path_cover); */
 
-         echo $cover_ext, '<br>';
-         echo $path_cover, '<br><br>';
+         /* echo $cover_ext, '<br>';
+         echo $path_cover, '<br><br>'; */
 
          //добавление книги в базу данных
          $q = "UPDATE books SET b_name = '$b_name', original_name = '$original_name', author = '$author', data_writed = '$data_writed', genres = '$genres', b_description = '$b_description', category = '$category' WHERE id_book = '$id_book'";

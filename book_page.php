@@ -5,7 +5,6 @@ if (isset($_POST['id_book'])) {
    $_SESSION['id_book'] = $_POST['id_book'];
 }
 
-setcookie("b_name", '');
 include 'db_connect.php';
 
 $id_book = $_SESSION['id_book'];
@@ -57,6 +56,48 @@ $_SESSION['b_name'] = $book['b_name'];
                   <?php echo $book['author'] ?>
                </h3>
 
+               <form action="reading.php" method="post">
+                  <input type="hidden" name="id_book" value=<?php echo $_SESSION['id_book']; ?>>
+                  <input class="btn" type="submit" value="Читати">
+               </form>
+
+               <li class="menu__link">
+                  <a>Додати до списку</a>
+                  <ul class="sub-list">
+                     <li>
+                        <form action="add_book_to_list.php" method="post">
+                           <input type="hidden" name="list" value="list_reading">
+                           <input class="btn" type="submit" value="Читаю">
+                        </form>
+
+                        <form action="add_book_to_list.php" method="post">
+                           <input type="hidden" name="list" value="list_favorite">
+                           <input class="btn" type="submit" value="Улюблене">
+                        </form>
+
+                        <form action="add_book_to_list.php" method="post">
+                           <input type="hidden" name="list" value="list_in_plans">
+                           <input class="btn" type="submit" value="У планах">
+                        </form>
+
+                        <form action="add_book_to_list.php" method="post">
+                           <input type="hidden" name="list" value="list_readed">
+                           <input class="btn" type="submit" value="Прочитано">
+                        </form>
+
+                        <form action="add_book_to_list.php" method="post">
+                           <input type="hidden" name="list" value="list_abandoned">
+                           <input class="btn" type="submit" value="Покинуто">
+                        </form>
+
+                        <form action="add_book_to_list.php" method="post">
+                           <input type="hidden" name="list" value="delete">
+                           <input class="btn" type="submit" value="Видалити">
+                        </form>
+                     </li>
+                  </ul>
+               </li>
+
                <h3 class="info__about">
                   <?php echo '<b>Опис:</b> ' . $book['b_description'] ?>
                </h3>
@@ -89,18 +130,22 @@ $_SESSION['b_name'] = $book['b_name'];
                <h3 class="info__about">
                   <?php echo "<b>Вікова категорія: </b>" . $book['category'] ?>
                </h3>
-               <form action="reading.php" method="post">
-                  <input type="hidden" name="id_book" value=<?php echo $_SESSION['id_book']; ?>>
-                  <input class="btn" type="submit" value="Читати">
-               </form>
+
             </div>
          </div>
       </div>
       <script>
-         if (window.history.replaceState) {
-            window.history.replaceState(null, null, window.location.href);
-         }
+      if (window.history.replaceState) {
+         window.history.replaceState(null, null, window.location.href);
+      }
       </script>
 </body>
 
 </html>
+
+<?php
+if (isset($_SESSION['message'])) {
+   echo "<script>alert('" . $_SESSION['message'] . "')</script>";
+   unset($_SESSION['message']);
+}
+?>

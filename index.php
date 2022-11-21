@@ -28,7 +28,7 @@ session_start();
             <a href="index.php"><img class="header__logo" src="img/logo.svg"></img></a>
             <ul class="menu__search">
                <li class="menu__item">
-                  <input type="sea" class="input__search" placeholder="Пошук...">
+                  <input type="search" class="input__search" placeholder="Пошук...">
                </li>
                <li class="menu__item">
                   <input type="image" src="img/search.svg" height="20" alt="Кнопка «input»">
@@ -59,7 +59,7 @@ session_start();
                   </li>
                   <?php if (!empty($_SESSION['nick'])) { ?>
                   <li class="menu__item">
-                     <a href="#" class="menu__link">Мої книжки</a>
+                     <a href="my_books.php" class="menu__link">Мої книжки</a>
                   </li>
                   <?php } ?>
                   <li class="menu__item">

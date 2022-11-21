@@ -26,7 +26,7 @@ loadAvatar($$_FILES['avatar']);
 
 <head>
    <meta charset="UTF-8">
-   <title>Вхід</title>
+   <title>Профіль</title>
    <link href="css/index.css" rel="stylesheet" />
    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
    <link rel="icon" href="img/favicon.ico" type="image/x-icon">

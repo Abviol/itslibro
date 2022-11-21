@@ -47,7 +47,7 @@ session_start();
             <textarea
                style="resize: none; margin: 10px 0; padding: 10px; border: unset; border: 2px solid #dddddd; outline: none; font-family: Roboto; border-radius: 10px;"
                name="b_description" id="b_description" cols="10" rows="5" placeholder="Коротко опишіть книгу"
-               maxlength="500"><?php echo $_SESSION['b_description']; ?></textarea>
+               maxlength="1000"><?php echo $_SESSION['b_description']; ?></textarea>
 
             <label>Категорія</label>
             <label><input type="radio" name="category" <?php if (isset($_SESSION['category']) && $_SESSION['category']=="Для

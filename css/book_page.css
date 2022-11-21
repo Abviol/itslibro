@@ -132,3 +132,60 @@ h3 {
    font-size: 16px;
    line-height: 1.5;
 }
+
+.menu__link {
+   border: solid 1px #000;
+   border-radius: 10px;
+   padding: 5px;
+   margin: 5px 0 10px 0;
+   font-size: 14px;
+   font-weight: 600;
+   width: 200px;
+   text-align: center;
+}
+
+.menu__link:hover {
+   color: rgba(169, 108, 37, 0.5);
+   transition: all 0.3s ease 0s;
+}
+
+.menu__link ul {
+   position: absolute;
+   top: auto;
+   background-color: #fff;
+   border: solid 2px rgba(204, 146, 58, 0.25);
+   border-radius: 10px;
+   z-index: 51;
+   opacity: 0;
+   transition: all 0.3s ease 0s;
+   pointer-events: none;
+   margin: 6px 0;
+}
+
+.form__list {
+   display: flex;
+   flex-direction: column;
+   
+}
+
+.menu__sub-link {
+   font-weight: 5 00;
+   font-size: 14px;
+   color: #a96c25;
+}
+
+.btn {
+   border: solid 1px #000;
+   border-radius: 10px;
+   padding: 5px;
+   margin: 5px 0 10px 0;
+   font-size: 14px;
+   font-weight: 600;
+   width: 200px;
+}
+
+.menu__link:hover ul {
+   pointer-events: all;
+   opacity: 1;
+   transform: translate(0px, 0px);
+}

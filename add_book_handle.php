@@ -114,6 +114,14 @@ if ($b_name == "" || $original_name == "" || $data_writed == "" || $author == ""
 
          header('Location: admin_page.php');
          $_SESSION['message'] = "Книгу успішно додано до бази даних сайту!";
+
+         unset($_SESSION['b_name']);
+         unset($_SESSION['original_name']);
+         unset($_SESSION['author']);
+         unset($_SESSION['data_writed']);
+         unset($_SESSION['genres']);
+         unset($_SESSION['category']);
+         unset($_SESSION['b_description']);
       }
    }
 }
