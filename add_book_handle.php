@@ -65,8 +65,6 @@ $_SESSION['data_writed'] = $data_writed;
 $_SESSION['genres'] = $genres;
 $_SESSION['category'] = $category;
 $_SESSION['b_description'] = $b_description;
-/* $_SESSION['cover'] = pathinfo($cover['tmp_name'], PATHINFO_DIRNAME) . $cover['name'];
-$_SESSION['text'] = $text['tmp_name']; */
 
 if ($b_name == "" || $original_name == "" || $data_writed == "" || $author == "" || $genres == "" || $b_description == "" || $category == "" || empty($cover['tmp_name']) || empty($text['tmp_name'])) { //все ли поля  заполнены?
    $_SESSION['message'] = 'Усі поля повинні бути заповнені!';
@@ -81,36 +79,33 @@ if ($b_name == "" || $original_name == "" || $data_writed == "" || $author == ""
          $_SESSION['message'] = "Така книга вже є на сайті!";
          header('Location: add_book.php');
       } else {
-         $q = "SELECT * FROM books";
-         $id_book = mysqli_num_rows(mysqli_query($link, $q)) + 1;
 
          //получение данных о загруженной картинке
          $cover_info = pathinfo($cover['name']);
          $cover_ext = $cover_info['extension'];
-         $path_cover = 'img/covers/' . $id_book . '.' . $cover_ext;
-         move_uploaded_file($cover['tmp_name'], $path_cover);
-
-         echo $cover_ext, '<br>';
-         echo $path_cover, '<br><br>';
 
          //получение данных о загруженом .txt файле
          $id_publisher = $_SESSION['id_user'];
          $text_info = pathinfo($text['name']);
          $text_ext = $text_info['extension'];
          $word_count = count_words_in_txt($text['tmp_name']);
-         $path_book = 'books/' . $id_book . '.txt';
-         move_uploaded_file($text['tmp_name'], $path_book);
-
-         echo $id_publisher, '<br>';
-         echo $text_ext, '<br>';
-         echo $word_count, '<br>';
-         echo $path_book, '<br>';
 
          //добавление книги в базу данных
          $q = "INSERT INTO books (id_publisher, b_name, original_name, author, picture, data_writed, data_published, genres, words_count, b_description, category, views_count, in_list_count, rating, ratings_count) VALUES ('" . $id_publisher . "', '" . $b_name . "', '" . $original_name . "', '" . $author . "', '" . $path_cover . "', '" . $data_writed . "', '" . $date_published . "', '" . $genres . "', '" . $word_count . "', '" . $b_description . "', '" . $category . "', '0', '0', '0', '0')";
+         mysqli_query($link, $q);
 
-         echo '<br>' . $q . '<br>';
-         var_dump(mysqli_query($link, $q));
+         $q = "SELECT * FROM books ORDER BY id_book DESC LIMIT 1";
+         $id_book = mysqli_query($link, $q);
+         $id_book = mysqli_fetch_assoc($id_book);
+
+         $path_book = 'books/' . $id_book['id_book'] . '.txt';
+         move_uploaded_file($text['tmp_name'], $path_book);
+
+         $path_cover = 'img/covers/' . $id_book['id_book'] . '.' . $cover_ext;
+         move_uploaded_file($cover['tmp_name'], $path_cover);
+
+         $q = "UPDATE books SET picture = '$path_cover' WHERE id_book = '" . $id_book['id_book'] . "'";
+         mysqli_query($link, $q);
 
          header('Location: admin_page.php');
          $_SESSION['message'] = "Книгу успішно додано до бази даних сайту!";

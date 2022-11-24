@@ -664,9 +664,9 @@ body._touch .menu__list>li._active .menu__arrow {
       margin: 100px 0;
 }
 
-.profile__container {
+/* .profile__container {
 
-}
+} */
 
 .profile__paragraph {
    height: 100px;
@@ -814,12 +814,13 @@ body._touch .menu__list>li._active .menu__arrow {
 
 .detail__info {
    margin-top: 10px;
-   padding-left: 10px;
+   padding: 0 10px;
    opacity: 0.8;
    border-bottom: 1px solid rgba(204, 146, 58, 0.25);
    font-weight: 500;
    font-size: 18px;
    line-height: 17px;
+   width: 100%;
 }
 
 .profile__about {

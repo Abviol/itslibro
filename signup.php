@@ -40,14 +40,22 @@ if ($nick == "" || $pwd == "" || $age == "" || $email == "" || $pwd_conf == "") 
          } else {
             if ($pwd === $pwd_conf) {
 
-               $_SESSION['avatar'] = make_avatar(strtoupper($_SESSION['nick'][0]));
-               $avatar = $_SESSION['avatar'];
 
-               $q = "INSERT INTO users (nick, email, age, avatar, u_password, u_status) VALUES ('" . $nick . "', '" . $email . "', '" . $age . "', '" . $avatar . "', '" . $pwd . "', 'user')";
 
+               $q = "INSERT INTO users (nick, email, age, u_password, u_status) VALUES ('" . $nick . "', '" . $email . "', '" . $age . "', '" . $pwd . "', 'user')";
                mysqli_query($link, $q);
 
-               $_SESSION['message'] = 'Дякуємо за рееєстрацію!';
+               $q = "SELECT * FROM users ORDER BY id_user DESC LIMIT 1";
+               $id_user = mysqli_query($link, $q);
+               $id_user = mysqli_fetch_assoc($id_user);
+
+               $_SESSION['avatar'] = make_avatar($_SESSION['nick'][0], $id_user['id_user']);
+               $avatar = $_SESSION['avatar'];
+
+               $q = "UPDATE users SET avatar = '$avatar' WHERE id_user = '" . $id_user['id_user'] . "'";
+               mysqli_query($link, $q);
+
+               $_SESSION['message'] = 'Дякуємо за реєстрацію!';
                header('Location: login.php');
 
 

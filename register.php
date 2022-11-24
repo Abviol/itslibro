@@ -26,7 +26,7 @@ session_start();
       <input type="text" name="nick" placeholder="Придумайте свій нікнейм" value=<?php echo $_SESSION['nick']; ?>>
 
       <label>Вік</label>
-      <input type="text" name="age" placeholder="Вкажіть ваш ік" value=<?php echo $_SESSION['age']; ?>>
+      <input type="text" name="age" placeholder="Вкажіть ваш вік" value=<?php echo $_SESSION['age']; ?>>
 
       <label>Пароль</label>
       <input type="password" name="pwd" placeholder="Придумайте пароль">

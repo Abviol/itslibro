@@ -29,24 +29,12 @@ if ($b_name == "" || $original_name == "" || $data_writed == "" || $author == ""
       $_SESSION['message'] = "Рік написання має бути числом";
       header('Location: edit_book.php');
    } else {
-      $check_book = mysqli_query($link, "SELECT * FROM books WHERE b_name = '$b_name' AND original_name = '$original_name' AND author = '$author'");
+      $check_book = mysqli_query($link, "SELECT * FROM books WHERE b_name = '$b_name' AND original_name = '$original_name' AND author = '$author' AND id_book != '$id_book'");
       if (mysqli_num_rows($check_book) > 0) { //есть ли уже на сайте такая книга?
          $_SESSION['message'] = "Така книга вже є на сайті!";
          header('Location: edit_book.php');
       } else {
-         $q = "SELECT * FROM books";
-         /* $id_book = mysqli_num_rows(mysqli_query($link, $q)) + 1; */
 
-         //получение данных о загруженной картинке
-         /* $cover_info = pathinfo($cover['name']);
-         $cover_ext = $cover_info['extension'];
-         $path_cover = 'img/covers/' . $id_book . '.' . $cover_ext;
-         move_uploaded_file($cover['tmp_name'], $path_cover); */
-
-         /* echo $cover_ext, '<br>';
-         echo $path_cover, '<br><br>'; */
-
-         //добавление книги в базу данных
          $q = "UPDATE books SET b_name = '$b_name', original_name = '$original_name', author = '$author', data_writed = '$data_writed', genres = '$genres', b_description = '$b_description', category = '$category' WHERE id_book = '$id_book'";
 
          echo '<br>' . $q . '<br>';

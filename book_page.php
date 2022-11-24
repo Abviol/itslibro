@@ -87,7 +87,8 @@ $_SESSION['b_name'] = $book['b_name'];
 
                         <form action="add_book_to_list.php" method="post">
                            <input type="hidden" name="list" value="list_abandoned">
-                           <input class="btn" type="submit" value="Покинуто">
+                           <input class="btn" type="submit" value="Покинуто
+                           ">
                         </form>
 
                         <form action="add_book_to_list.php" method="post">
@@ -135,9 +136,9 @@ $_SESSION['b_name'] = $book['b_name'];
          </div>
       </div>
       <script>
-      if (window.history.replaceState) {
-         window.history.replaceState(null, null, window.location.href);
-      }
+         if (window.history.replaceState) {
+            window.history.replaceState(null, null, window.location.href);
+         }
       </script>
 </body>
 

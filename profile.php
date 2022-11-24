@@ -1,24 +1,6 @@
 ﻿<?php
 ini_set('session.save_path', getcwd() . '\sessions');
 session_start();
-/* include 'db_connect.php';
-include 'upload_avatar.php'; */
-
-function loadAvatar($avatar)
-{
-   $path = 'img/avatar/' . $_SESSION['nick'] . '.jpg';
-   unlink($path);
-   $path = 'img/avatars' . $_SESSION['nick'] . '.jpg';
-   move_uploaded_file($_FILES['avatar']['tmp_name'], $path);
-   /* $q = "UPDATE users SET avatar='" . $path . "' WHERE nick = '" . $_SESSION['nick'] . "'";
-   mysqli_query($link, $q); */
-}
-
-/* if (avatarSecurity($_FILES['avatar'])) {
-loadAvatar($$_FILES['avatar']);
-} else {
-/* echo "<script> alert('Дата заїзду повинна бути меншою за дату виїзду. Вкажіть правильні дати.'); </script>"; 
-} */
 ?>
 
 <!DOCTYPE html>
@@ -38,14 +20,17 @@ loadAvatar($$_FILES['avatar']);
       <header class="header">
          <div class="header__container _container">
             <a href="index.php"><img class="header__logo" src="img/logo.svg"></img></a>
-            <ul class="menu__search">
-               <li class="menu__item">
-                  <input type="sea" class="input__search" placeholder="Пошук...">
-               </li>
-               <li class="menu__item">
-                  <input type="image" src="img/search.svg" height="20" alt="Кнопка «input»">
-               </li>
-            </ul>
+            <form action="all_books.php" method="post">
+               <ul class="menu__search">
+                  <li class="menu__item">
+                     <input type="search" name="search_key" class="input__search" placeholder="Пошук...">
+                  </li>
+                  <li class="menu__item">
+                     <button style="background-color: rgba(0, 0, 0, 0); cursor: pointer   ;" type="submit"><img
+                           src="img/search.svg" height="20" alt="Кнопка «input»"></button>
+                  </li>
+               </ul>
+            </form>
             <div class="menu__icon">
                <span></span>
             </div>
@@ -112,7 +97,7 @@ loadAvatar($$_FILES['avatar']);
                   <h1 class="profile__paragraph-text">Профіль</h1>
                </div>
                <div class="profile__main-info">
-                  <form class="profile__avnick" enctype="multipart/form-data" action="upload_avatar.php">
+                  <form action="upload_avatar.php" class="profile__avnick" method="post" enctype="multipart/form-data">
                      <div class="avnick__backgr"
                         style="background: url(<?php echo $_SESSION['avatar'] ?> );  background-repeat: no-repeat; background-size: cover; background-position: center;">
                         <div class="avnick__backgr-blur"></div>
@@ -131,7 +116,7 @@ loadAvatar($$_FILES['avatar']);
                         <li class="avnick__upload">
                            <label class="avnick__upload-label">
                               Оновити аватар
-                              <input type="file" name="avatar" id="" class="avatar__upload">
+                              <input type="file" name="avatar" class="avatar__upload" accept="image/png, image/jpeg">
                            </label>
                         </li>
                      </ul>
@@ -141,11 +126,15 @@ loadAvatar($$_FILES['avatar']);
                      <div class="details__column">
                         <div class="detail__row">
                            <p class="detail__name">E-mail:</p>
-                           <input type="text" class="detail__info" value=<?php echo $_SESSION['email'] ?>>
+                           <p type="text" class="detail__info">
+                              <?php echo $_SESSION['email'] ?>
+                           </p>
                         </div>
                         <div class="detail__row">
                            <p class="detail__name">Вік:</p>
-                           <input type="text" class="detail__info" value=<?php echo $_SESSION['age'] ?>>
+                           <p type="text" class="detail__info">
+                              <?php echo $_SESSION['age'] ?>
+                           </p>
                         </div>
                         <div class="detail__row">
                            <p class="detail__name">Пароль:</p>

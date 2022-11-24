@@ -1,8 +1,17 @@
 ﻿<?php
 ini_set('session.save_path', getcwd() . '\sessions');
 session_start();
-setcookie("id_book", "");
-include 'db_connect.php'; ?>
+include 'db_connect.php';
+
+if (!empty($_POST['search_key'])) {
+   $_SESSION['search_key'] = $_POST['search_key'];
+}
+$search_key = $_SESSION['search_key'];
+$count = strlen($search_key);
+if ($search_key[$count] == "") {
+   $search_key = rtrim($search_key, ' ');
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -21,7 +30,26 @@ include 'db_connect.php'; ?>
    <div class="wrapper">
       <div class="_container">
          <?php
-         $q = "SELECT * FROM books";
+         if ($search_key != "") {
+            $search = explode(" ", $search_key);
+            $count = count($search);
+            $array = array();
+            $i = 0;
+            foreach ($search as $key) {
+               $i++;
+               if ($key != "") {
+                  if ($i < $count) {
+                     $array[] = "CONCAT (`b_name`, `original_name`, `author`, `genres`) LIKE '%" . $key . "%' OR ";
+                  } else {
+                     $array[] = "CONCAT (`b_name`, `original_name`, `author`, `genres`) LIKE '%" . $key . "%'";
+                  }
+               }
+            }
+            $q = "SELECT * FROM `books` WHERE " . implode("", $array) . " ORDER BY `b_name`";
+            unset($_SESSION['search_key']);
+         } else {
+            $q = "SELECT * FROM books";
+         }
          $book = mysqli_query($link, $q);
          $book = mysqli_fetch_all($book);
          foreach ($book as $book) {
@@ -66,6 +94,11 @@ include 'db_connect.php'; ?>
          ?>
 
       </div>
+      <script>
+      if (window.history.replaceState) {
+         window.history.replaceState(null, null, window.location.href);
+      }
+      </script>
 </body>
 
 </html>

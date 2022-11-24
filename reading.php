@@ -6,14 +6,6 @@ if (isset($_SESSION['id_book'])) {
    $path_txt = 'books/'.strval($_SESSION['id_book']).'.txt';
 }
 
-
-/* $path1 = "books/test_doc.doc";
-$path3 = 'books/test_docx.docx';
-$path4 = 'books/1.docx';
-$path5 = 'books/test_htm.htm';
-$path2 = 'books/1.txt';
-$path6 = 'books/taras.txt'; */
-
 function wholeWordTruncate($s, $characterCount)
 {
    $return = $s;
@@ -139,7 +131,7 @@ if (isset($_GET['p'])) {
                                              }
                                              while ($i <= $j) { ?>
                <a <?php if ($i===$page) echo 'class="active"' ?> href="?p=<?= $i ?>">
-                  <?= $i ?>
+                     <?= $i ?>
                </a>
                <?php $i++;
                                              }
@@ -188,7 +180,7 @@ if (isset($_GET['p'])) {
             }
             while ($i <= $j) { ?>
             <a <?php if ($i===$page) echo 'class="active"' ?> href="?p=<?= $i ?>">
-               <?= $i ?>
+                  <?= $i ?>
             </a>
             <?php $i++;
             }
@@ -206,9 +198,9 @@ if (isset($_GET['p'])) {
       </div>
    </div>
    <script>
-   if (window.history.replaceState) {
-      window.history.replaceState(null, null, window.location.href);
-   }
+      if (window.history.replaceState) {
+         window.history.replaceState(null, null, window.location.href);
+      }
    </script>
 </body>
 

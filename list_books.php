@@ -92,6 +92,12 @@ session_start();
          <div class="_container" style="min-width: 1400px;">
             <div class="admin__panel" ">
                <h3 class=" admin__panel-text">Список книг</h3>
+               <?php
+               if ($_SESSION['message']) {
+                  echo '<h3 class="admin__message">' . $_SESSION['message'] . '</h3>';
+               }
+               unset($_SESSION['message']);
+               ?>
                <table class="panel__table">
                   <thead>
                      <tr>

@@ -1,7 +1,8 @@
 ﻿<?php
-function make_avatar($character)
+
+function make_avatar($character, $id)
 {
-   $path = 'img/avatars/' . $_SESSION['nick'] . '.jpg';
+   $path = 'img/avatars/' . $id . '.jpg';
 
    $image = imagecreate(200, 200);
 

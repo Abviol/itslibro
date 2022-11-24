@@ -1,26 +1,12 @@
 ﻿<?php
 ini_set('session.save_path', getcwd() . '\sessions');
 session_start();
-include 'db_connect.php';
 
-function avatarSecurity($avatar)
-{
-   $name = $_FILES['name'];
-   $type = $_FILES['type'];
-   $size = $_FILES['size'];
-   $blacklist = array(".php", ".js", ".html", ".css");
+$new_avatar = $_FILES['avatar'];
+$avatar_info = pathinfo($new_avatar['name']);
+$avatar_ext = $avatar_info['extension'];
 
-   foreach ($blacklist as $row) {
-      if (preg_match("/$row\$/i", $name))
-         return false;
-   }
-
-   if ($type != "image/jpg")
-      return false;
-
-   if ($size > 5 * 1024 * 1024)
-      return false;
-
-   return true;
-}
+$path_avatar = 'img/avatars/' . $_SESSION['id_user'] . '.' . $avatar_ext;
+echo $path_avatar;
+move_uploaded_file($new_avatar['tmp_name'], $path_avatar);
 ?>
