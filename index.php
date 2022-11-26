@@ -26,14 +26,17 @@ session_start();
       <header class="header">
          <div class="header__container _container">
             <a href="index.php"><img class="header__logo" src="img/logo.svg"></img></a>
-            <ul class="menu__search">
-               <li class="menu__item">
-                  <input type="search" class="input__search" placeholder="Пошук...">
-               </li>
-               <li class="menu__item">
-                  <input type="image" src="img/search.svg" height="20" alt="Кнопка «input»">
-               </li>
-            </ul>
+            <form action="all_books.php" method="post">
+               <ul class="menu__search">
+                  <li class="menu__item">
+                     <input type="search" name="search_key" class="input__search" placeholder="Пошук...">
+                  </li>
+                  <li class="menu__item">
+                     <button style="background-color: rgba(0, 0, 0, 0); cursor: pointer   ;" type="submit"><img
+                           src="img/search.svg" height="20" alt="Кнопка «input»"></button>
+                  </li>
+               </ul>
+            </form>
             <div class="menu__icon">
                <span></span>
             </div>
@@ -45,7 +48,7 @@ session_start();
                   <li class="menu__item">
                      <a href="" class="menu__link">Про сайт</a>
                   </li>
-                  <li class="menu__item">
+                  <!-- <li class="menu__item">
                      <a href="" class="menu__link">Підписка</a>
                      <span class="menu__arrow"></span>
                      <ul class="menu__sub-list">
@@ -56,10 +59,12 @@ session_start();
                            <a href="" class="menu__sub-link">Ввести промокод</a>
                         </li>
                      </ul>
-                  </li>
-                  <?php if (!empty($_SESSION['nick'])) { ?>
+                  </li> -->
+                  <?php include 'db_connect.php';
+
+                  if (!empty($_SESSION['nick'])) { ?>
                   <li class="menu__item">
-                     <a href="my_books.php" class="menu__link">Мої книжки</a>
+                     <a href="#" class="menu__link">Мої книжки</a>
                   </li>
                   <?php } ?>
                   <li class="menu__item">
@@ -91,37 +96,6 @@ session_start();
                </ul>
             </nav>
          </div>
-         <!-- <div class="_container">
-            <nav class="subheader__menu menu">
-               <ul class="menu__list">
-                  <li class="menu__item">
-                     <button class="menu_button">
-                        <a class="hat_a">📚Всі книги</a>
-                     </button>
-                  </li>
-                  <li class="menu__item">
-                     <button class="menu_button">
-                        <a class="hat_a">🔥Популярне</a>
-                     </button>
-                  </li>
-                  <li class="menu__item">
-                     <button class="menu_button">
-                        <a class="hat_a">⏰Новинки</a>
-                     </button>
-                  </li>
-                  <li class="menu__item">
-                     <button class="menu_button">
-                        <a class="hat_a">👌Безкоштовні книги</a>
-                     </button>
-                  </li>
-                  <li class="menu__item">
-                     <button class="menu_button">
-                        <a class="menu__item">👍Топ книг</a>
-                     </button>
-                  </li>
-               </ul>
-            </nav>
-         </div> -->
       </header>
       <!------------------- SLOGAN -------------------------->
       <div class="slogan">
@@ -771,5 +745,4 @@ session_start();
          </nav>
       </footer>
    </div>
-   <script src="js/script.js"></script> <!-- скрипт находится сдесь для более быстрой загрузки сайта -->
-</body>
+   <script src="js/script.js"></script>

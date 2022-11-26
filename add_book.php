@@ -50,9 +50,10 @@ session_start();
                maxlength="1000"><?php echo $_SESSION['b_description']; ?></textarea>
 
             <label>Категорія</label>
-            <label><input type="radio" name="category" <?php if (isset($_SESSION['category']) && $_SESSION['category']=="Для
-                  будь-якого віку") echo "checked"; ?> value="Для
-                  будь-якого віку">Для
+            <label>
+               <input type="radio" name="category"
+                  <?php if (isset($_SESSION['category']) && $_SESSION['category']=="Для будь-якого віку") echo "checked"; ?>
+                  value="Для будь-якого віку">Для
                будь-якого віку
             </label>
             <label for=""><input type="radio" name="category" <?php if (isset($_SESSION['category']) && $_SESSION['category'] == "12+")

@@ -88,10 +88,6 @@ body._lock {
    margin: 0;
 }
 
-.menu {
-   
-}
-
 .menu__list  {
    flex-wrap: wrap;
 }
@@ -734,13 +730,16 @@ body._touch .menu__list>li._active .menu__arrow {
 
 .avnick__upload {
    margin-top: 20px;
+   display: flex;
+   justify-content: space-around;
 }
 
-.avnick__upload-label {
+.avnick__upload-submit {
    font-size: 16px;
    font-weight: 600;
    line-height: 22px;
    color: #A96C25;
+   background-color: #fff;
    border: solid 2px #A96C25;
    border-radius: 10px;
    padding: 2px 5px;
@@ -749,11 +748,26 @@ body._touch .menu__list>li._active .menu__arrow {
    display: block;
 }
 
-.avnick__upload-label:hover {
+.avnick__upload-submit:hover {
    color: #fff;
    background-color: #A96C25;
    transition: all 0.3s ease 0s;
    cursor: pointer;
+}
+
+.avnick__upload-button {
+   position: absolute;
+   width: 100px;
+   height: 100px;
+   cursor: pointer;
+   border-radius: 50px;
+   opacity: 0;
+   transition: all 0.3s ease 0s;
+}
+
+.avnick__upload-button:hover {
+   opacity: 1;
+   transition: all 0.3s ease 0s;
 }
 
 .avatar__upload[type=file] {

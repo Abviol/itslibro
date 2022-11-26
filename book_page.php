@@ -4,14 +4,9 @@ session_start();
 if (isset($_POST['id_book'])) {
    $_SESSION['id_book'] = $_POST['id_book'];
 }
-
-include 'db_connect.php';
-
-$id_book = $_SESSION['id_book'];
-$q = "SELECT * FROM books WHERE id_book = '" . $id_book . "'";
-$book_q = mysqli_query($link, $q);
-$book = mysqli_fetch_assoc($book_q);
-$_SESSION['b_name'] = $book['b_name'];
+if (isset($_POST['b_name'])) {
+   $_SESSION['b_name'] = $_POST['b_name'];
+}
 ?>
 
 <!DOCTYPE html>
@@ -25,12 +20,81 @@ $_SESSION['b_name'] = $book['b_name'];
    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
    <link href="css/book_page.css" rel="stylesheet">
    <title>
-      <?php echo "Детально: " . $book['b_name'] ?>
+      <?php echo "Детально: " . $_SESSION['b_name'] ?>
    </title>
 </head>
 
 <body>
    <div class="wrapper">
+      <!-- -------------------- HEADER ----------------------- -->
+      <header class="header">
+         <div class="header__container _container">
+            <a href="index.php"><img class="header__logo" src="img/logo.svg"></img></a>
+            <form action="all_books.php" method="post">
+               <ul class="menu__search">
+                  <li class="menu__item">
+                     <input type="search" name="search_key" class="input__search" placeholder="Пошук...">
+                  </li>
+                  <li class="menu__item">
+                     <button style="background-color: rgba(0, 0, 0, 0); cursor: pointer   ;" type="submit"><img
+                           src="img/search.svg" height="20" alt="Кнопка «input»"></button>
+                  </li>
+               </ul>
+            </form>
+            <div class="menu__icon">
+               <span></span>
+            </div>
+            <nav class="header__menu menu">
+               <ul class="menu__list">
+                  <li class="menu__item">
+                     <a href="all_books.php" class="menu__link">Бібліотека</a>
+                  </li>
+                  <li class="menu__item">
+                     <a href="" class="menu__link">Про сайт</a>
+                  </li>
+                  <?php include 'db_connect.php';
+                  $id_book = $_SESSION['id_book'];
+                  $q = "SELECT * FROM books WHERE id_book = '" . $id_book . "'";
+                  $book_q = mysqli_query($link, $q);
+                  $book = mysqli_fetch_assoc($book_q);
+                  $_SESSION['b_name'] = $book['b_name'];
+
+                  if (!empty($_SESSION['nick'])) { ?>
+                  <li class="menu__item">
+                     <a href="#" class="menu__link">Мої книжки</a>
+                  </li>
+                  <?php } ?>
+                  <li class="menu__item">
+                     <?php if (empty($_SESSION['nick'])) { ?>
+                     <a href="login.php" class="menu__link">Увійти</a>
+                     <?php } else { ?>
+                     <a class="menu__link menu__login">
+                        <?php echo $_SESSION['nick']; ?>
+                     </a>
+                     <span class="menu__arrow"></span>
+                     <ul class="menu__sub-list">
+                        <li>
+                           <a href="profile.php" class="menu__sub-link">Профіль</a>
+                        </li>
+                        <li>
+                           <a href="my_books.php" class="menu__sub-link">Мої книжки</a>
+                        </li>
+                        <?php if ($_SESSION['u_status'] == 'adm') { ?>
+                        <li>
+                           <a href="admin_page.php" class="menu__sub-link">Сторінка адміністратора</a>
+                        </li>
+                        <?php } ?>
+                        <li>
+                           <a href="logout.php" class="menu__sub-link">Вийти з акаунту</a>
+                        </li>
+                     </ul>
+                     <?php } ?>
+                  </li>
+               </ul>
+            </nav>
+         </div>
+      </header>
+      <!-- ----------------------- PAGE ------------------ -->
       <div class="_container">
          <div class="book__info__container">
             <div class="cover__container">
@@ -135,11 +199,47 @@ $_SESSION['b_name'] = $book['b_name'];
             </div>
          </div>
       </div>
-      <script>
-         if (window.history.replaceState) {
-            window.history.replaceState(null, null, window.location.href);
-         }
-      </script>
+      <!------------------- FOOTER -------------------------->
+      <footer class="footer">
+         <nav class="footer__container _container">
+            <div class="footer__column">
+               <h5>Про проект</h5>
+               <ul>
+                  <li><a href="">Що таке Itslibro?</a></li>
+               </ul>
+            </div>
+            <div class="footer__column">
+               <h5>Підписка</h5>
+               <ul>
+                  <li><a href="">Оформити підписку</a></li>
+                  <li><a href="">Ввести промокод</a></li>
+               </ul>
+            </div>
+            <div class="footer__column">
+               <h5>Служба підтримки</h5>
+               <ul>
+                  <li><a href="">+(38) 095 489 16 59</a></li>
+                  <li><a href="">libhelp@gmail.com</a></li>
+               </ul>
+            </div>
+            <div class="footer__column">
+               <h5>Слідкуйте за новинами</h5>
+               <div class="footer__icons">
+                  <a href="https://www.instagram.com/abviol999/"><img src="img/inst.svg" alt=""></a>
+                  <a href="https://www.youtube.com/channel/UCC7NAPBjk0yZ4ee6WtH0ZCQ"><img src="img/yt.svg" alt=""></a>
+                  <a href="https://t.me/abviol"><img src="img/tg.svg" alt=""></a>
+                  <a href="https://www.facebook.com/profile.php?id=100059965062647"><img src="img/fb.svg" alt=""></a>
+               </div>
+            </div>
+         </nav>
+      </footer>
+   </div>
+   <script src="js/script.js"></script>
+   <script>
+   if (window.history.replaceState) {
+      window.history.replaceState(null, null, window.location.href);
+   }
+   </script>
 </body>
 
 </html>

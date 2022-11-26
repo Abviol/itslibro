@@ -180,7 +180,7 @@ session_start();
                            <form action="edit_book.php" method="post">
                               <input type="hidden" name="id_book" value=<?php echo $book[0]; ?>>
                               <button type="submit" style="margin-top: 10px; background: none; cursor: pointer;">
-                                 <img src="img/pencil.svg" alt="">
+                                 <img src="img/pencil_1.svg" alt="">
                               </button>
                            </form>
                         </td>

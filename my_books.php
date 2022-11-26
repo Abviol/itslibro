@@ -30,7 +30,11 @@ include 'db_connect.php'; ?>
          </form>
 
          <?php
-         $list = $_POST['selected_list'];
+         if (empty($_POST['selected_list'])) {
+            $list = 'list_reading';
+         } else {
+            $list = $_POST['selected_list'];
+         }
          $id_user = $_SESSION['id_user'];
          $q = "SELECT id_book FROM " . $list . " WHERE id_user = " . $id_user;
          $books = mysqli_query($link, $q);

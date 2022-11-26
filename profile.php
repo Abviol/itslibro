@@ -42,19 +42,21 @@ session_start();
                   <li class="menu__item">
                      <a href="" class="menu__link">Про сайт</a>
                   </li>
-                  <li class="menu__item">
-                     <a href="" class="menu__link">Підписка</a>
-                     <span class="menu__arrow"></span>
-                     <ul class="menu__sub-list">
-                        <li>
-                           <a href="" class="menu__sub-link">Оформити підписку</a>
-                        </li>
-                        <li>
-                           <a href="" class="menu__sub-link">Ввести промокод</a>
-                        </li>
-                     </ul>
-                  </li>
-                  <?php if (!empty($_SESSION['nick'])) { ?>
+                  <!-- <li class="menu__item">
+                           <a href="" class="menu__link">Підписка</a>
+                           <span class="menu__arrow"></span>
+                           <ul class="menu__sub-list">
+                              <li>
+                                 <a href="" class="menu__sub-link">Оформити підписку</a>
+                              </li>
+                              <li>
+                                 <a href="" class="menu__sub-link">Ввести промокод</a>
+                              </li>
+                           </ul>
+                        </li> -->
+                  <?php include 'db_connect.php';
+
+                  if (!empty($_SESSION['nick'])) { ?>
                   <li class="menu__item">
                      <a href="#" class="menu__link">Мої книжки</a>
                   </li>
@@ -104,6 +106,9 @@ session_start();
                      </div>
                      <ul class="avnick">
                         <li class="avnick__avatar">
+                           <label class="avnick__upload-button" style="background: url(img/pencil.svg);">
+                              <input type="file" name="avatar" class="avatar__upload"
+                                 accept="image/png, image/jpeg"></label>
                            <div
                               style="background: url(<?php echo $_SESSION['avatar'] ?>); background-position: center; background-size: cover;">
                            </div>
@@ -114,10 +119,9 @@ session_start();
                            </p>
                         </li>
                         <li class="avnick__upload">
-                           <label class="avnick__upload-label">
+                           <button class="avnick__upload-submit" type="submit">
                               Оновити аватар
-                              <input type="file" name="avatar" class="avatar__upload" accept="image/png, image/jpeg">
-                           </label>
+                           </button>
                         </li>
                      </ul>
                   </form>
