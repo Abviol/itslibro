@@ -198,32 +198,23 @@ if ($_POST['sorting_option'] == 'newest') {
                <h3 class="sort-text">Сортировка</h3>
                <form class="sorting-options" action="all_books.php" method="post">
                   <label class="sorting-option">
-                     <input type="radio" name="sorting_option" value="newest" <?php if (
-                        empty($_POST['sorting_option'])
-                        || $_POST['sorting_option'] == "newest"
-                     )
-                        echo "checked"; ?>>
+                     <input type="radio" name="sorting_option" value="newest" <?php if ( empty($_POST['sorting_option'])
+                        || $_POST['sorting_option']=="newest" ) echo "checked"; ?>>
                      <span class="radio"></span>за новизною
                   </label>
                   <label class="sorting-option">
                      <input type="radio" name="sorting_option" value="popular" <?php if (
-                        $_POST['sorting_option'] == "popular"
-                     )
-                        echo "checked"; ?>>
+                        $_POST['sorting_option']=="popular" ) echo "checked"; ?>>
                      <span class="radio"></span>за популярністю
                   </label>
                   <label class="sorting-option">
-                     <input type="radio" name="sorting_option" value="best" <?php if (
-                        $_POST['sorting_option'] == "best"
-                     )
-                        echo "checked"; ?>>
+                     <input type="radio" name="sorting_option" value="best" <?php if ( $_POST['sorting_option']=="best"
+                        ) echo "checked"; ?>>
                      <span class="radio"></span>за рейтингом
                   </label>
                   <label class="sorting-option">
                      <input type="radio" name="sorting_option" value="biggest" <?php if (
-                        $_POST['sorting_option'] == "biggest"
-                     )
-                        echo "checked"; ?>>
+                        $_POST['sorting_option']=="biggest" ) echo "checked"; ?>>
                      <span class="radio"></span>за обсягом
                   </label>
                   <input class="learn-more" type="submit" value="Сортувати" style="margin-top: 5px; font-size: 16px;">
@@ -268,8 +259,8 @@ if ($_POST['sorting_option'] == 'newest') {
    </div>
    <script src="js/script.js"></script>
    <script>
-      if (w ow.history.replaceState) {
-      wi istory.replaceState(null, null, window.location.href);
+      if (window.history.replaceState) {
+         window.history.replaceState(null, null, window.location.href);
       }
    </script>
 </body>

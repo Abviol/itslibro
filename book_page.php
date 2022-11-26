@@ -95,110 +95,110 @@ if (isset($_POST['b_name'])) {
          </div>
       </header>
       <!-- ----------------------- PAGE ------------------ -->
-      <div class="_container">
-         <div class="book__info__container">
-            <div class="cover__container">
-               <img src=<?php echo $book['picture'] ?> alt="Обкладанка">
-            </div>
-            <div class="book-page__book__info">
-
-               <div class="book__statistics">
-                  <h3 class="info__views">
-                     <?php echo "Кількість переглядів: " . $book['views_count'] ?>
+      <main class="page">
+         <div class="_container">
+            <div class="book__info__container">
+               <div class="cover__container">
+                  <img src=<?php echo $book['picture'] ?> alt="Обкладанка" class="cover" width="200" height="350">
+               </div>
+               <div class="book-page__book__info">
+                  <div class="book__statistics">
+                     <h3 class="info__views">
+                        <?php echo "Кількість переглядів: " . $book['views_count'] ?>
+                     </h3>
+                     <h3 class="info__rating">
+                        <?php echo "Оцінка: " . $book['rating'] . " (кількість оцінок: " . $book['ratings_count'] . ")" ?>
+                     </h3>
+                  </div>
+                  <div class="main__info">
+                     <h3 class="info__name">
+                        <?php echo "\"" . $book['b_name'] . "\"" ?>
+                     </h3>
+                     <h3 class="info__author">
+                        <?php echo $book['author'] ?>
+                     </h3>
+                  </div>
+                  <div class="actions">
+                     <form action="reading.php" method="post">
+                        <input type="hidden" name="id_book" value=<?php echo $_SESSION['id_book']; ?>>
+                        <input class="action" type="submit" value="Читати">
+                     </form>
+                     <li class="action">
+                        <a>Додати до списку</a>
+                        <ul>
+                           <li>
+                              <form action="add_book_to_list.php" method="post" class="form__action">
+                                 <input type="hidden" name="list" value="list_reading">
+                                 <input class="btn" type="submit" value="Читаю">
+                              </form>
+                              <form action="add_book_to_list.php" method="post" class="form__action">
+                                 <input type="hidden" name="list" value="list_favorite">
+                                 <input class="btn" type="submit" value="Улюблене">
+                              </form>
+                              <form action="add_book_to_list.php" method="post" class="form__action">
+                                 <input type="hidden" name="list" value="list_in_plans">
+                                 <input class="btn" type="submit" value="У планах">
+                              </form>
+                              <form action="add_book_to_list.php" method="post" class="form__action">
+                                 <input type="hidden" name="list" value="list_readed">
+                                 <input class="btn" type="submit" value="Прочитано">
+                              </form>
+                              <form action="add_book_to_list.php" method="post" class="form__action">
+                                 <input type="hidden" name="list" value="list_abandoned">
+                                 <input class="btn" type="submit" value="Покинуто">
+                              </form>
+                              <form action="add_book_to_list.php" method="post" class="form__action">
+                                 <input type="hidden" name="list" value="delete">
+                                 <input class="btn" type="submit" value="Видалити">
+                              </form>
+                           </li>
+                        </ul>
+                     </li>
+                     <li class="action">
+                        <a>Оцінити</a>
+                        <ul>
+                           <li>
+                              <?php
+                              for ($i = 1; $i <= 5; $i++) { ?>
+                              <form action="add_book_to_list.php" method="post" class="form__action">
+                                 <input type="hidden" name="rate" value=<?= $i ?>>
+                                 <input style="color: #000;" class="btn" type="submit" value=<?= $i ?>>
+                              </form>
+                              <?php } ?>
+                           </li>
+                        </ul>
+                     </li>
+                  </div>
+                  <h3 class="info__about">
+                     <?php echo '<b>Опис:</b> ' . $book['b_description'] ?>
                   </h3>
-
-                  <h3 class="info__rating">
-                     <?php echo "Оцінка: " . $book['rating'] . " (кількість оцінок: " . $book['ratings_count'] . ")" ?>
+                  <h3 class="info__about">
+                     <?php
+                     $q = "SELECT * FROM users WHERE id_user=" . $book['id_publisher'];
+                     $y = mysqli_query($link, $q);
+                     $publisher = mysqli_fetch_assoc($y);
+                     echo "<b>Опублікував: </b>" . $publisher['nick'];
+                     ?>
+                  </h3>
+                  <h3 class="info__about">
+                     <?php echo "<b>Дата написання: </b>" . $book['data_writed'] . " рік" ?>
+                  </h3>
+                  <h3 class="info__about">
+                     <?php echo "<b>Дата опублікування: </b>" . $book['data_published'] ?>
+                  </h3>
+                  <h3 class="info__about">
+                     <?php echo "<b>Жанри: </b>" . $book['genres'] ?>
+                  </h3>
+                  <h3 class="info__about">
+                     <?php echo "<b>Кількість слів : </b>" . $book['words_count'] ?>
+                  </h3>
+                  <h3 class="info__about">
+                     <?php echo "<b>Вікова категорія: </b>" . $book['category'] ?>
                   </h3>
                </div>
-
-               <h3 class="info__name">
-                  <?php echo "\"" . $book['b_name'] . "\"" ?>
-               </h3>
-
-               <h3 class="info__author">
-                  <?php echo $book['author'] ?>
-               </h3>
-
-               <form action="reading.php" method="post">
-                  <input type="hidden" name="id_book" value=<?php echo $_SESSION['id_book']; ?>>
-                  <input class="btn" type="submit" value="Читати">
-               </form>
-
-               <li class="menu__link">
-                  <a>Додати до списку</a>
-                  <ul class="sub-list">
-                     <li>
-                        <form action="add_book_to_list.php" method="post">
-                           <input type="hidden" name="list" value="list_reading">
-                           <input class="btn" type="submit" value="Читаю">
-                        </form>
-
-                        <form action="add_book_to_list.php" method="post">
-                           <input type="hidden" name="list" value="list_favorite">
-                           <input class="btn" type="submit" value="Улюблене">
-                        </form>
-
-                        <form action="add_book_to_list.php" method="post">
-                           <input type="hidden" name="list" value="list_in_plans">
-                           <input class="btn" type="submit" value="У планах">
-                        </form>
-
-                        <form action="add_book_to_list.php" method="post">
-                           <input type="hidden" name="list" value="list_readed">
-                           <input class="btn" type="submit" value="Прочитано">
-                        </form>
-
-                        <form action="add_book_to_list.php" method="post">
-                           <input type="hidden" name="list" value="list_abandoned">
-                           <input class="btn" type="submit" value="Покинуто
-                           ">
-                        </form>
-
-                        <form action="add_book_to_list.php" method="post">
-                           <input type="hidden" name="list" value="delete">
-                           <input class="btn" type="submit" value="Видалити">
-                        </form>
-                     </li>
-                  </ul>
-               </li>
-
-               <h3 class="info__about">
-                  <?php echo '<b>Опис:</b> ' . $book['b_description'] ?>
-               </h3>
-
-               <h3 class="info__about">
-                  <?php
-                  $q = "SELECT * FROM users WHERE id_user=" . $book['id_publisher'];
-                  $y = mysqli_query($link, $q);
-                  $publisher = mysqli_fetch_assoc($y);
-                  echo "<b>Опублікував: </b>" . $publisher['nick'];
-                  ?>
-               </h3>
-
-               <h3 class="info__about">
-                  <?php echo "<b>Дата написання: </b>" . $book['data_writed'] . " рік" ?>
-               </h3>
-
-               <h3 class="info__about">
-                  <?php echo "<b>Дата опублікування: </b>" . $book['data_published'] ?>
-               </h3>
-
-               <h3 class="info__about">
-                  <?php echo "<b>Жанри: </b>" . $book['genres'] ?>
-               </h3>
-
-               <h3 class="info__about">
-                  <?php echo "<b>Кількість слів : </b>" . $book['words_count'] ?>
-               </h3>
-
-               <h3 class="info__about">
-                  <?php echo "<b>Вікова категорія: </b>" . $book['category'] ?>
-               </h3>
-
             </div>
          </div>
-      </div>
+      </main>
       <!------------------- FOOTER -------------------------->
       <footer class="footer">
          <nav class="footer__container _container">
