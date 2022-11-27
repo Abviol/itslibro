@@ -482,7 +482,6 @@ body._touch .menu__list>li._active .menu__arrow {
 
 .cover__container {
    width: 200px;
-   height: 350px;
 }
 .cover {
    border-radius: 10px;
@@ -506,8 +505,26 @@ h3 {
    padding: 100px 0;
 }
 
+.page__name {
+   margin: 0px auto 20px auto;
+   height: 100px;
+   max-width: 940px;
+   padding: 0 30px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   background-color: #fff;
+   border-radius: 10px;
+}
+
+.page__name-text {
+   font-weight: 600;
+   font-size: 32px;
+   line-height: 38px;
+}
+
 .book-page__book__info {
-   max-width: 660px;
+   max-width: 680px;
    display: flex;
    flex-direction: column;
    justify-content: space-between;
@@ -541,9 +558,17 @@ h3 {
 .info__name {
    font-size: 32px;
    margin: 0 0 10px 0;
-   font-weight: 600;
+   font-weight: 500;
    font-size: 32px;
    line-height: 38px;
+}
+
+.info__original-name {
+   font-weight: 400;
+   font-size: 14px;
+   line-height: 16px;
+   color: #000;
+   margin: 0 0 10px 0;
 }
 
 .info__author {
@@ -580,10 +605,9 @@ h3 {
 }
 
 .info__about {
-   font-size: 16px;
-   margin-top: 5px;
-   font-weight: 400;
-   color: #000;
+   margin-bottom: 20px;
+   display: flex;
+   flex-direction: column;
 }
 
 .text__container {
@@ -690,4 +714,20 @@ align-items: center;
 
 .actions {
    margin-bottom: 20px;
+}
+
+.info__about-name {
+   font-weight: 600;
+   font-size: 18px;
+   line-height: 21px;
+   margin-bottom: 10px;
+}
+
+
+.info__about-info {
+   font-weight: 400;
+   font-size: 16px;
+   line-height: 125%;
+   letter-spacing: 0.011em;
+   color: rgba(0, 0, 0, 0.6);
 }

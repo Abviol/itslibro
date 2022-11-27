@@ -96,10 +96,13 @@ if (isset($_POST['b_name'])) {
       </header>
       <!-- ----------------------- PAGE ------------------ -->
       <main class="page">
+         <div class="page__name">
+            <h1 class="page__name-text">Про книгу</h1>
+         </div>
          <div class="_container">
             <div class="book__info__container">
                <div class="cover__container">
-                  <img src=<?php echo $book['picture'] ?> alt="Обкладанка" class="cover" width="200" height="350">
+                  <img src=<?php echo $book['picture'] ?> alt="Обкладанка" class="cover" width="200">
                </div>
                <div class="book-page__book__info">
                   <div class="book__statistics">
@@ -112,7 +115,10 @@ if (isset($_POST['b_name'])) {
                   </div>
                   <div class="main__info">
                      <h3 class="info__name">
-                        <?php echo "\"" . $book['b_name'] . "\"" ?>
+                        <?php echo $book['b_name'] ?>
+                     </h3>
+                     <h3 class="info__original-name">
+                        <?php echo $book['original_name'] ?>
                      </h3>
                      <h3 class="info__author">
                         <?php echo $book['author'] ?>
@@ -169,32 +175,59 @@ if (isset($_POST['b_name'])) {
                         </ul>
                      </li>
                   </div>
-                  <h3 class="info__about">
-                     <?php echo '<b>Опис:</b> ' . $book['b_description'] ?>
-                  </h3>
-                  <h3 class="info__about">
-                     <?php
-                     $q = "SELECT * FROM users WHERE id_user=" . $book['id_publisher'];
-                     $y = mysqli_query($link, $q);
-                     $publisher = mysqli_fetch_assoc($y);
-                     echo "<b>Опублікував: </b>" . $publisher['nick'];
-                     ?>
-                  </h3>
-                  <h3 class="info__about">
-                     <?php echo "<b>Дата написання: </b>" . $book['data_writed'] . " рік" ?>
-                  </h3>
-                  <h3 class="info__about">
-                     <?php echo "<b>Дата опублікування: </b>" . $book['data_published'] ?>
-                  </h3>
-                  <h3 class="info__about">
-                     <?php echo "<b>Жанри: </b>" . $book['genres'] ?>
-                  </h3>
-                  <h3 class="info__about">
-                     <?php echo "<b>Кількість слів : </b>" . $book['words_count'] ?>
-                  </h3>
-                  <h3 class="info__about">
-                     <?php echo "<b>Вікова категорія: </b>" . $book['category'] ?>
-                  </h3>
+                  <div class="info__about">
+                     <h3 class="info__about-name" style="font-size: 20px;">Опис</h3>
+                     <h3 class="info__about-info">
+                        <?php echo $book['b_description'] ?>
+                     </h3>
+                  </div>
+
+                  <div class="info__about">
+                     <h3 class="info__about-name">Опублікував</h3>
+                     <h3 class="info__about-info">
+                        <?php
+                        $q = "SELECT * FROM users WHERE id_user=" . $book['id_publisher'];
+                        $y = mysqli_query($link, $q);
+                        $publisher = mysqli_fetch_assoc($y);
+                        echo $publisher['nick'];
+                        ?>
+                     </h3>
+                  </div>
+
+                  <div class="info__about">
+                     <h3 class="info__about-name">Дата написання</h3>
+                     <h3 class="info__about-info">
+                        <?php echo $book['data_writed'] . " рік" ?>
+                     </h3>
+                  </div>
+
+                  <div class="info__about">
+                     <h3 class="info__about-name">Дата опублікування</h3>
+                     <h3 class="info__about-info">
+                        <?php echo $book['data_published'] ?>
+                     </h3>
+                  </div>
+
+                  <div class="info__about">
+                     <h3 class="info__about-name">Жанри</h3>
+                     <h3 class="info__about-info">
+                        <?php echo $book['genres'] ?>
+                     </h3>
+                  </div>
+
+                  <div class="info__about">
+                     <h3 class="info__about-name">Обсяг</h3>
+                     <h3 class="info__about-info">
+                        <?php echo $book['words_count'] . " слів" ?>
+                     </h3>
+                  </div>
+
+                  <div class="info__about">
+                     <h3 class="info__about-name">Вікова категорія</h3>
+                     <h3 class="info__about-info">
+                        <?php echo $book['category'] ?>
+                     </h3>
+                  </div>
                </div>
             </div>
          </div>

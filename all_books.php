@@ -170,7 +170,7 @@ if ($_POST['sorting_option'] == 'newest') {
                   </div>
                   <div class="all-books__book__info">
                      <h3 class="info__name">
-                        <?php echo "\"" . $books['b_name'] . "\"" ?>
+                        <?php echo $books['b_name'] ?>
                      </h3>
                      <h3 class="info__author">
                         <?php echo $books['author'] ?>
