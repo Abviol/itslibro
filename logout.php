@@ -8,12 +8,8 @@ unset($_SESSION['u_status']);
 unset($_SESSION['about_user']);
 unset($_SESSION['u_password']);
 unset($_SESSION['avatar']);
-/* $_SESSION['nick'] = "";
- $_SESSION['email'] = "";
- $_SESSION['age'] = "";
- $_SESSION['u_status'] = "";
- $_SESSION['about_user'] = "";
- $_SESSION['pwd'] = "";
- $_SESSION['avatar'] = ""; */
+unset($_SESSION['id_user']);
+unset($_SESSION['id_book']);
+unset($_SESSION['selected_list']);
 header('Location: index.php');
 ?>

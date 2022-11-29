@@ -21,14 +21,17 @@ session_start();
       <header class="header">
          <div class="header__container _container">
             <a href="index.php"><img class="header__logo" src="img/logo.svg"></img></a>
-            <ul class="menu__search">
-               <li class="menu__item">
-                  <input type="sea" class="input__search" placeholder="Пошук...">
-               </li>
-               <li class="menu__item">
-                  <input type="image" src="img/search.svg" height="20" alt="Кнопка «input»">
-               </li>
-            </ul>
+            <form action="all_books.php" method="post">
+               <ul class="menu__search">
+                  <li class="menu__item">
+                     <input type="search" name="search_key" class="input__search" placeholder="Пошук...">
+                  </li>
+                  <li class="menu__item">
+                     <button style="background-color: rgba(0, 0, 0, 0); cursor: pointer   ;" type="submit"><img
+                           src="img/search.svg" height="20" alt="Кнопка «input»"></button>
+                  </li>
+               </ul>
+            </form>
             <div class="menu__icon">
                <span></span>
             </div>
@@ -40,21 +43,23 @@ session_start();
                   <li class="menu__item">
                      <a href="" class="menu__link">Про сайт</a>
                   </li>
+                  <!-- <li class="menu__item">
+                              <a href="" class="menu__link">Підписка</a>
+                              <span class="menu__arrow"></span>
+                              <ul class="menu__sub-list">
+                                 <li>
+                                    <a href="" class="menu__sub-link">Оформити підписку</a>
+                                 </li>
+                                 <li>
+                                    <a href="" class="menu__sub-link">Ввести промокод</a>
+                                 </li>
+                              </ul>
+                           </li> -->
+                  <?php include 'db_connect.php';
+
+                  if (!empty($_SESSION['nick'])) { ?>
                   <li class="menu__item">
-                     <a href="" class="menu__link">Підписка</a>
-                     <span class="menu__arrow"></span>
-                     <ul class="menu__sub-list">
-                        <li>
-                           <a href="" class="menu__sub-link">Оформити підписку</a>
-                        </li>
-                        <li>
-                           <a href="" class="menu__sub-link">Ввести промокод</a>
-                        </li>
-                     </ul>
-                  </li>
-                  <?php if (!empty($_SESSION['nick'])) { ?>
-                  <li class="menu__item">
-                     <a href="#" class="menu__link">Мої книжки</a>
+                     <a href="my_books.php" class="menu__link">Мої книжки</a>
                   </li>
                   <?php } ?>
                   <li class="menu__item">
@@ -89,9 +94,11 @@ session_start();
       </header>
       <!------------------- Page -------------------------->
       <main class="page">
+         <div class="page__name" style="min-width: 1400px;">
+            <h1 class=" page__name-text">Список книг</h1>
+         </div>
          <div class="_container" style="min-width: 1400px;">
-            <div class="admin__panel" ">
-               <h3 class=" admin__panel-text">Список книг</h3>
+            <div class="admin__panel">
                <?php
                if ($_SESSION['message']) {
                   echo '<h3 class="admin__message">' . $_SESSION['message'] . '</h3>';
@@ -102,7 +109,7 @@ session_start();
                   <thead>
                      <tr>
                         <th>id книги</th>
-                        <th>id видавеця</th>
+                        <th>id видавця</th>
                         <th>Назва книги</th>
                         <th>Оригинальна назва</th>
                         <th>Автор</th>
@@ -173,13 +180,14 @@ session_start();
                         <td>
                            <form action="delete_book.php" method="post">
                               <input type="hidden" name="id_book" value=<?php echo $book[0]; ?>>
-                              <button type="submit" style="background: none; cursor: pointer;">
+                              <button type="submit" style="background: none; cursor: pointer;" class="icons">
                                  <img src="img/trash.svg" alt="">
                               </button>
                            </form>
                            <form action="edit_book.php" method="post">
                               <input type="hidden" name="id_book" value=<?php echo $book[0]; ?>>
-                              <button type="submit" style="margin-top: 10px; background: none; cursor: pointer;">
+                              <button type="submit" style="margin-top: 10px; background: none; cursor: pointer;"
+                                 class="icons">
                                  <img src="img/pencil_1.svg" alt="">
                               </button>
                            </form>

@@ -61,7 +61,7 @@ if (isset($_POST['b_name'])) {
 
                   if (!empty($_SESSION['nick'])) { ?>
                   <li class="menu__item">
-                     <a href="#" class="menu__link">Мої книжки</a>
+                     <a href="my_books.php" class="menu__link">Мої книжки</a>
                   </li>
                   <?php } ?>
                   <li class="menu__item">
@@ -112,6 +112,15 @@ if (isset($_POST['b_name'])) {
                      <h3 class="info__rating">
                         <?php echo "Оцінка: " . $book['rating'] . " (кількість оцінок: " . $book['ratings_count'] . ")" ?>
                      </h3>
+                     <?php
+                     $q = "SELECT * FROM ratings WHERE id_user = " . $_SESSION['id_user'] . " AND id_book = " . $_SESSION['id_book'];
+                     $users_rating = mysqli_query($link, $q);
+                     if (mysqli_num_rows($users_rating) > 0) {
+                        $users_rating = mysqli_fetch_assoc($users_rating); ?>
+                     <h3 class="info__rating">
+                        <?php echo "Ваша оцінка: " . $users_rating['rating'] ?>
+                     </h3>
+                     <?php } ?>
                   </div>
                   <div class="main__info">
                      <h3 class="info__name">
@@ -129,6 +138,7 @@ if (isset($_POST['b_name'])) {
                         <input type="hidden" name="id_book" value=<?php echo $_SESSION['id_book']; ?>>
                         <input class="action" type="submit" value="Читати">
                      </form>
+                     <?php if (!empty($_SESSION['nick'])) { ?>
                      <li class="action">
                         <a>Додати до списку</a>
                         <ul>
@@ -160,20 +170,26 @@ if (isset($_POST['b_name'])) {
                            </li>
                         </ul>
                      </li>
+                     <?php
+                        $q = "SELECT * FROM ratings WHERE id_user = " . $_SESSION['id_user'] . " AND id_book = " . $_SESSION['id_book'];
+                        if (mysqli_num_rows(mysqli_query($link, $q)) < 0) {
+                     ?>
                      <li class="action">
                         <a>Оцінити</a>
                         <ul>
                            <li>
                               <?php
-                              for ($i = 1; $i <= 5; $i++) { ?>
-                              <form action="add_book_to_list.php" method="post" class="form__action">
-                                 <input type="hidden" name="rate" value=<?= $i ?>>
-                                 <input style="color: #000;" class="btn" type="submit" value=<?= $i ?>>
+                           for ($i = 1; $i <= 5; $i++) { ?>
+                              <form action="rating.php" method="post" class="form__action">
+                                 <input type="hidden" name="rating" value=<?php echo $i; ?>>
+                                 <input style="color: #000;" class="btn" type="submit" value=<?php echo $i ?>>
                               </form>
                               <?php } ?>
                            </li>
                         </ul>
                      </li>
+                     <?php }
+                     } ?>
                   </div>
                   <div class="info__about">
                      <h3 class="info__about-name" style="font-size: 20px;">Опис</h3>

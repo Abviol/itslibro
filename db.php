@@ -74,7 +74,7 @@ $q4 = "CREATE TABLE IF NOT EXISTS `itslibro1`.`ratings` (
   `rating` INT NOT NULL,
   INDEX `book_idx` (`id_book` ASC),
   INDEX `user_idx` (`id_user` ASC),
-  CONSTRAINT `book_rate`чё
+  CONSTRAINT `book_rate`
     FOREIGN KEY (`id_book`)
     REFERENCES `itslibro1`.`books` (`id_book`)
     ON DELETE NO ACTION

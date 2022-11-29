@@ -151,29 +151,59 @@ body._lock {
 
 .menu__sub-list {
    position: absolute;
-   top: 100%;
-   right: 0;
+   display: flex;
+   flex-direction: column;
+   top: auto;
    background-color: #fff;
-   border: solid 2px rgba(204, 146, 58, 0.25);
+   width: 150px;
+   filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.25));
    border-radius: 10px;
-   padding: 10px;
+   z-index: 51;
+   opacity: 0;
+   transform: translate(0px, 10%);
+   transition: all 0.3s ease 0s;
+   pointer-events: none;
+   margin: 6px 0;
    min-width: 175px;
    z-index: 51;
+   right: 0;
 }
 
 .menu__sub-list li {
-   margin: 5px 0;
-   border-bottom: #000;
+   padding: 5px 10px;
+   background-color: #fff;
+   cursor: pointer;
+   transition: all 0.3s ease 0s;
+   width: 100%;
+}
+
+.menu__sub-list li:first-child {
+   padding: 10px 10px 5px 10px;
+   border-radius: 10px 10px 0 0;
 }
 
 .menu__sub-list li:last-child {
-   margin: 0;
+   padding: 5px 10px 10px 10px;
+   border-radius: 0 0 10px 10px;
+}
+
+.menu__sub-list li:hover {
+   background-color: #eeeeee;
+   transition: all 0.4s ease 0s;
+}
+
+.menu__sub-list li:last-child>a {
+   color: #C10000;
 }
 
 .menu__sub-link {
-   font-weight: 5 00;
+   font-weight: 400;
+   width: 150px;
    font-size: 14px;
-   color: #a96c25;
+   line-height: 16px;
+   background-color: rgba(0, 0, 0, 0);
+   color: #000;
+   cursor: pointer;
 }
 
 .menu__list>li {
@@ -545,6 +575,7 @@ h3 {
 }
 
 .info__rating {
+   margin-right: 50px;
    font-size: 14px;
    font-weight: 400;
    line-height: 16px;
@@ -664,14 +695,9 @@ align-items: center;
    flex-direction: column;
 }
 
-.menu__sub-link {
-   font-weight: 5 00;
-   font-size: 14px;
-   color: #a96c25;
-}
-
 .btn {
    font-weight: 400;
+   width: 150px;
    font-size: 14px;
    line-height: 16px;
    background-color: rgba(0, 0, 0, 0);
@@ -698,8 +724,8 @@ align-items: center;
 }
 
 .form__action:hover {
-   background-color: #f5f5f5;
-   transition: all 0.3s ease 0s;
+   background-color: #eeeeee;
+   transition: all 0.4s ease 0s;
 }
 
 .form__action:last-child > .btn {

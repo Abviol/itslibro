@@ -1,6 +1,10 @@
 ﻿<?php
 ini_set('session.save_path', getcwd() . '\sessions');
 session_start();
+
+if (!isset($_SESSION['nick'])) {
+   header('Location: index.php');
+}
 ?>
 
 <!DOCTYPE html>
@@ -43,22 +47,22 @@ session_start();
                      <a href="" class="menu__link">Про сайт</a>
                   </li>
                   <!-- <li class="menu__item">
-                           <a href="" class="menu__link">Підписка</a>
-                           <span class="menu__arrow"></span>
-                           <ul class="menu__sub-list">
-                              <li>
-                                 <a href="" class="menu__sub-link">Оформити підписку</a>
-                              </li>
-                              <li>
-                                 <a href="" class="menu__sub-link">Ввести промокод</a>
-                              </li>
-                           </ul>
-                        </li> -->
+                              <a href="" class="menu__link">Підписка</a>
+                              <span class="menu__arrow"></span>
+                              <ul class="menu__sub-list">
+                                 <li>
+                                    <a href="" class="menu__sub-link">Оформити підписку</a>
+                                 </li>
+                                 <li>
+                                    <a href="" class="menu__sub-link">Ввести промокод</a>
+                                 </li>
+                              </ul>
+                           </li> -->
                   <?php include 'db_connect.php';
 
                   if (!empty($_SESSION['nick'])) { ?>
                   <li class="menu__item">
-                     <a href="#" class="menu__link">Мої книжки</a>
+                     <a href="my_books.php" class="menu__link">Мої книжки</a>
                   </li>
                   <?php } ?>
                   <li class="menu__item">
