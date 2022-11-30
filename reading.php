@@ -1,10 +1,17 @@
 ﻿<?php
 ini_set('session.save_path', getcwd() . '\sessions');
 session_start();
+include 'db_connect.php';
 
 if (isset($_SESSION['id_book'])) {
    $path_txt = 'books/'.strval($_SESSION['id_book']).'.txt';
 }
+
+$q = "SELECT * FROM books WHERE id_book = " . $_SESSION['id_book'];
+$book = mysqli_fetch_assoc(mysqli_query($link, $q));
+$views_count = $book['views_count'] + 1;
+$q = "UPDATE books SET views_count = " . $views_count . " WHERE id_book = " . $_SESSION['id_book'];
+mysqli_query($link, $q);
 
 function wholeWordTruncate($s, $characterCount)
 {
@@ -131,7 +138,7 @@ if (isset($_GET['p'])) {
                                              }
                                              while ($i <= $j) { ?>
                <a <?php if ($i===$page) echo 'class="active"' ?> href="?p=<?= $i ?>">
-                     <?= $i ?>
+                  <?= $i ?>
                </a>
                <?php $i++;
                                              }
@@ -180,7 +187,7 @@ if (isset($_GET['p'])) {
             }
             while ($i <= $j) { ?>
             <a <?php if ($i===$page) echo 'class="active"' ?> href="?p=<?= $i ?>">
-                  <?= $i ?>
+               <?= $i ?>
             </a>
             <?php $i++;
             }
@@ -198,9 +205,9 @@ if (isset($_GET['p'])) {
       </div>
    </div>
    <script>
-      if (window.history.replaceState) {
-         window.history.replaceState(null, null, window.location.href);
-      }
+   if (window.history.replaceState) {
+      window.history.replaceState(null, null, window.location.href);
+   }
    </script>
 </body>
 

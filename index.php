@@ -1,6 +1,17 @@
 ﻿<?php
 ini_set('session.save_path', getcwd() . '\sessions');
 session_start();
+
+function wholeWordTruncate($s, $characterCount)
+{
+   $return = $s;
+
+   if (preg_match("/^.{1,$characterCount}\b\W*/su", $s, $match))
+      return $match[0];
+   else
+      return mb_substr($return, 0, $characterCount);
+
+}
 ?>
 
 <!DOCTYPE html>
@@ -125,139 +136,60 @@ session_start();
                      <li>
                         <h2 class="books__paragraaph">Популярні книжки</h2>
                      </li>
-                     <li>
-                        <a href="#">
-                           <div class="books__more">
-                              <div class="books__more-text">Ще</div>
-                              <div class="books__more-arrow">
-                                 <img src="img/arrow_right.svg" alt="">
-                              </div>
-                           </div>
-                        </a>
-                     </li>
                   </ul>
                   <div class="books__body">
                      <div class="books__list">
-                        <div class="books__columun">
-                           <div class="books__item item-book">
-                              <div class="item-book__cover">
-                                 <a href="#"><img src="img/covers/1.png" alt="Обкладанка"></a>
+                        <?php
+                        $q = "SELECT * FROM books ORDER BY views_count DESC";
+                        $book = mysqli_query($link, $q);
+                        $book = mysqli_fetch_all($book);
+                        $i = 0;
+                        foreach ($book as $book) {
+                           if ($i < 6) {
+                              $q1 = "SELECT * FROM books WHERE id_book=" . $book[0];
+                              $y = mysqli_query($link, $q1);
+                              $books = mysqli_fetch_assoc($y); ?>
+                        <form action="book_page.php" method="post" style="width: 16.66666%;">
+                           <input type="hidden" name="id_book" value=<?php echo $book[0]; ?>>
+                           <input type="hidden" name="b_name" value=<?php echo $books['b_name']; ?>>
+                           <button type="submit" class="books__columun">
+                              <div class="books__item item-book">
+                                 <div class="item-book__cover">
+                                    <a href="#"><img src=<?php echo $books['picture'] ?> alt="Обкладанка"
+                                          class="book__cover"></a>
+                                 </div>
+                                 <div class="item-book__stars">
+                                    <?php
+                              $rating = floor($books['rating']);
+                              for ($j = 1; $j <= $rating; $j++) { ?>
+                                    <img class="star" src="img/star.svg" height="18px" alt="Зірка">
+                                    <?php }
+                              if ($books['rating'] > $rating) { ?>
+                                    <img src="img/star-half.svg" height="18px" alt="Зірка">
+                                    <?php } ?>
+                                 </div>
+                                 <a href="#">
+                                    <h3 class="item-book__name">
+                                       <?php
+                              if (strlen($books['b_name']) <= 15) {
+                                 echo $books['b_name'];
+                              } else {
+                                 echo wholeWordTruncate($books['b_name'], 15) . "...";
+                              }
+                                       ?>
+                                    </h3>
+                                 </a>
+                                 <a href="#">
+                                    <h3 class="item-book__author">
+                                       <?php echo $books['author'] ?>
+                                    </h3>
+                                 </a>
                               </div>
-                              <div class="item-book__stars">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                              </div>
-                              <a href="#">
-                                 <h3 class="item-book__name">451 градус за Фаренгейтом</h3>
-                              </a>
-                              <a href="#">
-                                 <h3 class="item-book__author">Рей Бредбері</h3>
-                              </a>
-                           </div>
-                        </div>
-                        <div class="books__columun">
-                           <div class="books__item item-book">
-                              <div class="item-book__cover">
-                                 <a href="#"><img src="img/covers/1.png" alt="Обкладанка"></a>
-                              </div>
-                              <div class="item-book__stars">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                              </div>
-                              <a href="#">
-                                 <h3 class="item-book__name">451 градус за Фаренгейтом</h3>
-                              </a>
-                              <a href="#">
-                                 <h3 class="item-book__author">Рей Бредбері</h3>
-                              </a>
-                           </div>
-                        </div>
-                        <div class="books__columun">
-                           <div class="books__item item-book">
-                              <div class="item-book__cover">
-                                 <a href="#"><img src="img/covers/1.png" alt="Обкладанка"></a>
-                              </div>
-                              <div class="item-book__stars">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                              </div>
-                              <a href="#">
-                                 <h3 class="item-book__name">451 градус за Фаренгейтом</h3>
-                              </a>
-                              <a href="#">
-                                 <h3 class="item-book__author">Рей Бредбері</h3>
-                              </a>
-                           </div>
-                        </div>
-                        <div class="books__columun">
-                           <div class="books__item item-book">
-                              <div class="item-book__cover">
-                                 <a href="#"><img src="img/covers/1.png" alt="Обкладанка"></a>
-                              </div>
-                              <div class="item-book__stars">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                              </div>
-                              <a href="#">
-                                 <h3 class="item-book__name">451 градус за Фаренгейтом</h3>
-                              </a>
-                              <a href="#">
-                                 <h3 class="item-book__author">Рей Бредбері</h3>
-                              </a>
-                           </div>
-                        </div>
-                        <div class="books__columun">
-                           <div class="books__item item-book">
-                              <div class="item-book__cover">
-                                 <a href="#"><img src="img/covers/1.png" alt="Обкладанка"></a>
-                              </div>
-                              <div class="item-book__stars">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                              </div>
-                              <a href="#">
-                                 <h3 class="item-book__name">451 градус за Фаренгейтом</h3>
-                              </a>
-                              <a href="#">
-                                 <h3 class="item-book__author">Рей Бредбері</h3>
-                              </a>
-                           </div>
-                        </div>
-                        <div class="books__columun">
-                           <div class="books__item item-book">
-                              <div class="item-book__cover">
-                                 <a href="#"><img src="img/covers/1.png" alt="Обкладанка"></a>
-                              </div>
-                              <div class="item-book__stars">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                              </div>
-                              <a href="#">
-                                 <h3 class="item-book__name">451 градус за Фаренгейтом</h3>
-                              </a>
-                              <a href="#">
-                                 <h3 class="item-book__author">Рей Бредбері</h3>
-                              </a>
-                           </div>
-                        </div>
+                           </button>
+                        </form>
+                        <?php $i++;
+                           }
+                        } ?>
                      </div>
                   </div>
                </div>
@@ -270,139 +202,126 @@ session_start();
                      <li>
                         <h2 class="books__paragraaph">Новинки</h2>
                      </li>
-                     <li>
-                        <a href="#">
-                           <div class="books__more">
-                              <div class="books__more-text">Ще</div>
-                              <div class="books__more-arrow">
-                                 <img src="img/arrow_right.svg" alt="">
+                  </ul>
+                  <div class="books__body">
+                     <div class="books__list">
+                        <?php
+                        $q = "SELECT * FROM books ORDER BY data_published DESC";
+                        $book = mysqli_query($link, $q);
+                        $book = mysqli_fetch_all($book);
+                        $i = 0;
+                        foreach ($book as $book) {
+                           if ($i < 6) {
+                              $q1 = "SELECT * FROM books WHERE id_book=" . $book[0];
+                              $y = mysqli_query($link, $q1);
+                              $books = mysqli_fetch_assoc($y); ?>
+                        <form action="book_page.php" method="post" style="width: 16.66666%;">
+                           <input type="hidden" name="id_book" value=<?php echo $book[0]; ?>>
+                           <input type="hidden" name="b_name" value=<?php echo $books['b_name']; ?>>
+                           <button type="submit" class="books__columun">
+                              <div class="books__item item-book">
+                                 <div class="item-book__cover">
+                                    <a href="#"><img src=<?php echo $books['picture'] ?> alt="Обкладанка"
+                                          class="book__cover"></a>
+                                 </div>
+                                 <div class="item-book__stars">
+                                    <?php
+                              $rating = floor($books['rating']);
+                              for ($j = 1; $j <= $rating; $j++) { ?>
+                                    <img class="star" src="img/star.svg" height="18px" alt="Зірка">
+                                    <?php }
+                              if ($books['rating'] > $rating) { ?>
+                                    <img src="img/star-half.svg" height="18px" alt="Зірка">
+                                    <?php } ?>
+                                 </div>
+                                 <a href="#">
+                                    <h3 class="item-book__name">
+                                       <?php
+                              if (strlen($books['b_name']) <= 15) {
+                                 echo $books['b_name'];
+                              } else {
+                                 echo wholeWordTruncate($books['b_name'], 15) . "...";
+                              }
+                                       ?>
+                                    </h3>
+                                 </a>
+                                 <a href="#">
+                                    <h3 class="item-book__author">
+                                       <?php echo $books['author'] ?>
+                                    </h3>
+                                 </a>
                               </div>
-                           </div>
-                        </a>
+                           </button>
+                        </form>
+                        <?php $i++;
+                           }
+                        } ?>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="page__books books">
+            <div class="books__container _container">
+               <div class="books__books">
+                  <ul>
+                     <li>
+                        <h2 class="books__paragraaph">ТОП-6</h2>
                      </li>
                   </ul>
                   <div class="books__body">
                      <div class="books__list">
-                        <div class="books__columun">
-                           <div class="books__item item-book">
-                              <div class="item-book__cover">
-                                 <a href="#"><img src="img/covers/1.png" alt="Обкладанка"></a>
+                        <?php
+                        $q = "SELECT * FROM books ORDER BY rating DESC";
+                        $book = mysqli_query($link, $q);
+                        $book = mysqli_fetch_all($book);
+                        $i = 0;
+                        foreach ($book as $book) {
+                           if ($i < 6) {
+                              $q1 = "SELECT * FROM books WHERE id_book=" . $book[0];
+                              $y = mysqli_query($link, $q1);
+                              $books = mysqli_fetch_assoc($y); ?>
+                        <form action="book_page.php" method="post" style="width: 16.66666%;">
+                           <input type="hidden" name="id_book" value=<?php echo $book[0]; ?>>
+                           <input type="hidden" name="b_name" value=<?php echo $books['b_name']; ?>>
+                           <button type="submit" class="books__columun">
+                              <div class="books__item item-book">
+                                 <div class="item-book__cover">
+                                    <a href="#"><img src=<?php echo $books['picture'] ?> alt="Обкладанка"
+                                          class="book__cover"></a>
+                                 </div>
+                                 <div class="item-book__stars">
+                                    <?php
+                              $rating = floor($books['rating']);
+                              for ($j = 1; $j <= $rating; $j++) { ?>
+                                    <img class="star" src="img/star.svg" height="18px" alt="Зірка">
+                                    <?php }
+                              if ($books['rating'] > $rating) { ?>
+                                    <img src="img/star-half.svg" height="18px" alt="Зірка">
+                                    <?php } ?>
+                                 </div>
+                                 <a href="#">
+                                    <h3 class="item-book__name">
+                                       <?php
+                              if (strlen($books['b_name']) <= 15) {
+                                 echo $books['b_name'];
+                              } else {
+                                 echo wholeWordTruncate($books['b_name'], 15) . "...";
+                              }
+                                       ?>
+                                    </h3>
+                                 </a>
+                                 <a href="#">
+                                    <h3 class="item-book__author">
+                                       <?php echo $books['author'] ?>
+                                    </h3>
+                                 </a>
                               </div>
-                              <div class="item-book__stars">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                              </div>
-                              <a href="#">
-                                 <h3 class="item-book__name">451 градус за Фаренгейтом</h3>
-                              </a>
-                              <a href="#">
-                                 <h3 class="item-book__author">Рей Бредбері</h3>
-                              </a>
-                           </div>
-                        </div>
-                        <div class="books__columun">
-                           <div class="books__item item-book">
-                              <div class="item-book__cover">
-                                 <a href="#"><img src="img/covers/1.png" alt="Обкладанка"></a>
-                              </div>
-                              <div class="item-book__stars">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                              </div>
-                              <a href="#">
-                                 <h3 class="item-book__name">451 градус за Фаренгейтом</h3>
-                              </a>
-                              <a href="#">
-                                 <h3 class="item-book__author">Рей Бредбері</h3>
-                              </a>
-                           </div>
-                        </div>
-                        <div class="books__columun">
-                           <div class="books__item item-book">
-                              <div class="item-book__cover">
-                                 <a href="#"><img src="img/covers/1.png" alt="Обкладанка"></a>
-                              </div>
-                              <div class="item-book__stars">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                              </div>
-                              <a href="#">
-                                 <h3 class="item-book__name">451 градус за Фаренгейтом</h3>
-                              </a>
-                              <a href="#">
-                                 <h3 class="item-book__author">Рей Бредбері</h3>
-                              </a>
-                           </div>
-                        </div>
-                        <div class="books__columun">
-                           <div class="books__item item-book">
-                              <div class="item-book__cover">
-                                 <a href="#"><img src="img/covers/1.png" alt="Обкладанка"></a>
-                              </div>
-                              <div class="item-book__stars">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                              </div>
-                              <a href="#">
-                                 <h3 class="item-book__name">451 градус за Фаренгейтом</h3>
-                              </a>
-                              <a href="#">
-                                 <h3 class="item-book__author">Рей Бредбері</h3>
-                              </a>
-                           </div>
-                        </div>
-                        <div class="books__columun">
-                           <div class="books__item item-book">
-                              <div class="item-book__cover">
-                                 <a href="#"><img src="img/covers/1.png" alt="Обкладанка"></a>
-                              </div>
-                              <div class="item-book__stars">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                              </div>
-                              <a href="#">
-                                 <h3 class="item-book__name">451 градус за Фаренгейтом</h3>
-                              </a>
-                              <a href="#">
-                                 <h3 class="item-book__author">Рей Бредбері</h3>
-                              </a>
-                           </div>
-                        </div>
-                        <div class="books__columun">
-                           <div class="books__item item-book">
-                              <div class="item-book__cover">
-                                 <a href="#"><img src="img/covers/1.png" alt="Обкладанка"></a>
-                              </div>
-                              <div class="item-book__stars">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                              </div>
-                              <a href="#">
-                                 <h3 class="item-book__name">451 градус за Фаренгейтом</h3>
-                              </a>
-                              <a href="#">
-                                 <h3 class="item-book__author">Рей Бредбері</h3>
-                              </a>
-                           </div>
-                        </div>
+                           </button>
+                        </form>
+                        <?php $i++;
+                           }
+                        } ?>
                      </div>
                   </div>
                </div>

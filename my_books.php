@@ -142,7 +142,7 @@ if ($_POST['sorting_option'] == 'newest') {
          }
          ?>
          <div class="page__name">
-            <h1 class="page__name-text">Мої книги</h1>
+            <h1 class="page__name-text">Мої книжки</h1>
          </div>
          <form class="lists" method="post" action="my_books.php">
             <button <?php if ($_SESSION['selected_list'] == 'list_reading') {

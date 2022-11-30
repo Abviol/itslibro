@@ -100,13 +100,8 @@ if (!isset($_SESSION['nick'])) {
          <div class="profile__container _container">
             <div class="profile__profile">
                <div class="profile__paragraph">
-                  <h1 class="profile__paragraph-text">Профіль</h1>
-                  <?php
-                  if ($_SESSION['message']) {
-                     echo '<p class="msg">' . $_SESSION['message'] . '</p>';
-                  }
-                  unset($_SESSION['message']);
-                  ?>
+                  <h1 class="profile__paragraph-text" style="padding-left: 20px;">Профіль</h1>
+                  <a href="edit_profile.php" class="profile_edit"><img src="img/pencil_2.svg"></a>
                </div>
                <div class="profile__main-info">
                   <form action="upload_avatar.php" class="profile__avnick" method="post" enctype="multipart/form-data">
@@ -169,6 +164,12 @@ if (!isset($_SESSION['nick'])) {
                      } ?>
                   </p>
                </div>
+               <?php
+               if ($_SESSION['message']) {
+                  echo '<p class="msg" style="background-color: #fff; border: 2px solid #26bd00;">' . $_SESSION['message'] . '</p>';
+               }
+               unset($_SESSION['message']);
+               ?>
             </div>
          </div>
       </main>

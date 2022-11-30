@@ -20,7 +20,7 @@ if (isset($_POST['b_name'])) {
    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
    <link href="css/book_page.css" rel="stylesheet">
    <title>
-      <?php echo "Детально: " . $_SESSION['b_name'] ?>
+      <?php echo $_SESSION['b_name'] ?>
    </title>
 </head>
 
@@ -172,7 +172,8 @@ if (isset($_POST['b_name'])) {
                      </li>
                      <?php
                         $q = "SELECT * FROM ratings WHERE id_user = " . $_SESSION['id_user'] . " AND id_book = " . $_SESSION['id_book'];
-                        if (mysqli_num_rows(mysqli_query($link, $q)) < 0) {
+                        if (mysqli_num_rows(mysqli_query($link, $q)) > 0) {
+                        } else {
                      ?>
                      <li class="action">
                         <a>Оцінити</a>
@@ -285,9 +286,9 @@ if (isset($_POST['b_name'])) {
    </div>
    <script src="js/script.js"></script>
    <script>
-      if (window.history.replaceState) {
-         window.history.replaceState(null, null, window.location.href);
-      }
+   if (window.history.replaceState) {
+      window.history.replaceState(null, null, window.location.href);
+   }
    </script>
 </body>
 
