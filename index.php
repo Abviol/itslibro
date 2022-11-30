@@ -49,17 +49,17 @@ session_start();
                      <a href="" class="menu__link">Про сайт</a>
                   </li>
                   <!-- <li class="menu__item">
-                              <a href="" class="menu__link">Підписка</a>
-                              <span class="menu__arrow"></span>
-                              <ul class="menu__sub-list">
-                                 <li>
-                                    <a href="" class="menu__sub-link">Оформити підписку</a>
-                                 </li>
-                                 <li>
-                                    <a href="" class="menu__sub-link">Ввести промокод</a>
-                                 </li>
-                              </ul>
-                           </li> -->
+                                 <a href="" class="menu__link">Підписка</a>
+                                 <span class="menu__arrow"></span>
+                                 <ul class="menu__sub-list">
+                                    <li>
+                                       <a href="" class="menu__sub-link">Оформити підписку</a>
+                                    </li>
+                                    <li>
+                                       <a href="" class="menu__sub-link">Ввести промокод</a>
+                                    </li>
+                                 </ul>
+                              </li> -->
                   <?php include 'db_connect.php';
 
                   if (!empty($_SESSION['nick'])) { ?>
@@ -76,7 +76,6 @@ session_start();
                      </a>
                      <span class="menu__arrow"></span>
                      <ul class="menu__sub-list">
-                        <li></li>
                         <li>
                            <a href="profile.php" class="menu__sub-link">Профіль</a>
                         </li>
@@ -85,7 +84,7 @@ session_start();
                         </li>
                         <?php if ($_SESSION['u_status'] == 'adm') { ?>
                         <li>
-                           <a href="admin_page.php" class="menu__sub-link">Сторінка адміністратора</a>
+                           <a href="admin_page.php" class="menu__sub-link">Панель адміністратора</a>
                         </li>
                         <?php } ?>
                         <li>
@@ -125,296 +124,6 @@ session_start();
                   <ul>
                      <li>
                         <h2 class="books__paragraaph">Популярні книжки</h2>
-                     </li>
-                     <li>
-                        <a href="#">
-                           <div class="books__more">
-                              <div class="books__more-text">Ще</div>
-                              <div class="books__more-arrow">
-                                 <img src="img/arrow_right.svg" alt="">
-                              </div>
-                           </div>
-                        </a>
-                     </li>
-                  </ul>
-                  <div class="books__body">
-                     <div class="books__list">
-                        <div class="books__columun">
-                           <div class="books__item item-book">
-                              <div class="item-book__cover">
-                                 <a href="#"><img src="img/covers/1.png" alt="Обкладанка"></a>
-                              </div>
-                              <div class="item-book__stars">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                              </div>
-                              <a href="#">
-                                 <h3 class="item-book__name">451 градус за Фаренгейтом</h3>
-                              </a>
-                              <a href="#">
-                                 <h3 class="item-book__author">Рей Бредбері</h3>
-                              </a>
-                           </div>
-                        </div>
-                        <div class="books__columun">
-                           <div class="books__item item-book">
-                              <div class="item-book__cover">
-                                 <a href="#"><img src="img/covers/1.png" alt="Обкладанка"></a>
-                              </div>
-                              <div class="item-book__stars">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                              </div>
-                              <a href="#">
-                                 <h3 class="item-book__name">451 градус за Фаренгейтом</h3>
-                              </a>
-                              <a href="#">
-                                 <h3 class="item-book__author">Рей Бредбері</h3>
-                              </a>
-                           </div>
-                        </div>
-                        <div class="books__columun">
-                           <div class="books__item item-book">
-                              <div class="item-book__cover">
-                                 <a href="#"><img src="img/covers/1.png" alt="Обкладанка"></a>
-                              </div>
-                              <div class="item-book__stars">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                              </div>
-                              <a href="#">
-                                 <h3 class="item-book__name">451 градус за Фаренгейтом</h3>
-                              </a>
-                              <a href="#">
-                                 <h3 class="item-book__author">Рей Бредбері</h3>
-                              </a>
-                           </div>
-                        </div>
-                        <div class="books__columun">
-                           <div class="books__item item-book">
-                              <div class="item-book__cover">
-                                 <a href="#"><img src="img/covers/1.png" alt="Обкладанка"></a>
-                              </div>
-                              <div class="item-book__stars">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                              </div>
-                              <a href="#">
-                                 <h3 class="item-book__name">451 градус за Фаренгейтом</h3>
-                              </a>
-                              <a href="#">
-                                 <h3 class="item-book__author">Рей Бредбері</h3>
-                              </a>
-                           </div>
-                        </div>
-                        <div class="books__columun">
-                           <div class="books__item item-book">
-                              <div class="item-book__cover">
-                                 <a href="#"><img src="img/covers/1.png" alt="Обкладанка"></a>
-                              </div>
-                              <div class="item-book__stars">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                              </div>
-                              <a href="#">
-                                 <h3 class="item-book__name">451 градус за Фаренгейтом</h3>
-                              </a>
-                              <a href="#">
-                                 <h3 class="item-book__author">Рей Бредбері</h3>
-                              </a>
-                           </div>
-                        </div>
-                        <div class="books__columun">
-                           <div class="books__item item-book">
-                              <div class="item-book__cover">
-                                 <a href="#"><img src="img/covers/1.png" alt="Обкладанка"></a>
-                              </div>
-                              <div class="item-book__stars">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                              </div>
-                              <a href="#">
-                                 <h3 class="item-book__name">451 градус за Фаренгейтом</h3>
-                              </a>
-                              <a href="#">
-                                 <h3 class="item-book__author">Рей Бредбері</h3>
-                              </a>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-         <div class="page__books books">
-            <div class="books__container _container">
-               <div class="books__books">
-                  <ul>
-                     <li>
-                        <h2 class="books__paragraaph">Гарячі книжки тижня</h2>
-                     </li>
-                     <li>
-                        <a href="#">
-                           <div class="books__more">
-                              <div class="books__more-text">Ще</div>
-                              <div class="books__more-arrow">
-                                 <img src="img/arrow_right.svg" alt="">
-                              </div>
-                           </div>
-                        </a>
-                     </li>
-                  </ul>
-                  <div class="books__body">
-                     <div class="books__list">
-                        <div class="books__columun">
-                           <div class="books__item item-book">
-                              <div class="item-book__cover">
-                                 <a href="#"><img src="img/covers/1.png" alt="Обкладанка"></a>
-                              </div>
-                              <div class="item-book__stars">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                              </div>
-                              <a href="#">
-                                 <h3 class="item-book__name">451 градус за Фаренгейтом</h3>
-                              </a>
-                              <a href="#">
-                                 <h3 class="item-book__author">Рей Бредбері</h3>
-                              </a>
-                           </div>
-                        </div>
-                        <div class="books__columun">
-                           <div class="books__item item-book">
-                              <div class="item-book__cover">
-                                 <a href="#"><img src="img/covers/1.png" alt="Обкладанка"></a>
-                              </div>
-                              <div class="item-book__stars">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                              </div>
-                              <a href="#">
-                                 <h3 class="item-book__name">451 градус за Фаренгейтом</h3>
-                              </a>
-                              <a href="#">
-                                 <h3 class="item-book__author">Рей Бредбері</h3>
-                              </a>
-                           </div>
-                        </div>
-                        <div class="books__columun">
-                           <div class="books__item item-book">
-                              <div class="item-book__cover">
-                                 <a href="#"><img src="img/covers/1.png" alt="Обкладанка"></a>
-                              </div>
-                              <div class="item-book__stars">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                              </div>
-                              <a href="#">
-                                 <h3 class="item-book__name">451 градус за Фаренгейтом</h3>
-                              </a>
-                              <a href="#">
-                                 <h3 class="item-book__author">Рей Бредбері</h3>
-                              </a>
-                           </div>
-                        </div>
-                        <div class="books__columun">
-                           <div class="books__item item-book">
-                              <div class="item-book__cover">
-                                 <a href="#"><img src="img/covers/1.png" alt="Обкладанка"></a>
-                              </div>
-                              <div class="item-book__stars">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                              </div>
-                              <a href="#">
-                                 <h3 class="item-book__name">451 градус за Фаренгейтом</h3>
-                              </a>
-                              <a href="#">
-                                 <h3 class="item-book__author">Рей Бредбері</h3>
-                              </a>
-                           </div>
-                        </div>
-                        <div class="books__columun">
-                           <div class="books__item item-book">
-                              <div class="item-book__cover">
-                                 <a href="#"><img src="img/covers/1.png" alt="Обкладанка"></a>
-                              </div>
-                              <div class="item-book__stars">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                              </div>
-                              <a href="#">
-                                 <h3 class="item-book__name">451 градус за Фаренгейтом</h3>
-                              </a>
-                              <a href="#">
-                                 <h3 class="item-book__author">Рей Бредбері</h3>
-                              </a>
-                           </div>
-                        </div>
-                        <div class="books__columun">
-                           <div class="books__item item-book">
-                              <div class="item-book__cover">
-                                 <a href="#"><img src="img/covers/1.png" alt="Обкладанка"></a>
-                              </div>
-                              <div class="item-book__stars">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                                 <img src="img/star.svg" height="18px" alt="Зірка">
-                              </div>
-                              <a href="#">
-                                 <h3 class="item-book__name">451 градус за Фаренгейтом</h3>
-                              </a>
-                              <a href="#">
-                                 <h3 class="item-book__author">Рей Бредбері</h3>
-                              </a>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-         <div class="page__books books">
-            <div class="books__container _container">
-               <div class="books__books">
-                  <ul>
-                     <li>
-                        <h2 class="books__paragraaph">Жанр тижня: наукова фантастика</h2>
                      </li>
                      <li>
                         <a href="#">
@@ -727,6 +436,7 @@ session_start();
                   <li><a href="">Ввести промокод</a></li>
                </ul>
             </div>
+
             <div class="footer__column">
                <h5>Служба підтримки</h5>
                <ul>
@@ -747,3 +457,6 @@ session_start();
       </footer>
    </div>
    <script src="js/script.js"></script>
+</body>
+
+</html>

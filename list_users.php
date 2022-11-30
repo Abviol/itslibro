@@ -79,7 +79,7 @@ session_start();
                         </li>
                         <?php if ($_SESSION['u_status'] == 'adm') { ?>
                         <li>
-                           <a href="admin_page.php" class="menu__sub-link">Сторінка адміністратора</a>
+                           <a href="admin_page.php" class="menu__sub-link">Панель адміністратора</a>
                         </li>
                         <?php } ?>
                         <li>

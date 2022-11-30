@@ -23,10 +23,3 @@ if ($_FILES['avatar']['error'] == 0) {
 }
 header('Location: profile.php');
 ?>
-
-<pre>
-   <?php
-   print_r($_FILES['avatar']);
-   echo '<br>' . $avatar_ext;
-   ?>
-</pre>

@@ -101,6 +101,12 @@ if (!isset($_SESSION['nick'])) {
             <div class="profile__profile">
                <div class="profile__paragraph">
                   <h1 class="profile__paragraph-text">Профіль</h1>
+                  <?php
+                  if ($_SESSION['message']) {
+                     echo '<p class="msg">' . $_SESSION['message'] . '</p>';
+                  }
+                  unset($_SESSION['message']);
+                  ?>
                </div>
                <div class="profile__main-info">
                   <form action="upload_avatar.php" class="profile__avnick" method="post" enctype="multipart/form-data">
@@ -138,7 +144,7 @@ if (!isset($_SESSION['nick'])) {
                               <?php echo $_SESSION['email'] ?>
                            </p>
                         </div>
-                        <div class="detail__row">
+                        <div class="detail__row" style="align-content: center;">
                            <p class="detail__name">Вік:</p>
                            <p type="text" class="detail__info">
                               <?php echo $_SESSION['age'] ?>
@@ -146,7 +152,8 @@ if (!isset($_SESSION['nick'])) {
                         </div>
                         <div class="detail__row">
                            <p class="detail__name">Пароль:</p>
-                           <input type="password" class="detail__info" value=<?php echo $_SESSION['u_password'] ?>>
+                           <input readonly="readonly" type="password" class="detail__info" value=<?php echo
+                              $_SESSION['u_password'] ?>>
                         </div>
                      </div>
                      <div class="details__decoration"></div>

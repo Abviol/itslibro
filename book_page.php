@@ -81,7 +81,7 @@ if (isset($_POST['b_name'])) {
                         </li>
                         <?php if ($_SESSION['u_status'] == 'adm') { ?>
                         <li>
-                           <a href="admin_page.php" class="menu__sub-link">Сторінка адміністратора</a>
+                           <a href="admin_page.php" class="menu__sub-link">Панель адміністратора</a>
                         </li>
                         <?php } ?>
                         <li>
@@ -285,9 +285,9 @@ if (isset($_POST['b_name'])) {
    </div>
    <script src="js/script.js"></script>
    <script>
-   if (window.history.replaceState) {
-      window.history.replaceState(null, null, window.location.href);
-   }
+      if (window.history.replaceState) {
+         window.history.replaceState(null, null, window.location.href);
+      }
    </script>
 </body>
 

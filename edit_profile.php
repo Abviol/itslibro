@@ -2,11 +2,9 @@
 ini_set('session.save_path', getcwd() . '\sessions');
 session_start();
 
-if ($_SESSION['u_status'] != 'adm') {
-   header('Location: index.php');
-}
-?>
+$id_user = $_SESSION['id_user'];
 
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -15,14 +13,15 @@ if ($_SESSION['u_status'] != 'adm') {
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <link href="css/index.css" rel="stylesheet" />
+   <link href="css/log.css" rel="stylesheet" />
    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
-   <title>Панель адміністратора</title>
+   <title>Додати книгу</title>
 </head>
 
 <body>
    <div class="wrapper">
+      <!------------------- HEADER -------------------------->
       <header class="header">
          <div class="header__container _container">
             <a href="index.php"><img class="header__logo" src="img/logo.svg"></img></a>
@@ -48,20 +47,10 @@ if ($_SESSION['u_status'] != 'adm') {
                   <li class="menu__item">
                      <a href="" class="menu__link">Про сайт</a>
                   </li>
-                  <!-- <li class="menu__item">
-                              <a href="" class="menu__link">Підписка</a>
-                              <span class="menu__arrow"></span>
-                              <ul class="menu__sub-list">
-                                 <li>
-                                    <a href="" class="menu__sub-link">Оформити підписку</a>
-                                 </li>
-                                 <li>
-                                    <a href="" class="menu__sub-link">Ввести промокод</a>
-                                 </li>
-                              </ul>
-                           </li> -->
                   <?php include 'db_connect.php';
-
+                  $q = "SELECT * FROM books WHERE id_book = '" . $id_book . "'";
+                  $book_q = mysqli_query($link, $q);
+                  $book = mysqli_fetch_assoc($book_q);
                   if (!empty($_SESSION['nick'])) { ?>
                   <li class="menu__item">
                      <a href="my_books.php" class="menu__link">Мої книжки</a>
@@ -97,39 +86,47 @@ if ($_SESSION['u_status'] != 'adm') {
             </nav>
          </div>
       </header>
-      <!------------------- Page -------------------------->
+      <!------------------- PAGE -------------------------->
       <main class="page">
-         <div class="page__name">
-            <h1 class="page__name-text">Панель адміністратора</h1>
-         </div>
          <div class="_container">
-            <div class="admin__panel">
-               <div class="panel__buttons">
-                  <a href="add_book.php">
-                     <div class="panel__button">Додати книгу</div>
-                  </a>
-                  <a href="list_users.php">
-                     <div class="panel__button">Список користувачів</div>
-                  </a>
-                  <a href="list_books.php">
-                     <div class="panel__button">Список книг</div>
-                  </a>
-                  <a href="add_admin.php">
-                     <div class="panel__button">Додати адміністратора</div>
-                  </a>
-               </div>
-               <div class="panel__buttons_1">
-                  <a href="delete_admin.php">
-                     <div class="panel__button">Видалити адміністратора</div>
-                  </a>
-               </div>
+
+            <div class="page__name">
+               <h1 class=" page__name-text">Оновити профіль</h1>
+            </div>
+            <form action="edit_profile_handle.php" method="post" class="form__action">
+
+               <input class="input_info" type="text" name="nick" placeholder="Придумайте свій нікнейм" value=<?php echo
+                  $_SESSION['nick']; ?>>
+
+               <input class="input_info" type="text" name="age" placeholder="Вкажіть ваш вік" value=<?php echo
+                  $_SESSION['age']; ?>>
+
+               <textarea
+                  style="width: 100%; resize: none; margin-bottom: 20px; padding: 10px 20px; border: unset; background-color: #f5f5f5; outline: none; font-family: Roboto; border-radius: 10px;"
+                  name="about_user" id="about_user" cols="10" rows="5" placeholder="Про себе..."
+                  maxlength="256"><?php echo $_SESSION['about_user']; ?></textarea>
+
+               <input class="input_info" type="password" name="pwd" placeholder="Введіть пароль">
+
+               <input class="input_info" type="password" name="new_pwd"
+                  placeholder="Введіть новий пароль (за бажанням)">
+
+               <button class="action" type="submit">Оновити</button>
+
                <?php
                if ($_SESSION['message']) {
-                  echo '<h3 class="admin__message">' . $_SESSION['message'] . '</h3>';
+                  echo '<p class="msg">' . $_SESSION['message'] . '</p>';
                }
                unset($_SESSION['message']);
+
+               /* unset($_SESSION['email']);
+               unset($_SESSION['nick']);
+               unset($_SESSION['age']); */
                ?>
-            </div>
+
+               <p>Не пам'ятаєте пароль? - <a href="login.php" class="act_link">змініть його!</a></p>
+
+            </form>
          </div>
       </main>
       <!------------------- FOOTER -------------------------->
@@ -148,6 +145,7 @@ if ($_SESSION['u_status'] != 'adm') {
                   <li><a href="">Ввести промокод</a></li>
                </ul>
             </div>
+
             <div class="footer__column">
                <h5>Служба підтримки</h5>
                <ul>
@@ -167,7 +165,7 @@ if ($_SESSION['u_status'] != 'adm') {
          </nav>
       </footer>
    </div>
+   <script src="js/script.js"></script>
 </body>
-<script src="js/script.js"></script>
 
 </html>

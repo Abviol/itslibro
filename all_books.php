@@ -104,7 +104,7 @@ if ($_POST['sorting_option'] == 'newest') {
                         </li>
                         <?php if ($_SESSION['u_status'] == 'adm') { ?>
                         <li>
-                           <a href="admin_page.php" class="menu__sub-link">Сторінка адміністратора</a>
+                           <a href="admin_page.php" class="menu__sub-link">Панель адміністратора</a>
                         </li>
                         <?php } ?>
                         <li>
@@ -154,7 +154,7 @@ if ($_POST['sorting_option'] == 'newest') {
                <div class="all-books__book">
                   <div class="cover__container">
                      <img src=<?php echo $books['picture'] ?> alt="Обкладанка" height="150" width="100"
-                        style="border-radius: 10px;">
+                     style="border-radius: 10px;">
                      <form action="book_page.php" method="post">
                         <input type="hidden" name="id_book" value=<?php echo $book[0]; ?>>
                         <input type="hidden" name="b_name" value=<?php echo $books['b_name']; ?>>
@@ -191,32 +191,23 @@ if ($_POST['sorting_option'] == 'newest') {
                <h3 class="sort-text">Сортировка</h3>
                <form class="sorting-options" action="all_books.php" method="post">
                   <label class="sorting-option">
-                     <input type="radio" name="sorting_option" value="newest" <?php if (
-                        empty($_POST['sorting_option'])
-                        || $_POST['sorting_option'] == "newest"
-                     )
-                        echo "checked"; ?>>
+                     <input type="radio" name="sorting_option" value="newest" <?php if ( empty($_POST['sorting_option'])
+                        || $_POST['sorting_option']=="newest" ) echo "checked"; ?>>
                      <span class="radio"></span>за новизною
                   </label>
                   <label class="sorting-option">
                      <input type="radio" name="sorting_option" value="popular" <?php if (
-                        $_POST['sorting_option'] == "popular"
-                     )
-                        echo "checked"; ?>>
+                        $_POST['sorting_option']=="popular" ) echo "checked"; ?>>
                      <span class="radio"></span>за популярністю
                   </label>
                   <label class="sorting-option">
-                     <input type="radio" name="sorting_option" value="best" <?php if (
-                        $_POST['sorting_option'] == "best"
-                     )
-                        echo "checked"; ?>>
+                     <input type="radio" name="sorting_option" value="best" <?php if ( $_POST['sorting_option']=="best"
+                        ) echo "checked"; ?>>
                      <span class="radio"></span>за рейтингом
                   </label>
                   <label class="sorting-option">
                      <input type="radio" name="sorting_option" value="biggest" <?php if (
-                        $_POST['sorting_option'] == "biggest"
-                     )
-                        echo "checked"; ?>>
+                        $_POST['sorting_option']=="biggest" ) echo "checked"; ?>>
                      <span class="radio"></span>за обсягом
                   </label>
                   <input class="learn-more" type="submit" value="Сортувати" style="margin-top: 5px; font-size: 16px;">
@@ -261,9 +252,9 @@ if ($_POST['sorting_option'] == 'newest') {
    </div>
    <script src="js/script.js"></script>
    <script>
-   if (window.history.replaceState) {
-      window.history.replaceState(null, null, window.location.href);
-   }
+      if (window.history.replaceState) {
+         window.history.replaceState(null, null, window.location.href);
+      }
    </script>
 </body>
 
