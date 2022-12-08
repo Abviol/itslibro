@@ -40,7 +40,7 @@ session_start();
                      <a href="all_books.php" class="menu__link">Бібліотека</a>
                   </li>
                   <li class="menu__item">
-                     <a href="" class="menu__link">Про сайт</a>
+                     <a href="about_project.php" class="menu__link">Про сайт</a>
                   </li>
                   <li class="menu__item">
                      <a href="login.php" class="menu__link">Увійти</a>
@@ -58,8 +58,8 @@ session_start();
             </div>
             <form action="signup.php" method="post" class="form__action">
 
-               <input class="input_info" type="e-mail" name="email" id="" placeholder="Вкажіть e-mail" value=<?php echo $_SESSION['email'];
-                  ?>>
+               <input class="input_info" type="e-mail" name="email" placeholder="Вкажіть e-mail"
+                  value=<?php echo $_SESSION['email'];?>>
 
                <input class="input_info" type="text" name="nick" placeholder="Придумайте свій нікнейм" value=<?php echo $_SESSION['nick'];
                   ?>>
@@ -78,7 +78,6 @@ session_start();
                   echo '<p class="msg">' . $_SESSION['message'] . '</p>';
                }
                unset($_SESSION['message']);
-
                unset($_SESSION['email']);
                unset($_SESSION['nick']);
                unset($_SESSION['age']);
@@ -95,7 +94,7 @@ session_start();
             <div class="footer__column">
                <h5>Про проект</h5>
                <ul>
-                  <li><a href="">Що таке Itslibro?</a></li>
+                  <li><a href="about_project.php">Що таке Itslibro?</a></li>
                </ul>
             </div>
             <div class="footer__column">

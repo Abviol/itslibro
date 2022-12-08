@@ -2,7 +2,6 @@
 ini_set('session.save_path', getcwd() . '\sessions');
 session_start();
 include 'db_connect.php';
-include 'function.php';
 
 $nick = $_POST['nick'];
 $age = $_POST['age'];
@@ -40,16 +39,6 @@ if ($age == "") {
                $q = "UPDATE users SET nick = '$nick', age = '$age', u_password = '$new_pwd', about_user = '$about_user' WHERE id_user = '$id_user'";
                mysqli_query($link, $q);
             }
-
-            $q = "SELECT * FROM users WHERE id_user = '$id_user'";
-            $id_user = mysqli_query($link, $q);
-            $id_user = mysqli_fetch_assoc($id_user);
-
-            $_SESSION['avatar'] = make_avatar($id_user['nick'][0], $id_user['id_user']);
-            $avatar = $_SESSION['avatar'];
-
-            $q = "UPDATE users SET avatar = '$avatar' WHERE id_user = '" . $id_user['id_user'] . "'";
-            mysqli_query($link, $q);
 
             $_SESSION['message'] = 'Профіль успішно оновлено!';
             $_SESSION['nick'] = $nick;

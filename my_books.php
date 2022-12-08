@@ -77,7 +77,7 @@ if ($_POST['sorting_option'] == 'newest') {
                      <a href="all_books.php" class="menu__link">Бібліотека</a>
                   </li>
                   <li class="menu__item">
-                     <a href="" class="menu__link">Про сайт</a>
+                     <a href="about_project.php" class="menu__link">Про сайт</a>
                   </li>
                   <!-- <li class="menu__item">
                                           <a href="" class="menu__link">Підписка</a>
@@ -145,23 +145,31 @@ if ($_POST['sorting_option'] == 'newest') {
             <h1 class="page__name-text">Мої книжки</h1>
          </div>
          <form class="lists" method="post" action="my_books.php">
-            <button <?php if ($_SESSION['selected_list'] == 'list_reading') {
+            <button <?php if ($_SESSION['selected_list']=='list_reading') {
+               echo 'class="list_selected"';
+            } else {
+               echo 'class="list"';
+            } ?> name="selected_list" value="list_reading" type="submit">Читаю 📖</button>
+            <button <?php if ($_SESSION['selected_list'] == 'list_favorite') {
+               echo 'class="list_selected"';
+            } else {
+               echo 'class="list"';
+            } ?> name="selected_list" value="list_favorite" type="submit">Улюблене 😍</button>
+            <button <?php if ($_SESSION['selected_list'] == 'list_in_plans') {
                echo 'class="list_selected"';
             } else { echo
                'class="list"';
-            } ?> name="selected_list" value="list_reading" type="submit">Читаю 📖</button>
-            <button <?php if ($_SESSION['selected_list']=='list_favorite') { echo 'class="list_selected"'; } else {
-               echo
-                  'class="list"'; } ?> name="selected_list" value="list_favorite" type="submit">Улюблене 😍</button>
-            <button <?php if ($_SESSION['selected_list']=='list_in_plans') { echo 'class="list_selected"'; } else {
-               echo
-                  'class="list"'; } ?> name="selected_list" value="list_in_plans" type="submit">У планах 📅</button>
-            <button <?php if ($_SESSION['selected_list']=='list_readed') { echo 'class="list_selected"'; } else {
-               echo
-                  'class="list"'; } ?> name="selected_list" value="list_readed" type="submit">Прочитано ✅</button>
-            <button <?php if ($_SESSION['selected_list']=='list_abandoned') { echo 'class="list_selected"'; } else {
-                  echo 'class="list"'; } ?> name="selected_list" value="list_abandoned" type="submit">Покинуто
-               🥱</button>
+            } ?> name="selected_list" value="list_in_plans" type="submit">У планах 📅</button>
+            <button <?php if ($_SESSION['selected_list'] == 'list_readed') {
+               echo 'class="list_selected"';
+            } else {
+               echo 'class="list"';
+            } ?> name="selected_list" value="list_readed" type="submit">Прочитано ✅</button>
+            <button <?php if ($_SESSION['selected_list'] == 'list_abandoned') {
+               echo 'class="list_selected"';
+            } else {
+               echo 'class="list"';
+            } ?> name="selected_list" value="list_abandoned" type="submit">Покинуто🥱</button>
          </form>
          <div class="_container">
             <div class="all-books__container">
@@ -219,9 +227,12 @@ if ($_POST['sorting_option'] == 'newest') {
                      <h3 class="info__author">
                         <?php echo $books['author'] ?>
                      </h3>
-                     <h3 class="info__rating">
-                        <?php echo "Оцінка: " . $books['rating'] ?>
-                     </h3>
+                     <div class="info__rating">
+                        <img src="img/star.svg" alt="" height="16" style="margin-right: 4px">
+                        <p>
+                           <?php echo $books['rating'] ?>
+                        </p>
+                     </div>
                      <h3 class="info__about">
                         <?php
                         $desc = $books['b_description'];
@@ -247,23 +258,30 @@ if ($_POST['sorting_option'] == 'newest') {
                <h3 class="sort-text">Сортировка</h3>
                <form class="sorting-options" action="my_books.php" method="post">
                   <label class="sorting-option">
-                     <input type="radio" name="sorting_option" value="newest" <?php if ( empty($_POST['sorting_option'])
-                        || $_POST['sorting_option']=="newest" ) echo "checked"; ?>>
+                     <input type="radio" name="sorting_option" value="newest" <?php if (
+                        empty($_POST['sorting_option'])
+                        || $_POST['sorting_option'] == "newest"
+                     )
+                        echo "checked"; ?>>
                      <span class="radio"></span>за новизною
                   </label>
                   <label class="sorting-option">
                      <input type="radio" name="sorting_option" value="popular" <?php if (
-                        $_POST['sorting_option']=="popular" ) echo "checked"; ?>>
+                        $_POST['sorting_option'] == "popular"
+                     )
+                        echo "checked"; ?>>
                      <span class="radio"></span>за популярністю
                   </label>
                   <label class="sorting-option">
-                     <input type="radio" name="sorting_option" value="best" <?php if ($_POST['sorting_option']=="best")
-                           echo "checked"; ?>>
+                     <input type="radio" name="sorting_option" value="best" <?php if ($_POST['sorting_option'] == "best")
+                     echo "checked"; ?>>
                      <span class="radio"></span>за рейтингом
                   </label>
                   <label class="sorting-option">
                      <input type="radio" name="sorting_option" value="biggest" <?php if (
-                        $_POST['sorting_option']=="biggest" ) echo "checked"; ?>>
+                        $_POST['sorting_option'] == "biggest"
+                     )
+                        echo "checked"; ?>>
                      <span class="radio"></span>за обсягом
                   </label>
                   <input class="learn-more" type="submit" value="Сортувати" style="margin-top: 5px; font-size: 16px;">
@@ -277,7 +295,7 @@ if ($_POST['sorting_option'] == 'newest') {
             <div class="footer__column">
                <h5>Про проект</h5>
                <ul>
-                  <li><a href="">Що таке Itslibro?</a></li>
+                  <li><a href="about_project.php">Що таке Itslibro?</a></li>
                </ul>
             </div>
             <div class="footer__column">

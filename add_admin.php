@@ -40,7 +40,7 @@ session_start();
                      <a href="all_books.php" class="menu__link">Бібліотека</a>
                   </li>
                   <li class="menu__item">
-                     <a href="" class="menu__link">Про сайт</a>
+                     <a href="about_project.php" class="menu__link">Про сайт</a>
                   </li>
                   <!-- <li class="menu__item">
                                        <a href="" class="menu__link">Підписка</a>
@@ -126,7 +126,7 @@ session_start();
             <div class="footer__column">
                <h5>Про проект</h5>
                <ul>
-                  <li><a href="">Що таке Itslibro?</a></li>
+                  <li><a href="about_project.php">Що таке Itslibro?</a></li>
                </ul>
             </div>
             <div class="footer__column">

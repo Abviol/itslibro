@@ -28,7 +28,7 @@ function wholeWordTruncate($s, $characterCount)
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
    <link rel="stylesheet" href="css/index.css">
-   <title>Itslibro</title>
+   <title>Itslibro — головна</title>
 </head>
 
 <body>
@@ -57,7 +57,7 @@ function wholeWordTruncate($s, $characterCount)
                      <a href="all_books.php" class="menu__link">Бібліотека</a>
                   </li>
                   <li class="menu__item">
-                     <a href="" class="menu__link">Про сайт</a>
+                     <a href="about_project.php" class="menu__link">Про сайт</a>
                   </li>
                   <!-- <li class="menu__item">
                                  <a href="" class="menu__link">Підписка</a>
@@ -156,7 +156,7 @@ function wholeWordTruncate($s, $characterCount)
                               <div class="books__item item-book">
                                  <div class="item-book__cover">
                                     <a href="#"><img src=<?php echo $books['picture'] ?> alt="Обкладанка"
-                                          class="book__cover"></a>
+                                       class="book__cover"></a>
                                  </div>
                                  <div class="item-book__stars">
                                     <?php
@@ -222,7 +222,7 @@ function wholeWordTruncate($s, $characterCount)
                               <div class="books__item item-book">
                                  <div class="item-book__cover">
                                     <a href="#"><img src=<?php echo $books['picture'] ?> alt="Обкладанка"
-                                          class="book__cover"></a>
+                                       class="book__cover"></a>
                                  </div>
                                  <div class="item-book__stars">
                                     <?php
@@ -288,7 +288,7 @@ function wholeWordTruncate($s, $characterCount)
                               <div class="books__item item-book">
                                  <div class="item-book__cover">
                                     <a href="#"><img src=<?php echo $books['picture'] ?> alt="Обкладанка"
-                                          class="book__cover"></a>
+                                       class="book__cover"></a>
                                  </div>
                                  <div class="item-book__stars">
                                     <?php
@@ -345,7 +345,7 @@ function wholeWordTruncate($s, $characterCount)
             <div class="footer__column">
                <h5>Про проект</h5>
                <ul>
-                  <li><a href="">Що таке Itslibro?</a></li>
+                  <li><a href="about_project.php">Що таке Itslibro?</a></li>
                </ul>
             </div>
             <div class="footer__column">

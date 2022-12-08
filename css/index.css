@@ -1094,3 +1094,37 @@ text-align: left;
    transform: scale(1.2);
    transition: all 0.3s ease 0s;
 }
+
+/*---------------- Про проект -----------------*/
+
+.about__container {
+   width: 100%;
+   background-color: #fff;
+   border-radius: 10px;
+   padding: 30px;
+   font-size: 18px;
+   margin-bottom: 100px;
+   line-height: 1.5;
+}
+
+.about__container > p {
+   margin-bottom: 10px;
+}
+
+.about__container > p:last-child {
+   margin-bottom: 0;
+}
+
+.about__list > li {
+   list-style: disc inside;
+}
+
+.about__sub-list {
+   margin-left: 25px;
+   line-height: 1.2;
+}
+
+.about__sub-list > li {
+   list-style-position: inside;
+   list-style-type: circle;
+}

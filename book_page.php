@@ -50,7 +50,7 @@ if (isset($_POST['b_name'])) {
                      <a href="all_books.php" class="menu__link">Бібліотека</a>
                   </li>
                   <li class="menu__item">
-                     <a href="" class="menu__link">Про сайт</a>
+                     <a href="about_project.php" class="menu__link">Про сайт</a>
                   </li>
                   <?php include 'db_connect.php';
                   $id_book = $_SESSION['id_book'];
@@ -105,22 +105,37 @@ if (isset($_POST['b_name'])) {
                   <img src=<?php echo $book['picture'] ?> alt="Обкладанка" class="cover" width="200">
                </div>
                <div class="book-page__book__info">
-                  <div class="book__statistics">
-                     <h3 class="info__views">
-                        <?php echo "Кількість переглядів: " . $book['views_count'] ?>
-                     </h3>
-                     <h3 class="info__rating">
-                        <?php echo "Оцінка: " . $book['rating'] . " (кількість оцінок: " . $book['ratings_count'] . ")" ?>
-                     </h3>
-                     <?php
-                     $q = "SELECT * FROM ratings WHERE id_user = " . $_SESSION['id_user'] . " AND id_book = " . $_SESSION['id_book'];
-                     $users_rating = mysqli_query($link, $q);
-                     if (mysqli_num_rows($users_rating) > 0) {
-                        $users_rating = mysqli_fetch_assoc($users_rating); ?>
-                     <h3 class="info__rating">
-                        <?php echo "Ваша оцінка: " . $users_rating['rating'] ?>
-                     </h3>
-                     <?php } ?>
+                  <div class="stastics-align">
+                     <div class="book__statistics">
+                        <div class="info__views">
+                           <img src="img/eye.svg" alt="" height="24" style="margin-right: 7px">
+                           <?php echo $book['views_count'] ?>
+                        </div>
+                        <div class="info__rating">
+                           <img src="img/star.svg" alt="" height="24" style="margin-right: 7px">
+                           <p>
+                              <?php echo $book['rating'] ?> <span
+                                 style="font-size: 16px; color: rgba(0, 0, 0, 0.5); margin-right: 50px;">
+                                 <?php echo $book['ratings_count'] ?>
+                              </span>
+                              <?php
+                              if (isset($_SESSION['id_user'])) {
+                                 $q = "SELECT * FROM ratings WHERE id_user = " . $_SESSION['id_user'] . " AND id_book = " . $_SESSION['id_book'];
+                                 $user_rating = mysqli_query($link, $q);
+                                 if (mysqli_num_rows($user_rating) > 0) {
+                                    $user_rating = mysqli_fetch_assoc($user_rating); ?>
+                              <span style="font-size: 16px; color: rgba(0, 0, 0, 0.5);">
+                                 <?php echo "Ваша оцінка: " . $user_rating['rating'] ?>
+                              </span>
+                              <?php }
+                              } ?>
+                           </p>
+                        </div>
+                     </div>
+                     <p class="info__in-list-count">
+                        У списках у
+                        <?php echo $book['in_list_count'] ?> людей
+                     </p>
                   </div>
                   <div class="main__info">
                      <h3 class="info__name">
@@ -163,10 +178,22 @@ if (isset($_POST['b_name'])) {
                                  <input type="hidden" name="list" value="list_abandoned">
                                  <input class="btn" type="submit" value="Покинуто">
                               </form>
+                              <?php
+                        $delete = ['list_reading', 'list_favorite', 'list_in_plans', 'list_readed', 'list_abandoned'];
+                        $is_in_list = false;
+                        foreach ($delete as $delete_list) {
+                           $q = "SELECT * FROM " . $delete_list . " WHERE (id_user = '" . $_SESSION['id_user'] . "' AND id_book = '$id_book')";
+                           if (mysqli_num_rows(mysqli_query($link, $q)) > 0) {
+                              $is_in_list = true;
+                           }
+                        }
+                        if ($is_in_list) {
+                              ?>
                               <form action="add_book_to_list.php" method="post" class="form__action">
                                  <input type="hidden" name="list" value="delete">
-                                 <input class="btn" type="submit" value="Видалити">
+                                 <input class="btn" style="color: #C10000;" type="submit" value="Видалити">
                               </form>
+                              <?php } ?>
                            </li>
                         </ul>
                      </li>
@@ -255,7 +282,7 @@ if (isset($_POST['b_name'])) {
             <div class="footer__column">
                <h5>Про проект</h5>
                <ul>
-                  <li><a href="">Що таке Itslibro?</a></li>
+                  <li><a href="about_project.php">Що таке Itslibro?</a></li>
                </ul>
             </div>
             <div class="footer__column">

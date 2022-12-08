@@ -1,12 +1,7 @@
 ﻿<?php
 ini_set('session.save_path', getcwd() . '\sessions');
 session_start();
-
-if ($_SESSION['u_status'] != 'adm') {
-   header('Location: index.php');
-}
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -15,21 +10,23 @@ if ($_SESSION['u_status'] != 'adm') {
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <link href="css/index.css" rel="stylesheet" />
    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
-   <title>Панель адміністратора</title>
+   <link href="css/index.css" rel="stylesheet">
+   <title>Що таке Itslibro?</title>
 </head>
 
 <body>
    <div class="wrapper">
+      <!-- -------------------- HEADER ----------------------- -->
       <header class="header">
          <div class="header__container _container">
             <a href="index.php"><img class="header__logo" src="img/logo.svg"></img></a>
             <form action="all_books.php" method="post">
                <ul class="menu__search">
                   <li class="menu__item">
-                     <input type="search" name="search_key" class="input__search" placeholder="Пошук...">
+                     <input type="search" name="search_key" class="input__search" placeholder="Пошук..." value=<?php
+                     echo "\"" . $search_key . "\"" ?>\">
                   </li>
                   <li class="menu__item">
                      <button style="background-color: rgba(0, 0, 0, 0); cursor: pointer   ;" type="submit"><img
@@ -48,19 +45,12 @@ if ($_SESSION['u_status'] != 'adm') {
                   <li class="menu__item">
                      <a href="about_project.php" class="menu__link">Про сайт</a>
                   </li>
-                  <!-- <li class="menu__item">
-                              <a href="" class="menu__link">Підписка</a>
-                              <span class="menu__arrow"></span>
-                              <ul class="menu__sub-list">
-                                 <li>
-                                    <a href="" class="menu__sub-link">Оформити підписку</a>
-                                 </li>
-                                 <li>
-                                    <a href="" class="menu__sub-link">Ввести промокод</a>
-                                 </li>
-                              </ul>
-                           </li> -->
                   <?php include 'db_connect.php';
+                  $id_book = $_SESSION['id_book'];
+                  $q = "SELECT * FROM books WHERE id_book = '" . $id_book . "'";
+                  $book_q = mysqli_query($link, $q);
+                  $book = mysqli_fetch_assoc($book_q);
+                  $_SESSION['b_name'] = $book['b_name'];
 
                   if (!empty($_SESSION['nick'])) { ?>
                   <li class="menu__item">
@@ -97,38 +87,41 @@ if ($_SESSION['u_status'] != 'adm') {
             </nav>
          </div>
       </header>
-      <!------------------- Page -------------------------->
+      <!-- ----------------------- PAGE ------------------ -->
       <main class="page">
          <div class="page__name">
-            <h1 class="page__name-text">Панель адміністратора</h1>
+            <h1 class="page__name-text">Що таке Itslibro?</h1>
          </div>
          <div class="_container">
-            <div class="admin__panel">
-               <div class="panel__buttons">
-                  <a href="add_book.php">
-                     <div class="panel__button">Додати книгу</div>
-                  </a>
-                  <a href="list_users.php">
-                     <div class="panel__button">Список користувачів</div>
-                  </a>
-                  <a href="list_books.php">
-                     <div class="panel__button">Список книг</div>
-                  </a>
-                  <a href="add_admin.php">
-                     <div class="panel__button">Додати адміністратора</div>
-                  </a>
-               </div>
-               <div class="panel__buttons_1">
-                  <a href="delete_admin.php">
-                     <div class="panel__button">Видалити адміністратора</div>
-                  </a>
-               </div>
-               <?php
-               if ($_SESSION['message']) {
-                  echo '<h3 class="admin__message">' . $_SESSION['message'] . '</h3>';
-               }
-               unset($_SESSION['message']);
-               ?>
+            <div class="about__container">
+               <p style="margin-bottom: 45px;">
+                  <span style="  font-size: 28px;">Itslibro</span> — сайт онлайн-бібліотеки, який було
+                  розроблено в процесі виконання випускної роботи за темою "Створення сайту онлайн-бібліотеки". <br>Ідея
+                  проекту — створити український сайт із приємним, сучасним дизайном, зручним
+                  інтерфейсом, де можна почитати книгу на будь-який смак.
+               </p>
+
+               <p>
+
+               </p>
+               <p>
+                  <b>Виконавець:</b> Кисельов Назар Олексійович.
+               </p>
+               <p>
+                  <b>Науковий керівник:</b> Пасько Анатолій Іванович.
+               </p>
+               <p style="margin-bottom: 45px;">
+                  <b>Навчальний заклад:</b> Дніпровський ліцей інформаційних технологій при ДНУ ім. Олеся Гончара.
+               </p>
+               <p>
+                  Цей сайт був створений з ціллю практики навичок з програмування й <b>не є комерційним</b>.
+               </p>
+               <p style="margin: 100px 0 0 0; font-size: 16px;">
+                  2022 р.
+               </p>
+               <p style="font-size: 16px;">
+                  Україна, Дніпро
+               </p>
             </div>
          </div>
       </main>
@@ -167,7 +160,12 @@ if ($_SESSION['u_status'] != 'adm') {
          </nav>
       </footer>
    </div>
+   <script src="js/script.js"></script>
+   <script>
+   if (window.history.replaceState) {
+      window.history.replaceState(null, null, window.location.href);
+   }
+   </script>
 </body>
-<script src="js/script.js"></script>
 
 </html>

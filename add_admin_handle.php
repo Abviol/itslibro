@@ -8,25 +8,20 @@ $nick = $_POST['nick'];
 $pwd = $_POST['pwd'];
 $_SESSION['add_nick'] = $nick;
 
-$check_user = mysqli_query($link, "SELECT * FROM users WHERE (email = '$nick' OR nick = '$nick')");
-echo mysqli_num_rows($check_user) . "</br>";
-echo "$nick" . "</br>";
-echo "$pwd";
-
 if ($nick == "" || $pwd == "") {
 
    $_SESSION['message'] = 'Всі поля повинно бути заповнено!';
    header('Location: add_admin.php');
 
 } else {
+
+   $check_user = mysqli_query($link, "SELECT * FROM users WHERE (email = '$nick' OR nick = '$nick')");
    if (mysqli_num_rows($check_user) > 0) {
 
       $check_admin = mysqli_query($link, "SELECT * FROM users WHERE id_user = '" . $_SESSION['id_user'] . "' AND u_password = '" . $pwd . "'");
-
       if (mysqli_num_rows($check_admin) > 0) {
 
          $check_is_admin = mysqli_query($link, "SELECT * FROM users WHERE (email = '$nick' OR nick = '$nick') AND u_status='adm'");
-
          if (mysqli_num_rows($check_is_admin) > 0) {
             $_SESSION['message'] = 'Цей користувач вже є адміністратором сайту!';
             header('Location: add_admin.php');

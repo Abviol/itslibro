@@ -18,7 +18,6 @@ if ($_FILES['avatar']['error'] == 0) {
    }
 
    $q = "UPDATE users SET avatar = '$path_avatar' WHERE id_user = '" . $_SESSION['id_user'] . "'";
-
    mysqli_query($link, $q);
 }
 header('Location: profile.php');

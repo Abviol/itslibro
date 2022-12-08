@@ -75,19 +75,13 @@ if ($b_name == "" || $original_name == "" || $data_writed == "" || $author == ""
       header('Location: add_book.php');
    } else {
       $check_book = mysqli_query($link, "SELECT * FROM books WHERE b_name = '$b_name' AND original_name = '$original_name' AND author = '$author'");
-      if (mysqli_num_rows($check_book) > 0) { //есть ли уже на сайте такая книга?
+      if (mysqli_num_rows($check_book) > 0) { //чи є вже на сайті така книга?
          $_SESSION['message'] = "Така книга вже є на сайті!";
          header('Location: add_book.php');
       } else {
 
-         //получение данных о загруженной картинке
-         $cover_info = pathinfo($cover['name']);
-         $cover_ext = $cover_info['extension'];
-
-         //получение данных о загруженом .txt файле
          $id_publisher = $_SESSION['id_user'];
-         $text_info = pathinfo($text['name']);
-         $text_ext = $text_info['extension'];
+
          $word_count = count_words_in_txt($text['tmp_name']);
 
          //добавление книги в базу данных
@@ -98,9 +92,15 @@ if ($b_name == "" || $original_name == "" || $data_writed == "" || $author == ""
          $id_book = mysqli_query($link, $q);
          $id_book = mysqli_fetch_assoc($id_book);
 
+         //завантаження .txt файлу до папки сайту Itslibro/books/
+         $text_info = pathinfo($text['name']);
+         $text_ext = $text_info['extension'];
          $path_book = 'books/' . $id_book['id_book'] . '.txt';
          move_uploaded_file($text['tmp_name'], $path_book);
 
+         //получение данных о загруженной картинке
+         $cover_info = pathinfo($cover['name']);
+         $cover_ext = $cover_info['extension'];
          $path_cover = 'img/covers/' . $id_book['id_book'] . '.' . $cover_ext;
          move_uploaded_file($cover['tmp_name'], $path_cover);
 

@@ -46,29 +46,7 @@ $q2 = "CREATE TABLE IF NOT EXISTS `itslibro1`.`books` (
     ON UPDATE CASCADE)
 ENGINE = InnoDB CHARACTER SET cp1251";
 
-$q3 = "CREATE TABLE IF NOT EXISTS `itslibro1`.`comments` (
-  `id_comment` INT NOT NULL AUTO_INCREMENT,
-  `id_commenter` INT NOT NULL,
-  `id_book` INT NOT NULL,
-  `date_comment` DATETIME NOT NULL,
-  `c_comment` VARCHAR(256) NOT NULL,
-  `likes` INT NULL,
-  PRIMARY KEY (`id_comment`),
-  INDEX `books_idx` (`id_book` ASC),
-  INDEX `user_idx` (`id_commenter` ASC),
-  CONSTRAINT `book_com`
-    FOREIGN KEY (`id_book`)
-    REFERENCES `itslibro1`.`books` (`id_book`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `user_com`
-    FOREIGN KEY (`id_commenter`)
-    REFERENCES `itslibro1`.`users` (`id_user`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB CHARACTER SET cp1251";
-
-$q4 = "CREATE TABLE IF NOT EXISTS `itslibro1`.`ratings` (
+$q3 = "CREATE TABLE IF NOT EXISTS `itslibro1`.`ratings` (
   `id_book` INT NOT NULL,
   `id_user` INT NOT NULL,
   `rating` INT NOT NULL,
@@ -86,7 +64,7 @@ $q4 = "CREATE TABLE IF NOT EXISTS `itslibro1`.`ratings` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB CHARACTER SET cp1251";
 
-$q5 = "CREATE TABLE IF NOT EXISTS `itslibro1`.`list_favorite` (
+$q4 = "CREATE TABLE IF NOT EXISTS `itslibro1`.`list_favorite` (
   `id_user` INT NOT NULL,
   `id_book` INT NOT NULL,
   INDEX `user_idx` (`id_user` ASC),
@@ -103,7 +81,7 @@ $q5 = "CREATE TABLE IF NOT EXISTS `itslibro1`.`list_favorite` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB CHARACTER SET cp1251";
 
-$q6 = "CREATE TABLE IF NOT EXISTS `itslibro1`.`list_reading` (
+$q5 = "CREATE TABLE IF NOT EXISTS `itslibro1`.`list_reading` (
   `id_user` INT NOT NULL,
   `id_book` INT NOT NULL,
   INDEX `user_idx` (`id_user` ASC),
@@ -120,7 +98,7 @@ $q6 = "CREATE TABLE IF NOT EXISTS `itslibro1`.`list_reading` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB CHARACTER SET cp1251";
 
-$q7 = "CREATE TABLE IF NOT EXISTS `itslibro1`.`list_in_plans` (
+$q6 = "CREATE TABLE IF NOT EXISTS `itslibro1`.`list_in_plans` (
   `id_user` INT NOT NULL,
   `id_book` INT NOT NULL,
   INDEX `user_idx` (`id_user` ASC),
@@ -137,7 +115,7 @@ $q7 = "CREATE TABLE IF NOT EXISTS `itslibro1`.`list_in_plans` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB CHARACTER SET cp1251";
 
-$q8 = "CREATE TABLE IF NOT EXISTS `itslibro1`.`list_readed` (
+$q7 = "CREATE TABLE IF NOT EXISTS `itslibro1`.`list_readed` (
   `id_user` INT NOT NULL,
   `id_book` INT NOT NULL,
   INDEX `user_idx` (`id_user` ASC),
@@ -154,7 +132,7 @@ $q8 = "CREATE TABLE IF NOT EXISTS `itslibro1`.`list_readed` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB CHARACTER SET cp1251";
 
-$q9 = "CREATE TABLE IF NOT EXISTS `itslibro1`.`list_abandoned` (
+$q8 = "CREATE TABLE IF NOT EXISTS `itslibro1`.`list_abandoned` (
   `id_user` INT NOT NULL,
   `id_book` INT NOT NULL,
   INDEX `user_idx` (`id_user` ASC),
@@ -171,12 +149,10 @@ $q9 = "CREATE TABLE IF NOT EXISTS `itslibro1`.`list_abandoned` (
     ON UPDATE NO ACTION)   
 ENGINE = InnoDB CHARACTER SET cp1251";
 
-for ($i = 1; $i <= 9; $i++) {
+for ($i = 1; $i <= 8; $i++) {
   $q = ${'q' . $i};
   mysqli_query($link, $q);
-  echo '<br>';
 }
-echo '<br>';
 
 //users
 $q1 = "INSERT INTO users (nick, email, u_password, age, avatar, about_user, u_status) VALUES ('Abviol', 'kyselov_n@dlit.dp.ua', 'admin2006', '16', 'img/avatars/1.jpg', 'Полюбляю наукову фантастику й бойовики', 'adm')";
@@ -196,10 +172,10 @@ for ($i = 1; $i <= 5; $i++) {
 echo '<br>';
 
 //books
-$q1 = "INSERT INTO books (id_publisher, b_name, original_name, author, picture, data_writed, data_published, genres, words_count, b_description, category, views_count, in_list_count, rating, ratings_count) VALUES ('1', '451 градус за Фаренгейтом', 'Fahrenheit 451', 'Рей Дуглас Брeдбери', 'img/covers/1.png', '1953', '2022-10-30', 'Новела, наукова фантастика, антиутопічна фантастика, політична фантастика', '38551',  '«451 градус за Фаренгейтом» — науково-фантастичний роман Рея Бредбері, який входить до популярної серії «Класика для лінивих». Дія роману відбувається у тоталітарному суспільстві, яке забороняє своїм членам читати книги, які містять філософський зміст. Такі видання мають бути спалені, а ті, хто насмілився наблизитися до «шкідливої» літератури, називаються злочинцями. Головний герой Гай Монтег працює «пожежним», тобто спалює неугодні книги, поки в його житті не настає криза, яка змушує переосмислити основні цінності.', '12+', '0', '1', '5', '2')";
+$q1 = "INSERT INTO books (id_publisher, b_name, original_name, author, picture, data_writed, data_published, genres, words_count, b_description, category, views_count, in_list_count, rating, ratings_count) VALUES ('1', '451 градус за Фаренгейтом', 'Fahrenheit 451', 'Рей Дуглас Брeдбери', 'img/covers/1.png', '1953', '2022-10-30', 'Новела, наукова фантастика, антиутопічна фантастика, політична фантастика', '38551',  '«451 градус за Фаренгейтом» — науково-фантастичний роман Рея Бредбері, який входить до популярної серії «Класика для лінивих». Дія роману відбувається у тоталітарному суспільстві, яке забороняє своїм членам читати книги, які містять філософський зміст. Такі видання мають бути спалені, а ті, хто насмілився наблизитися до «шкідливої» літератури, називаються злочинцями. Головний герой Гай Монтег працює «пожежним», тобто спалює неугодні книги, поки в його житті не настає криза, яка змушує переосмислити основні цінності.', '12+', '0', '2', '5', '2')";
 
 $q2 = "INSERT INTO books (id_publisher, b_name, original_name, author, picture, data_writed, data_published, genres, words_count,
-b_description, category, views_count, in_list_count, rating, ratings_count) VALUES ('1', 'Червоне і чорне', 'Le Rouge et le Noirm', 'Стендаль (Марі-Анрі Бейль)', 'img/covers/2.jpg', '1830', '2022-10-29', 'Новела, психологічна література', '152440', '«Червоне та чорне» — це один із найвідоміших творів Стендаля. Книга розповість вам про честолюбство, про те, куди наводять надмірні амбіції та прагнення йти головами за своєю метою. Жюльєн Сорель розважливо будує кар`єру і прагне прославитися, як Наполеон. Зовні він холодний і цілеспрямований, проте в душі його роздирають сумніви та протиріччя, він кидається між честю і честолюбством. Його амбіції високі, але чи судилося їм втілитись? Синонімом червоного у романі виступає кохання, а чорне — це гординя та марнославство.', '12+', '0', '1', '5', '3')";
+b_description, category, views_count, in_list_count, rating, ratings_count) VALUES ('1', 'Червоне і чорне', 'Le Rouge et le Noirm', 'Стендаль (Марі-Анрі Бейль)', 'img/covers/2.jpg', '1830', '2022-10-29', 'Новела, психологічна література', '152440', '«Червоне та чорне» — це один із найвідоміших творів Стендаля. Книга розповість вам про честолюбство, про те, куди наводять надмірні амбіції та прагнення йти головами за своєю метою. Жюльєн Сорель розважливо будує кар`єру і прагне прославитися, як Наполеон. Зовні він холодний і цілеспрямований, проте в душі його роздирають сумніви та протиріччя, він кидається між честю і честолюбством. Його амбіції високі, але чи судилося їм втілитись? Синонімом червоного у романі виступає кохання, а чорне — це гординя та марнославство.', '12+', '0', '2', '5', '3')";
 
 $q3 = "INSERT INTO books (id_publisher, b_name, original_name, author, picture, data_writed, data_published, genres, words_count, b_description, category, views_count, in_list_count, rating, ratings_count) VALUES ('1', 'Гобсек', 'Gobseck', 'Оноре де Бальзак', 'img/covers/3.jpg', '1830', '2022-11-10', 'Повість', '17570', '«Гобсек» – сцени з приватного життя лихваря, портрет робителя грошей із грошей.', '12+', '0', '1', '5', '1')";
 

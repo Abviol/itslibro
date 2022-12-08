@@ -2,7 +2,7 @@
 ini_set('session.save_path', getcwd() . '\sessions');
 session_start();
 include 'db_connect.php';
-include 'function.php';
+include 'create_avatar.php';
 
 
 $email = $_POST['email'];

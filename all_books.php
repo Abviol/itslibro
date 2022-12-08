@@ -74,7 +74,7 @@ if ($_POST['sorting_option'] == 'newest') {
                      <a href="all_books.php" class="menu__link">Бібліотека</a>
                   </li>
                   <li class="menu__item">
-                     <a href="" class="menu__link">Про сайт</a>
+                     <a href="about_project.php" class="menu__link">Про сайт</a>
                   </li>
                   <?php include 'db_connect.php';
                   $id_book = $_SESSION['id_book'];
@@ -143,6 +143,11 @@ if ($_POST['sorting_option'] == 'newest') {
                   }
                   $q = "SELECT * FROM `books` WHERE " . implode("", $array) . " ORDER BY " . $order . " DESC";
                   unset($_SESSION['search_key']);
+                  if (mysqli_num_rows(mysqli_query($link, $q)) == 0) { ?>
+               <div class="list-nothing">
+                  <p>Нічого не знайдено :'(</p>
+               </div>
+               <?php }
                } else {
                   $q = "SELECT * FROM books ORDER BY " . $order . " DESC";
                }
@@ -155,7 +160,7 @@ if ($_POST['sorting_option'] == 'newest') {
                <div class="all-books__book">
                   <div class="cover__container">
                      <img src=<?php echo $books['picture'] ?> alt="Обкладанка" height="150" width="100"
-                        style="border-radius: 10px;">
+                     style="border-radius: 10px;">
                      <form action="book_page.php" method="post">
                         <input type="hidden" name="id_book" value=<?php echo $book[0]; ?>>
                         <input type="hidden" name="b_name" value=<?php echo $books['b_name']; ?>>
@@ -169,9 +174,12 @@ if ($_POST['sorting_option'] == 'newest') {
                      <h3 class="info__author">
                         <?php echo $books['author'] ?>
                      </h3>
-                     <h3 class="info__rating">
-                        <?php echo "Оцінка: " . $books['rating'] ?>
-                     </h3>
+                     <div class="info__rating">
+                        <img src="img/star.svg" alt="" height="16" style="margin-right: 4px">
+                        <p>
+                           <?php echo $books['rating'] ?>
+                        </p>
+                     </div>
                      <h3 class="info__about">
                         <?php
                   $desc = $books['b_description'];
@@ -231,7 +239,7 @@ if ($_POST['sorting_option'] == 'newest') {
             <div class="footer__column">
                <h5>Про проект</h5>
                <ul>
-                  <li><a href="">Що таке Itslibro?</a></li>
+                  <li><a href="about_project.php">Що таке Itslibro?</a></li>
                </ul>
             </div>
             <div class="footer__column">
@@ -262,9 +270,9 @@ if ($_POST['sorting_option'] == 'newest') {
    </div>
    <script src="js/script.js"></script>
    <script>
-   if (window.history.replaceState) {
-      window.history.replaceState(null, null, window.location.href);
-   }
+      if (window.history.replaceState) {
+         window.history.replaceState(null, null, window.location.href);
+      }
    </script>
 </body>
 
