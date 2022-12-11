@@ -18,11 +18,47 @@ USE `itslibro1` ;
 -- -----------------------------------------------------
 -- Table `itslibro1`.`users`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `itslibro1`.`users` (`id_user` INT NOT NULL AUTO_INCREMENT,`nick` VARCHAR(45) NOT NULL,`email` VARCHAR(45) NULL,`password` VARCHAR(45) NULL,`avatar` BLOB NULL,`about_user` VARCHAR(256) NULL,`status` VARCHAR(45) NOT NULL,PRIMARY KEY (`id_user`),UNIQUE INDEX `id_user_UNIQUE` (`id_user` ASC),UNIQUE INDEX `nick_UNIQUE` (`nick` ASC),UNIQUE INDEX `email_UNIQUE` (`email` ASC)) ENGINE = InnoDB;
+CREATE TABLE IF NOT EXISTS `itslibro1`.`users` (
+   `id_user` INT NOT NULL AUTO_INCREMENT,
+   `nick` VARCHAR(45) NOT NULL,
+   `email` VARCHAR(45) NULL,
+   `password` VARCHAR(45) NULL,
+   `avatar` BLOB NULL,
+   `about_user` VARCHAR(256) NULL,
+   `status` VARCHAR(45) NOT NULL,
+   PRIMARY KEY (`id_user`),
+   UNIQUE INDEX `id_user_UNIQUE` (`id_user` ASC),
+   UNIQUE INDEX `nick_UNIQUE` (`nick` ASC),
+   UNIQUE INDEX `email_UNIQUE` (`email` ASC))
+ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `itslibro1`.`books`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `itslibro1`.`books` (`id_book` INT NOT NULL AUTO_INCREMENT,`id_publisher` INT NOT NULL,`name` VARCHAR(100) NOT NULL,`original_name` VARCHAR(100) NULL,`author` VARCHAR(45) NOT NULL,`picture` BLOB NULL,`data_writed` VARCHAR(50) NOT NULL,`data_published` DATE NULL,`genres` VARCHAR(256) NOT NULL,`page_count` INT NOT NULL,`tags` VARCHAR(256) NOT NULL,`description` VARCHAR(256) NOT NULL,`category` VARCHAR(45) NOT NULL,`views_count` INT NULL,`in_list_count` INT NULL,`rating` INT NULL,PRIMARY KEY (`id_book`),INDEX `publisher_idx` (`id_publisher` ASC),CONSTRAINT `publisher`  FOREIGN KEY (`id_publisher`)  REFERENCES `itslibro1`.`users` (`id_user`)  ON DELETE CASCADE  ON UPDATE CASCADE) ENGINE = InnoDB;
+CREATE TABLE IF NOT EXISTS `itslibro1`.`books` (
+   `id_book` INT NOT NULL AUTO_INCREMENT,
+   `id_publisher` INT NOT NULL,
+   `name` VARCHAR(100) NOT NULL,
+   `original_name` VARCHAR(100) NULL,
+   `author` VARCHAR(45) NOT NULL,
+   `picture` BLOB NULL,
+   `data_writed` VARCHAR(50) NOT NULL,
+   `data_published` DATE NULL,
+   `genres` VARCHAR(256) NOT NULL,
+   `page_count` INT NOT NULL,
+   `tags` VARCHAR(256) NOT NULL,
+   `description` VARCHAR(256) NOT NULL,
+   `category` VARCHAR(45) NOT NULL,
+   `views_count` INT NULL,
+   `in_list_count` INT NULL,
+   `rating` INT NULL,
+   PRIMARY KEY (`id_book`),
+   INDEX `publisher_idx` (`id_publisher` ASC),
+   CONSTRAINT `publisher`  
+      FOREIGN KEY (`id_publisher`)  
+      REFERENCES `itslibro1`.`users` (`id_user`)  
+      ON DELETE CASCADE  
+      ON UPDATE CASCADE) 
+   ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `itslibro1`.`publications`
 -- -----------------------------------------------------

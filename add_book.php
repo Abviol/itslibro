@@ -166,15 +166,9 @@ session_start();
                unset($_SESSION['genres']);
                unset($_SESSION['category']);
                unset($_SESSION['b_description']);
-               /* unset($_SESSION['cover']);
-               unset($_SESSION['text']); */
                ?>
 
             </form>
-
-
-
-
          </div>
       </main>
       <!------------------- FOOTER -------------------------->

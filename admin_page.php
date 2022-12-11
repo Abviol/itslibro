@@ -5,6 +5,15 @@ session_start();
 if ($_SESSION['u_status'] != 'adm') {
    header('Location: index.php');
 }
+
+unset($_SESSION['message']);
+unset($_SESSION['b_name']);
+unset($_SESSION['original_name']);
+unset($_SESSION['author']);
+unset($_SESSION['data_writed']);
+unset($_SESSION['genres']);
+unset($_SESSION['category']);
+unset($_SESSION['b_description']);
 ?>
 
 

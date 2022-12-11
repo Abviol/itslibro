@@ -16,7 +16,7 @@ $id_user = $_SESSION['id_user'];
    <link href="css/log.css" rel="stylesheet" />
    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
-   <title>Додати книгу</title>
+   <title>Профіль</title>
 </head>
 
 <body>

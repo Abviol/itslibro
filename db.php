@@ -28,7 +28,7 @@ $q2 = "CREATE TABLE IF NOT EXISTS `itslibro1`.`books` (
   `author` VARCHAR(45) NOT NULL,
   `picture` VARCHAR(256) NULL,
   `data_writed` VARCHAR(50) NOT NULL,
-  `data_published` DATE NULL,
+  `data_published` DATE NOT NULL,
   `genres` VARCHAR(256) NOT NULL,
   `words_count` INT NOT NULL,
   `b_description` VARCHAR(1000) NOT NULL,

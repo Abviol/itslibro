@@ -148,7 +148,18 @@ function wholeWordTruncate($s, $characterCount)
                            if ($i < 6) {
                               $q1 = "SELECT * FROM books WHERE id_book=" . $book[0];
                               $y = mysqli_query($link, $q1);
-                              $books = mysqli_fetch_assoc($y); ?>
+                              $books = mysqli_fetch_assoc($y);
+                              $age_limit = 0;
+                              if ($books['category'] == '12+') {
+                                 $age_limit = 12;
+                              } else if ($books['category'] == '18+') {
+                                 $age_limit = 18;
+                              }
+                              $q2 = "SELECT * FROM users WHERE id_user = '" . $_SESSION['id_user'] . "'";
+                              $current_user = mysqli_fetch_assoc(mysqli_query($link, $q2));
+                              $age_user = $current_user['age'];
+                              if ($age_user >= $age_limit) {
+                        ?>
                         <form action="book_page.php" method="post" style="width: 16.66666%;">
                            <input type="hidden" name="id_book" value=<?php echo $book[0]; ?>>
                            <input type="hidden" name="b_name" value=<?php echo $books['b_name']; ?>>
@@ -156,26 +167,26 @@ function wholeWordTruncate($s, $characterCount)
                               <div class="books__item item-book">
                                  <div class="item-book__cover">
                                     <a href="#"><img src=<?php echo $books['picture'] ?> alt="Обкладанка"
-                                       class="book__cover"></a>
+                                          class="book__cover"></a>
                                  </div>
                                  <div class="item-book__stars">
                                     <?php
-                              $rating = floor($books['rating']);
-                              for ($j = 1; $j <= $rating; $j++) { ?>
+                                 $rating = floor($books['rating']);
+                                 for ($j = 1; $j <= $rating; $j++) { ?>
                                     <img class="star" src="img/star.svg" height="18px" alt="Зірка">
                                     <?php }
-                              if ($books['rating'] > $rating) { ?>
+                                 if ($books['rating'] > $rating) { ?>
                                     <img src="img/star-half.svg" height="18px" alt="Зірка">
                                     <?php } ?>
                                  </div>
                                  <a href="#">
                                     <h3 class="item-book__name">
                                        <?php
-                              if (strlen($books['b_name']) <= 15) {
-                                 echo $books['b_name'];
-                              } else {
-                                 echo wholeWordTruncate($books['b_name'], 15) . "...";
-                              }
+                                 if (strlen($books['b_name']) <= 15) {
+                                    echo $books['b_name'];
+                                 } else {
+                                    echo wholeWordTruncate($books['b_name'], 15) . "...";
+                                 }
                                        ?>
                                     </h3>
                                  </a>
@@ -188,6 +199,7 @@ function wholeWordTruncate($s, $characterCount)
                            </button>
                         </form>
                         <?php $i++;
+                              }
                            }
                         } ?>
                      </div>
@@ -206,7 +218,7 @@ function wholeWordTruncate($s, $characterCount)
                   <div class="books__body">
                      <div class="books__list">
                         <?php
-                        $q = "SELECT * FROM books ORDER BY data_published DESC";
+                        $q = "SELECT * FROM books ORDER BY id_book DESC";
                         $book = mysqli_query($link, $q);
                         $book = mysqli_fetch_all($book);
                         $i = 0;
@@ -214,7 +226,18 @@ function wholeWordTruncate($s, $characterCount)
                            if ($i < 6) {
                               $q1 = "SELECT * FROM books WHERE id_book=" . $book[0];
                               $y = mysqli_query($link, $q1);
-                              $books = mysqli_fetch_assoc($y); ?>
+                              $books = mysqli_fetch_assoc($y);
+                              $age_limit = 0;
+                              if ($books['category'] == '12+') {
+                                 $age_limit = 12;
+                              } else if ($books['category'] == '18+') {
+                                 $age_limit = 18;
+                              }
+                              $q2 = "SELECT * FROM users WHERE id_user = '" . $_SESSION['id_user'] . "'";
+                              $current_user = mysqli_fetch_assoc(mysqli_query($link, $q2));
+                              $age_user = $current_user['age'];
+                              if ($age_user >= $age_limit) {
+                        ?>
                         <form action="book_page.php" method="post" style="width: 16.66666%;">
                            <input type="hidden" name="id_book" value=<?php echo $book[0]; ?>>
                            <input type="hidden" name="b_name" value=<?php echo $books['b_name']; ?>>
@@ -222,26 +245,26 @@ function wholeWordTruncate($s, $characterCount)
                               <div class="books__item item-book">
                                  <div class="item-book__cover">
                                     <a href="#"><img src=<?php echo $books['picture'] ?> alt="Обкладанка"
-                                       class="book__cover"></a>
+                                          class="book__cover"></a>
                                  </div>
                                  <div class="item-book__stars">
                                     <?php
-                              $rating = floor($books['rating']);
-                              for ($j = 1; $j <= $rating; $j++) { ?>
+                                 $rating = floor($books['rating']);
+                                 for ($j = 1; $j <= $rating; $j++) { ?>
                                     <img class="star" src="img/star.svg" height="18px" alt="Зірка">
                                     <?php }
-                              if ($books['rating'] > $rating) { ?>
+                                 if ($books['rating'] > $rating) { ?>
                                     <img src="img/star-half.svg" height="18px" alt="Зірка">
                                     <?php } ?>
                                  </div>
                                  <a href="#">
                                     <h3 class="item-book__name">
                                        <?php
-                              if (strlen($books['b_name']) <= 15) {
-                                 echo $books['b_name'];
-                              } else {
-                                 echo wholeWordTruncate($books['b_name'], 15) . "...";
-                              }
+                                 if (strlen($books['b_name']) <= 15) {
+                                    echo $books['b_name'];
+                                 } else {
+                                    echo wholeWordTruncate($books['b_name'], 15) . "...";
+                                 }
                                        ?>
                                     </h3>
                                  </a>
@@ -254,6 +277,7 @@ function wholeWordTruncate($s, $characterCount)
                            </button>
                         </form>
                         <?php $i++;
+                              }
                            }
                         } ?>
                      </div>
@@ -280,7 +304,18 @@ function wholeWordTruncate($s, $characterCount)
                            if ($i < 6) {
                               $q1 = "SELECT * FROM books WHERE id_book=" . $book[0];
                               $y = mysqli_query($link, $q1);
-                              $books = mysqli_fetch_assoc($y); ?>
+                              $books = mysqli_fetch_assoc($y);
+                              $age_limit = 0;
+                              if ($books['category'] == '12+') {
+                                 $age_limit = 12;
+                              } else if ($books['category'] == '18+') {
+                                 $age_limit = 18;
+                              }
+                              $q2 = "SELECT * FROM users WHERE id_user = '" . $_SESSION['id_user'] . "'";
+                              $current_user = mysqli_fetch_assoc(mysqli_query($link, $q2));
+                              $age_user = $current_user['age'];
+                              if ($age_user >= $age_limit) {
+                        ?>
                         <form action="book_page.php" method="post" style="width: 16.66666%;">
                            <input type="hidden" name="id_book" value=<?php echo $book[0]; ?>>
                            <input type="hidden" name="b_name" value=<?php echo $books['b_name']; ?>>
@@ -288,26 +323,26 @@ function wholeWordTruncate($s, $characterCount)
                               <div class="books__item item-book">
                                  <div class="item-book__cover">
                                     <a href="#"><img src=<?php echo $books['picture'] ?> alt="Обкладанка"
-                                       class="book__cover"></a>
+                                          class="book__cover"></a>
                                  </div>
                                  <div class="item-book__stars">
                                     <?php
-                              $rating = floor($books['rating']);
-                              for ($j = 1; $j <= $rating; $j++) { ?>
+                                 $rating = floor($books['rating']);
+                                 for ($j = 1; $j <= $rating; $j++) { ?>
                                     <img class="star" src="img/star.svg" height="18px" alt="Зірка">
                                     <?php }
-                              if ($books['rating'] > $rating) { ?>
+                                 if ($books['rating'] > $rating) { ?>
                                     <img src="img/star-half.svg" height="18px" alt="Зірка">
                                     <?php } ?>
                                  </div>
                                  <a href="#">
                                     <h3 class="item-book__name">
                                        <?php
-                              if (strlen($books['b_name']) <= 15) {
-                                 echo $books['b_name'];
-                              } else {
-                                 echo wholeWordTruncate($books['b_name'], 15) . "...";
-                              }
+                                 if (strlen($books['b_name']) <= 15) {
+                                    echo $books['b_name'];
+                                 } else {
+                                    echo wholeWordTruncate($books['b_name'], 15) . "...";
+                                 }
                                        ?>
                                     </h3>
                                  </a>
@@ -320,6 +355,7 @@ function wholeWordTruncate($s, $characterCount)
                            </button>
                         </form>
                         <?php $i++;
+                              }
                            }
                         } ?>
                      </div>

@@ -115,7 +115,7 @@ if ($_POST['sorting_option'] == 'newest') {
                         </li>
                         <?php if ($_SESSION['u_status'] == 'adm') { ?>
                         <li>
-                           <a href="admin_page.php" class="menu__sub-link">Сторінка адміністратора</a>
+                           <a href="admin_page.php" class="menu__sub-link">Панель адміністратора</a>
                         </li>
                         <?php } ?>
                         <li>
@@ -148,12 +148,14 @@ if ($_POST['sorting_option'] == 'newest') {
             <button <?php if ($_SESSION['selected_list']=='list_reading') {
                echo 'class="list_selected"';
             } else {
-               echo 'class="list"';
+               echo
+                  'class="list"';
             } ?> name="selected_list" value="list_reading" type="submit">Читаю 📖</button>
             <button <?php if ($_SESSION['selected_list'] == 'list_favorite') {
                echo 'class="list_selected"';
             } else {
-               echo 'class="list"';
+               echo
+                  'class="list"';
             } ?> name="selected_list" value="list_favorite" type="submit">Улюблене 😍</button>
             <button <?php if ($_SESSION['selected_list'] == 'list_in_plans') {
                echo 'class="list_selected"';
@@ -163,7 +165,8 @@ if ($_POST['sorting_option'] == 'newest') {
             <button <?php if ($_SESSION['selected_list'] == 'list_readed') {
                echo 'class="list_selected"';
             } else {
-               echo 'class="list"';
+               echo
+                  'class="list"';
             } ?> name="selected_list" value="list_readed" type="submit">Прочитано ✅</button>
             <button <?php if ($_SESSION['selected_list'] == 'list_abandoned') {
                echo 'class="list_selected"';
@@ -209,7 +212,18 @@ if ($_POST['sorting_option'] == 'newest') {
                      if (mysqli_num_rows(mysqli_query($link, $check)) > 0) {
                         $q1 = "SELECT * FROM books WHERE id_book=" . $book[0];
                         $y = mysqli_query($link, $q1);
-                        $books = mysqli_fetch_assoc($y); ?>
+                        $books = mysqli_fetch_assoc($y);
+                        $age_limit = 0;
+                        if ($books['category'] == '12+') {
+                           $age_limit = 12;
+                        } else if ($books['category'] == '18+') {
+                           $age_limit = 18;
+                        }
+                        $q2 = "SELECT * FROM users WHERE id_user = '" . $_SESSION['id_user'] . "'";
+                        $current_user = mysqli_fetch_assoc(mysqli_query($link, $q2));
+                        $age_user = $current_user['age'];
+                        if ($age_user >= $age_limit) {
+               ?>
                <div class="all-books__book">
                   <div class="cover__container">
                      <img src=<?php echo $books['picture'] ?> alt="Обкладанка" height="150" width="100"
@@ -235,17 +249,18 @@ if ($_POST['sorting_option'] == 'newest') {
                      </div>
                      <h3 class="info__about">
                         <?php
-                        $desc = $books['b_description'];
-                        if (strlen($desc) > 320) {
-                           echo wholeWordTruncate($books['b_description'], 320) . "...";
-                        } else {
-                           echo $desc;
-                        }
+                           $desc = $books['b_description'];
+                           if (strlen($desc) > 320) {
+                              echo wholeWordTruncate($books['b_description'], 320) . "...";
+                           } else {
+                              echo $desc;
+                           }
                         ?>
                      </h3>
                   </div>
                </div>
                <?php
+                        }
                      }
                   }
                } else { ?>

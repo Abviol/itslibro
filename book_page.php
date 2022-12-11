@@ -20,7 +20,7 @@ if (isset($_POST['b_name'])) {
    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
    <link href="css/book_page.css" rel="stylesheet">
    <title>
-      <?php echo $_SESSION['b_name'] ?>
+      <?php echo '«' . $_SESSION['b_name'] . '»' ?>
    </title>
 </head>
 
@@ -248,7 +248,11 @@ if (isset($_POST['b_name'])) {
                   <div class="info__about">
                      <h3 class="info__about-name">Дата опублікування</h3>
                      <h3 class="info__about-info">
-                        <?php echo $book['data_published'] ?>
+                        <?php
+                        $year = mb_substr($book['data_published'], 0, 4);
+                        $month = mb_substr($book['data_published'], 5, 2);
+                        $day = mb_substr($book['data_published'], 8, 2);
+                        echo $date = $day . '.' . $month . '.' . $year; ?>
                      </h3>
                   </div>
 
@@ -262,7 +266,7 @@ if (isset($_POST['b_name'])) {
                   <div class="info__about">
                      <h3 class="info__about-name">Обсяг</h3>
                      <h3 class="info__about-info">
-                        <?php echo $book['words_count'] . " слів" ?>
+                        <?php echo number_format($book['words_count'], 0, ".", " ") . " слів" ?>
                      </h3>
                   </div>
 

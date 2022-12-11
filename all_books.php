@@ -156,11 +156,22 @@ if ($_POST['sorting_option'] == 'newest') {
                foreach ($book as $book) {
                   $q1 = "SELECT * FROM books WHERE id_book=" . $book[0];
                   $y = mysqli_query($link, $q1);
-                  $books = mysqli_fetch_assoc($y); ?>
+                  $books = mysqli_fetch_assoc($y);
+                  $age_limit = 0;
+                  if ($books['category'] == '12+') {
+                     $age_limit = 12;
+                  } else if ($books['category'] == '18+') {
+                     $age_limit = 18;
+                  }
+                  $q2 = "SELECT * FROM users WHERE id_user = '" . $_SESSION['id_user'] . "'";
+                  $current_user = mysqli_fetch_assoc(mysqli_query($link, $q2));
+                  $age_user = $current_user['age'];
+                  if ($age_user >= $age_limit) {
+               ?>
                <div class="all-books__book">
                   <div class="cover__container">
                      <img src=<?php echo $books['picture'] ?> alt="Обкладанка" height="150" width="100"
-                     style="border-radius: 10px;">
+                        style="border-radius: 10px;">
                      <form action="book_page.php" method="post">
                         <input type="hidden" name="id_book" value=<?php echo $book[0]; ?>>
                         <input type="hidden" name="b_name" value=<?php echo $books['b_name']; ?>>
@@ -182,17 +193,18 @@ if ($_POST['sorting_option'] == 'newest') {
                      </div>
                      <h3 class="info__about">
                         <?php
-                  $desc = $books['b_description'];
-                  if (strlen($desc) > 320) {
-                     echo wholeWordTruncate($books['b_description'], 320) . "...";
-                  } else {
-                     echo $desc;
-                  }
+                     $desc = $books['b_description'];
+                     if (strlen($desc) > 320) {
+                        echo wholeWordTruncate($books['b_description'], 320) . "...";
+                     } else {
+                        echo $desc;
+                     }
                         ?>
                      </h3>
                   </div>
                </div>
                <?php
+                  }
                }
                ?>
             </div>
@@ -200,32 +212,23 @@ if ($_POST['sorting_option'] == 'newest') {
                <h3 class="sort-text">Сортировка</h3>
                <form class="sorting-options" action="all_books.php" method="post">
                   <label class="sorting-option">
-                     <input type="radio" name="sorting_option" value="newest" <?php if (
-                        empty($_POST['sorting_option'])
-                        || $_POST['sorting_option'] == "newest"
-                     )
-                        echo "checked"; ?>>
+                     <input type="radio" name="sorting_option" value="newest" <?php if ( empty($_POST['sorting_option'])
+                        || $_POST['sorting_option']=="newest" ) echo "checked"; ?>>
                      <span class="radio"></span>за новизною
                   </label>
                   <label class="sorting-option">
                      <input type="radio" name="sorting_option" value="popular" <?php if (
-                        $_POST['sorting_option'] == "popular"
-                     )
-                        echo "checked"; ?>>
+                        $_POST['sorting_option']=="popular" ) echo "checked"; ?>>
                      <span class="radio"></span>за популярністю
                   </label>
                   <label class="sorting-option">
-                     <input type="radio" name="sorting_option" value="best" <?php if (
-                        $_POST['sorting_option'] == "best"
-                     )
-                        echo "checked"; ?>>
+                     <input type="radio" name="sorting_option" value="best" <?php if ( $_POST['sorting_option']=="best"
+                        ) echo "checked"; ?>>
                      <span class="radio"></span>за рейтингом
                   </label>
                   <label class="sorting-option">
                      <input type="radio" name="sorting_option" value="biggest" <?php if (
-                        $_POST['sorting_option'] == "biggest"
-                     )
-                        echo "checked"; ?>>
+                        $_POST['sorting_option']=="biggest" ) echo "checked"; ?>>
                      <span class="radio"></span>за обсягом
                   </label>
                   <input class="learn-more" type="submit" value="Сортувати" style="margin-top: 5px; font-size: 16px;">
@@ -270,9 +273,9 @@ if ($_POST['sorting_option'] == 'newest') {
    </div>
    <script src="js/script.js"></script>
    <script>
-      if (window.history.replaceState) {
-         window.history.replaceState(null, null, window.location.href);
-      }
+   if (window.history.replaceState) {
+      window.history.replaceState(null, null, window.location.href);
+   }
    </script>
 </body>
 

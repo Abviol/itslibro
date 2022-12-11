@@ -160,7 +160,7 @@ session_start();
                            <?= $book[8] ?>
                         </td>
                         <td>
-                           <?= $book[9] ?>
+                           <?= number_format($book[9], 0, ".", " ") ?>
                         </td>
                         <td>
                            <?= $book[11] ?>

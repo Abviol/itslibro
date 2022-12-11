@@ -1,4 +1,7 @@
-﻿<head>
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
@@ -9,7 +12,7 @@
       include 'db_connect.php';
       ini_set('session.save_path', getcwd() . '\sessions');
       session_start();
-      echo $_SESSION ['b_name'] ?>
+      echo '«' . $_SESSION ['b_name'] .'»'  ?>
    </title>
 </head>
 
@@ -30,7 +33,7 @@ function wholeWordTruncate($s, $characterCount)
 {
    $return = $s;
 
-   if (preg_match("/^.{1,$characterCount}\b\W*/su", $s, $match))
+   if (preg_match("/^.{1,$characterCount}\b\W*/su", $s, $match))  //пояснити
       return $match[0];
    else
       return mb_substr($return, 0, $characterCount);
@@ -50,14 +53,13 @@ function read_txt($path, $page_number, $rows_on_page) // читання .txt ф�
          $str_in = $str;
          $str_out = '';
          while ($str_in !== '') {
-            $match = wholeWordTruncate($str_in, 105); // читання до первших 135 символів без разриву слів
+            $match = wholeWordTruncate($str_in, 105); // читання до первших 105 символів без разриву слів
             $i = iconv_strlen($match); // к-ть символів у прочитаному рядку
             $str_in = mb_substr($str_in, $i); // видаляємо прочитаний рядок
             if ($row_count <= $row_end && $row_count > $row_start) // перевірка на належність вибраної сторінки
                $str_out .= $match . '<br>'; // конкотенація прочитаного рядка до змінного з усім параграфом
             $row_count++;
          }
-         /* $str_out = str_replace('\n', '<br>', $str_out); */
          $str = str_replace('<b</p><p style="margin-bottom: 15px;">', '', $str);
          $text .= '<p style="margin-bottom: 15px;">' . substr($str_out, 0, -4) . '</p>';
       }
@@ -76,7 +78,7 @@ function check_row_count_txt($path) // получение количество �
          $str_in = $str;
          $str_out = '';
          while ($str_in !== '') {
-            $match = wholeWordTruncate($str_in, 135);
+            $match = wholeWordTruncate($str_in, 105);
             $i = iconv_strlen($match);
             $str_in = mb_substr($str_in, $i);
             $row_count++;
@@ -88,15 +90,14 @@ function check_row_count_txt($path) // получение количество �
    return $row_count;
 }
 $rows_on_page = 100;
-?>
 
-<!DOCTYPE html>
-<html lang="en">
-
-<?php
 $page_count = ceil(check_row_count_txt($path_txt) / $rows_on_page);
 if (isset($_GET['p'])) {
-   $page = isset($_GET['p']) ? (int) $_GET['p'] : 0;
+   if ($_GET['p'] > $page_count) {
+      $page = $page_count;
+   } else if ($_GET['p'] < $page_count) {
+   $page = 1;
+   }
 } else {
    $page = 1;
 }
@@ -210,7 +211,7 @@ if (isset($_GET['p'])) {
                            $i = $page - 2;
                         }
                         while ($i <= $j) { ?>
-                  <a <?php if ($i===$page) echo 'class="active"' ?> href="?p=<?= $i ?>">
+                  <a <?php if ($i==$page) echo 'class="active"' ?> href="?p=<?= $i ?>">
                      <?= $i ?>
                   </a>
                   <?php $i++;
@@ -235,7 +236,8 @@ if (isset($_GET['p'])) {
 
             <div class="text__container">
                <?php
-                     echo read_txt($path_txt, $page, $rows_on_page); ?>
+                  echo read_txt($path_txt, $page, $rows_on_page); 
+               ?>
             </div>
             <div class="reading__bottom">
                <div class="pagination">
@@ -262,7 +264,7 @@ if (isset($_GET['p'])) {
                                        $i = $page - 2;
                                     }
                                     while ($i <= $j) { ?>
-                  <a <?php if ($i===$page) echo 'class="active"' ?> href="?p=<?= $i ?>">
+                  <a <?php if ($i==$page) echo 'class="active"' ?> href="?p=<?= $i ?>">
                      <?= $i ?>
                   </a>
                   <?php $i++;
@@ -319,9 +321,8 @@ if (isset($_GET['p'])) {
    </div>
    <script src="js/script.js"></script>
    <script>
-   if (window.history.replaceState) {
-      window.history.replaceState(null, null, window.location.href);
-   }
+   f(window.history.replaceState) {
+         indow.history.replaceState(null, null, window.location.href);
    </script>
 </body>
 
