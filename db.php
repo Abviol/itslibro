@@ -155,15 +155,15 @@ for ($i = 1; $i <= 8; $i++) {
 }
 
 //users
-$q1 = "INSERT INTO users (nick, email, u_password, age, avatar, about_user, u_status) VALUES ('Abviol', 'kyselov_n@dlit.dp.ua', 'admin2006', '16', 'img/avatars/1.jpg', 'Полюбляю наукову фантастику й бойовики', 'adm')";
+$q1 = "INSERT INTO users (nick, email, u_password, age, avatar, about_user, u_status) VALUES ('Abviol', 'kyselov_n@dlit.dp.ua', '4b14ade55cf2243661b1f2919884edfe', '16', 'img/avatars/1.jpg', 'Полюбляю наукову фантастику й бойовики', 'adm')";
 
-$q2 = "INSERT INTO users (nick, email, u_password, age, avatar, about_user, u_status) VALUES ('Патріот', 'iloveuA@gmail.com', 'uawillwin', '21', 'img/avatars/2.jpg', '', 'user')";
+$q2 = "INSERT INTO users (nick, email, u_password, age, avatar, about_user, u_status) VALUES ('Патріот', 'iloveuA@gmail.com', 'b5d1e4fef63ffa03694811dcf65e332b', '21', 'img/avatars/2.jpg', '', 'user')";
 
-$q3 = "INSERT INTO users (nick, email, u_password, age, avatar, about_user, u_status) VALUES ('Артур Пирожков', 'pyro2018@gmail.com', 'songpong11', '13', 'img/avatars/3.jpg', 'Обожнюю бабусині приіжки', 'user')";
+$q3 = "INSERT INTO users (nick, email, u_password, age, avatar, about_user, u_status) VALUES ('Артур Пирожков', 'pyro2018@gmail.com', '0172d51a59fa38c4b544971393bf3120', '13', 'img/avatars/3.jpg', 'Обожнюю бабусині приіжки', 'user')";
 
-$q4 = "INSERT INTO users (nick, email, u_password, age, avatar, about_user, u_status) VALUES ('Іван', 'ivan_lit@gmail.com', '120934111', '19', 'img/avatars/4.jpg', '', 'user')";
+$q4 = "INSERT INTO users (nick, email, u_password, age, avatar, about_user, u_status) VALUES ('Іван', 'ivan_lit@gmail.com', '1c9afe92fa90818787393d19b3b58a38', '19', 'img/avatars/4.jpg', '', 'user')";
 
-$q5 = "INSERT INTO users (nick, email, u_password, age, avatar, about_user, u_status) VALUES ('про100ліцеїст', 'lyceum_best@gmail.com', '12341234', '17', 'img/avatars/5.jpg', 'про100ліцеїст, ЛІТ', 'user')";
+$q5 = "INSERT INTO users (nick, email, u_password, age, avatar, about_user, u_status) VALUES ('про100ліцеїст', 'lyceum_best@gmail.com', 'ed2b1f468c5f915f3f1cf75d7068baae', '17', 'img/avatars/5.jpg', 'про100ліцеїст, ЛІТ', 'user')";
 
 for ($i = 1; $i <= 5; $i++) {
   $q = ${'q' . $i};

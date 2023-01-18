@@ -60,34 +60,34 @@ if (isset($_POST['b_name'])) {
                   $_SESSION['b_name'] = $book['b_name'];
 
                   if (!empty($_SESSION['nick'])) { ?>
-                  <li class="menu__item">
-                     <a href="my_books.php" class="menu__link">Мої книжки</a>
-                  </li>
+                     <li class="menu__item">
+                        <a href="my_books.php" class="menu__link">Мої книжки</a>
+                     </li>
                   <?php } ?>
                   <li class="menu__item">
                      <?php if (empty($_SESSION['nick'])) { ?>
-                     <a href="login.php" class="menu__link">Увійти</a>
+                        <a href="login.php" class="menu__link">Увійти</a>
                      <?php } else { ?>
-                     <a class="menu__link menu__login">
-                        <?php echo $_SESSION['nick']; ?>
-                     </a>
-                     <span class="menu__arrow"></span>
-                     <ul class="menu__sub-list">
-                        <li>
-                           <a href="profile.php" class="menu__sub-link">Профіль</a>
-                        </li>
-                        <li>
-                           <a href="my_books.php" class="menu__sub-link">Мої книжки</a>
-                        </li>
-                        <?php if ($_SESSION['u_status'] == 'adm') { ?>
-                        <li>
-                           <a href="admin_page.php" class="menu__sub-link">Панель адміністратора</a>
-                        </li>
-                        <?php } ?>
-                        <li>
-                           <a href="logout.php" class="menu__sub-link">Вийти з акаунту</a>
-                        </li>
-                     </ul>
+                        <a class="menu__link menu__login">
+                           <?php echo $_SESSION['nick']; ?>
+                        </a>
+                        <span class="menu__arrow"></span>
+                        <ul class="menu__sub-list">
+                           <li>
+                              <a href="profile.php" class="menu__sub-link">Профіль</a>
+                           </li>
+                           <li>
+                              <a href="my_books.php" class="menu__sub-link">Мої книжки</a>
+                           </li>
+                           <?php if ($_SESSION['u_status'] == 'adm') { ?>
+                              <li>
+                                 <a href="admin_page.php" class="menu__sub-link">Панель адміністратора</a>
+                              </li>
+                           <?php } ?>
+                           <li>
+                              <a href="logout.php" class="menu__sub-link">Вийти з акаунту</a>
+                           </li>
+                        </ul>
                      <?php } ?>
                   </li>
                </ul>
@@ -124,10 +124,10 @@ if (isset($_POST['b_name'])) {
                                  $user_rating = mysqli_query($link, $q);
                                  if (mysqli_num_rows($user_rating) > 0) {
                                     $user_rating = mysqli_fetch_assoc($user_rating); ?>
-                              <span style="font-size: 16px; color: rgba(0, 0, 0, 0.5);">
-                                 <?php echo "Ваша оцінка: " . $user_rating['rating'] ?>
-                              </span>
-                              <?php }
+                                    <span style="font-size: 16px; color: rgba(0, 0, 0, 0.5);">
+                                       <?php echo "Ваша оцінка: " . $user_rating['rating'] ?>
+                                    </span>
+                                 <?php }
                               } ?>
                            </p>
                         </div>
@@ -154,69 +154,69 @@ if (isset($_POST['b_name'])) {
                         <input class="action" type="submit" value="Читати">
                      </form>
                      <?php if (!empty($_SESSION['nick'])) { ?>
-                     <li class="action">
-                        <a>Додати до списку</a>
-                        <ul>
-                           <li>
-                              <form action="add_book_to_list.php" method="post" class="form__action">
-                                 <input type="hidden" name="list" value="list_reading">
-                                 <input class="btn" type="submit" value="Читаю">
-                              </form>
-                              <form action="add_book_to_list.php" method="post" class="form__action">
-                                 <input type="hidden" name="list" value="list_favorite">
-                                 <input class="btn" type="submit" value="Улюблене">
-                              </form>
-                              <form action="add_book_to_list.php" method="post" class="form__action">
-                                 <input type="hidden" name="list" value="list_in_plans">
-                                 <input class="btn" type="submit" value="У планах">
-                              </form>
-                              <form action="add_book_to_list.php" method="post" class="form__action">
-                                 <input type="hidden" name="list" value="list_readed">
-                                 <input class="btn" type="submit" value="Прочитано">
-                              </form>
-                              <form action="add_book_to_list.php" method="post" class="form__action">
-                                 <input type="hidden" name="list" value="list_abandoned">
-                                 <input class="btn" type="submit" value="Покинуто">
-                              </form>
-                              <?php
-                        $delete = ['list_reading', 'list_favorite', 'list_in_plans', 'list_readed', 'list_abandoned'];
-                        $is_in_list = false;
-                        foreach ($delete as $delete_list) {
-                           $q = "SELECT * FROM " . $delete_list . " WHERE (id_user = '" . $_SESSION['id_user'] . "' AND id_book = '$id_book')";
-                           if (mysqli_num_rows(mysqli_query($link, $q)) > 0) {
-                              $is_in_list = true;
-                           }
-                        }
-                        if ($is_in_list) {
-                              ?>
-                              <form action="add_book_to_list.php" method="post" class="form__action">
-                                 <input type="hidden" name="list" value="delete">
-                                 <input class="btn" style="color: #C10000;" type="submit" value="Видалити">
-                              </form>
-                              <?php } ?>
-                           </li>
-                        </ul>
-                     </li>
-                     <?php
+                        <li class="action">
+                           <a>Додати до списку</a>
+                           <ul>
+                              <li>
+                                 <form action="add_book_to_list.php" method="post" class="form__action">
+                                    <input type="hidden" name="list" value="list_reading">
+                                    <input class="btn" type="submit" value="Читаю">
+                                 </form>
+                                 <form action="add_book_to_list.php" method="post" class="form__action">
+                                    <input type="hidden" name="list" value="list_favorite">
+                                    <input class="btn" type="submit" value="Улюблене">
+                                 </form>
+                                 <form action="add_book_to_list.php" method="post" class="form__action">
+                                    <input type="hidden" name="list" value="list_in_plans">
+                                    <input class="btn" type="submit" value="У планах">
+                                 </form>
+                                 <form action="add_book_to_list.php" method="post" class="form__action">
+                                    <input type="hidden" name="list" value="list_readed">
+                                    <input class="btn" type="submit" value="Прочитано">
+                                 </form>
+                                 <form action="add_book_to_list.php" method="post" class="form__action">
+                                    <input type="hidden" name="list" value="list_abandoned">
+                                    <input class="btn" type="submit" value="Покинуто">
+                                 </form>
+                                 <?php
+                                 $delete = ['list_reading', 'list_favorite', 'list_in_plans', 'list_readed', 'list_abandoned'];
+                                 $is_in_list = false;
+                                 foreach ($delete as $delete_list) {
+                                    $q = "SELECT * FROM " . $delete_list . " WHERE (id_user = '" . $_SESSION['id_user'] . "' AND id_book = '$id_book')";
+                                    if (mysqli_num_rows(mysqli_query($link, $q)) > 0) {
+                                       $is_in_list = true;
+                                    }
+                                 }
+                                 if ($is_in_list) {
+                                    ?>
+                                    <form action="add_book_to_list.php" method="post" class="form__action">
+                                       <input type="hidden" name="list" value="delete">
+                                       <input class="btn" style="color: #C10000;" type="submit" value="Видалити">
+                                    </form>
+                                 <?php } ?>
+                              </li>
+                           </ul>
+                        </li>
+                        <?php
                         $q = "SELECT * FROM ratings WHERE id_user = " . $_SESSION['id_user'] . " AND id_book = " . $_SESSION['id_book'];
                         if (mysqli_num_rows(mysqli_query($link, $q)) > 0) {
                         } else {
-                     ?>
-                     <li class="action">
-                        <a>Оцінити</a>
-                        <ul>
-                           <li>
-                              <?php
-                           for ($i = 1; $i <= 5; $i++) { ?>
-                              <form action="rating.php" method="post" class="form__action">
-                                 <input type="hidden" name="rating" value=<?php echo $i; ?>>
-                                 <input style="color: #000;" class="btn" type="submit" value=<?php echo $i ?>>
-                              </form>
-                              <?php } ?>
+                           ?>
+                           <li class="action">
+                              <a>Оцінити</a>
+                              <ul>
+                                 <li>
+                                    <?php
+                                    for ($i = 1; $i <= 5; $i++) { ?>
+                                       <form action="rating.php" method="post" class="form__action">
+                                          <input type="hidden" name="rating" value=<?php echo $i; ?>>
+                                          <input style="color: #000;" class="btn" type="submit" value=<?php echo $i ?>>
+                                       </form>
+                                    <?php } ?>
+                                 </li>
+                              </ul>
                            </li>
-                        </ul>
-                     </li>
-                     <?php }
+                        <?php }
                      } ?>
                   </div>
                   <div class="info__about">
@@ -290,13 +290,6 @@ if (isset($_POST['b_name'])) {
                </ul>
             </div>
             <div class="footer__column">
-               <h5>Підписка</h5>
-               <ul>
-                  <li><a href="">Оформити підписку</a></li>
-                  <li><a href="">Ввести промокод</a></li>
-               </ul>
-            </div>
-            <div class="footer__column">
                <h5>Служба підтримки</h5>
                <ul>
                   <li><a href="">+(38) 095 489 16 59</a></li>
@@ -314,12 +307,13 @@ if (isset($_POST['b_name'])) {
             </div>
          </nav>
       </footer>
+      </footer>
    </div>
    <script src="js/script.js"></script>
    <script>
-   if (window.history.replaceState) {
-      window.history.replaceState(null, null, window.location.href);
-   }
+      if (window.history.replaceState) {
+         window.history.replaceState(null, null, window.location.href);
+      }
    </script>
 </body>
 

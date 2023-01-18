@@ -74,34 +74,34 @@ function wholeWordTruncate($s, $characterCount)
                   <?php include 'db_connect.php';
 
                   if (!empty($_SESSION['nick'])) { ?>
-                  <li class="menu__item">
-                     <a href="my_books.php" class="menu__link">Мої книжки</a>
-                  </li>
+                     <li class="menu__item">
+                        <a href="my_books.php" class="menu__link">Мої книжки</a>
+                     </li>
                   <?php } ?>
                   <li class="menu__item">
                      <?php if (empty($_SESSION['nick'])) { ?>
-                     <a href="login.php" class="menu__link">Увійти</a>
+                        <a href="login.php" class="menu__link">Увійти</a>
                      <?php } else { ?>
-                     <a class="menu__link menu__login">
-                        <?php echo $_SESSION['nick']; ?>
-                     </a>
-                     <span class="menu__arrow"></span>
-                     <ul class="menu__sub-list">
-                        <li>
-                           <a href="profile.php" class="menu__sub-link">Профіль</a>
-                        </li>
-                        <li>
-                           <a href="my_books.php" class="menu__sub-link">Мої книжки</a>
-                        </li>
-                        <?php if ($_SESSION['u_status'] == 'adm') { ?>
-                        <li>
-                           <a href="admin_page.php" class="menu__sub-link">Панель адміністратора</a>
-                        </li>
-                        <?php } ?>
-                        <li>
-                           <a href="logout.php" class="menu__sub-link">Вийти з акаунту</a>
-                        </li>
-                     </ul>
+                        <a class="menu__link menu__login">
+                           <?php echo $_SESSION['nick']; ?>
+                        </a>
+                        <span class="menu__arrow"></span>
+                        <ul class="menu__sub-list">
+                           <li>
+                              <a href="profile.php" class="menu__sub-link">Профіль</a>
+                           </li>
+                           <li>
+                              <a href="my_books.php" class="menu__sub-link">Мої книжки</a>
+                           </li>
+                           <?php if ($_SESSION['u_status'] == 'adm') { ?>
+                              <li>
+                                 <a href="admin_page.php" class="menu__sub-link">Панель адміністратора</a>
+                              </li>
+                           <?php } ?>
+                           <li>
+                              <a href="logout.php" class="menu__sub-link">Вийти з акаунту</a>
+                           </li>
+                        </ul>
                      <?php } ?>
                   </li>
                </ul>
@@ -155,50 +155,54 @@ function wholeWordTruncate($s, $characterCount)
                               } else if ($books['category'] == '18+') {
                                  $age_limit = 18;
                               }
-                              $q2 = "SELECT * FROM users WHERE id_user = '" . $_SESSION['id_user'] . "'";
-                              $current_user = mysqli_fetch_assoc(mysqli_query($link, $q2));
-                              $age_user = $current_user['age'];
+                              if (!empty($_SESSION['id_user'])) {
+                                 $q2 = "SELECT * FROM users WHERE id_user = '" . $_SESSION['id_user'] . "'";
+                                 $current_user = mysqli_fetch_assoc(mysqli_query($link, $q2));
+                                 $age_user = $current_user['age'];
+                              } else {
+                                 $age_user = 18;
+                              }
                               if ($age_user >= $age_limit) {
-                        ?>
-                        <form action="book_page.php" method="post" style="width: 16.66666%;">
-                           <input type="hidden" name="id_book" value=<?php echo $book[0]; ?>>
-                           <input type="hidden" name="b_name" value=<?php echo $books['b_name']; ?>>
-                           <button type="submit" class="books__columun">
-                              <div class="books__item item-book">
-                                 <div class="item-book__cover">
-                                    <a href="#"><img src=<?php echo $books['picture'] ?> alt="Обкладанка"
-                                          class="book__cover"></a>
-                                 </div>
-                                 <div class="item-book__stars">
-                                    <?php
-                                 $rating = floor($books['rating']);
-                                 for ($j = 1; $j <= $rating; $j++) { ?>
-                                    <img class="star" src="img/star.svg" height="18px" alt="Зірка">
-                                    <?php }
-                                 if ($books['rating'] > $rating) { ?>
-                                    <img src="img/star-half.svg" height="18px" alt="Зірка">
-                                    <?php } ?>
-                                 </div>
-                                 <a href="#">
-                                    <h3 class="item-book__name">
-                                       <?php
-                                 if (strlen($books['b_name']) <= 15) {
-                                    echo $books['b_name'];
-                                 } else {
-                                    echo wholeWordTruncate($books['b_name'], 15) . "...";
-                                 }
-                                       ?>
-                                    </h3>
-                                 </a>
-                                 <a href="#">
-                                    <h3 class="item-book__author">
-                                       <?php echo $books['author'] ?>
-                                    </h3>
-                                 </a>
-                              </div>
-                           </button>
-                        </form>
-                        <?php $i++;
+                                 ?>
+                                 <form action="book_page.php" method="post" style="width: 16.66666%;">
+                                    <input type="hidden" name="id_book" value=<?php echo $book[0]; ?>>
+                                    <input type="hidden" name="b_name" value=<?php echo $books['b_name']; ?>>
+                                    <button type="submit" class="books__columun">
+                                       <div class="books__item item-book">
+                                          <div class="item-book__cover">
+                                             <a href="#"><img src=<?php echo $books['picture'] ?> alt="Обкладанка"
+                                                   class="book__cover"></a>
+                                          </div>
+                                          <div class="item-book__stars">
+                                             <?php
+                                             $rating = floor($books['rating']);
+                                             for ($j = 1; $j <= $rating; $j++) { ?>
+                                                <img class="star" src="img/star.svg" height="18px" alt="Зірка">
+                                             <?php }
+                                             if ($books['rating'] > $rating) { ?>
+                                                <img src="img/star-half.svg" height="18px" alt="Зірка">
+                                             <?php } ?>
+                                          </div>
+                                          <a href="#">
+                                             <h3 class="item-book__name">
+                                                <?php
+                                                if (strlen($books['b_name']) <= 15) {
+                                                   echo $books['b_name'];
+                                                } else {
+                                                   echo wholeWordTruncate($books['b_name'], 15) . "...";
+                                                }
+                                                ?>
+                                             </h3>
+                                          </a>
+                                          <a href="#">
+                                             <h3 class="item-book__author">
+                                                <?php echo $books['author'] ?>
+                                             </h3>
+                                          </a>
+                                       </div>
+                                    </button>
+                                 </form>
+                                 <?php $i++;
                               }
                            }
                         } ?>
@@ -233,50 +237,54 @@ function wholeWordTruncate($s, $characterCount)
                               } else if ($books['category'] == '18+') {
                                  $age_limit = 18;
                               }
-                              $q2 = "SELECT * FROM users WHERE id_user = '" . $_SESSION['id_user'] . "'";
-                              $current_user = mysqli_fetch_assoc(mysqli_query($link, $q2));
-                              $age_user = $current_user['age'];
+                              if (!empty($_SESSION['id_user'])) {
+                                 $q2 = "SELECT * FROM users WHERE id_user = '" . $_SESSION['id_user'] . "'";
+                                 $current_user = mysqli_fetch_assoc(mysqli_query($link, $q2));
+                                 $age_user = $current_user['age'];
+                              } else {
+                                 $age_user = 18;
+                              }
                               if ($age_user >= $age_limit) {
-                        ?>
-                        <form action="book_page.php" method="post" style="width: 16.66666%;">
-                           <input type="hidden" name="id_book" value=<?php echo $book[0]; ?>>
-                           <input type="hidden" name="b_name" value=<?php echo $books['b_name']; ?>>
-                           <button type="submit" class="books__columun">
-                              <div class="books__item item-book">
-                                 <div class="item-book__cover">
-                                    <a href="#"><img src=<?php echo $books['picture'] ?> alt="Обкладанка"
-                                          class="book__cover"></a>
-                                 </div>
-                                 <div class="item-book__stars">
-                                    <?php
-                                 $rating = floor($books['rating']);
-                                 for ($j = 1; $j <= $rating; $j++) { ?>
-                                    <img class="star" src="img/star.svg" height="18px" alt="Зірка">
-                                    <?php }
-                                 if ($books['rating'] > $rating) { ?>
-                                    <img src="img/star-half.svg" height="18px" alt="Зірка">
-                                    <?php } ?>
-                                 </div>
-                                 <a href="#">
-                                    <h3 class="item-book__name">
-                                       <?php
-                                 if (strlen($books['b_name']) <= 15) {
-                                    echo $books['b_name'];
-                                 } else {
-                                    echo wholeWordTruncate($books['b_name'], 15) . "...";
-                                 }
-                                       ?>
-                                    </h3>
-                                 </a>
-                                 <a href="#">
-                                    <h3 class="item-book__author">
-                                       <?php echo $books['author'] ?>
-                                    </h3>
-                                 </a>
-                              </div>
-                           </button>
-                        </form>
-                        <?php $i++;
+                                 ?>
+                                 <form action="book_page.php" method="post" style="width: 16.66666%;">
+                                    <input type="hidden" name="id_book" value=<?php echo $book[0]; ?>>
+                                    <input type="hidden" name="b_name" value=<?php echo $books['b_name']; ?>>
+                                    <button type="submit" class="books__columun">
+                                       <div class="books__item item-book">
+                                          <div class="item-book__cover">
+                                             <a href="#"><img src=<?php echo $books['picture'] ?> alt="Обкладанка"
+                                                   class="book__cover"></a>
+                                          </div>
+                                          <div class="item-book__stars">
+                                             <?php
+                                             $rating = floor($books['rating']);
+                                             for ($j = 1; $j <= $rating; $j++) { ?>
+                                                <img class="star" src="img/star.svg" height="18px" alt="Зірка">
+                                             <?php }
+                                             if ($books['rating'] > $rating) { ?>
+                                                <img src="img/star-half.svg" height="18px" alt="Зірка">
+                                             <?php } ?>
+                                          </div>
+                                          <a href="#">
+                                             <h3 class="item-book__name">
+                                                <?php
+                                                if (strlen($books['b_name']) <= 15) {
+                                                   echo $books['b_name'];
+                                                } else {
+                                                   echo wholeWordTruncate($books['b_name'], 15) . "...";
+                                                }
+                                                ?>
+                                             </h3>
+                                          </a>
+                                          <a href="#">
+                                             <h3 class="item-book__author">
+                                                <?php echo $books['author'] ?>
+                                             </h3>
+                                          </a>
+                                       </div>
+                                    </button>
+                                 </form>
+                                 <?php $i++;
                               }
                            }
                         } ?>
@@ -311,50 +319,54 @@ function wholeWordTruncate($s, $characterCount)
                               } else if ($books['category'] == '18+') {
                                  $age_limit = 18;
                               }
-                              $q2 = "SELECT * FROM users WHERE id_user = '" . $_SESSION['id_user'] . "'";
-                              $current_user = mysqli_fetch_assoc(mysqli_query($link, $q2));
-                              $age_user = $current_user['age'];
+                              if (!empty($_SESSION['id_user'])) {
+                                 $q2 = "SELECT * FROM users WHERE id_user = '" . $_SESSION['id_user'] . "'";
+                                 $current_user = mysqli_fetch_assoc(mysqli_query($link, $q2));
+                                 $age_user = $current_user['age'];
+                              } else {
+                                 $age_user = 18;
+                              }
                               if ($age_user >= $age_limit) {
-                        ?>
-                        <form action="book_page.php" method="post" style="width: 16.66666%;">
-                           <input type="hidden" name="id_book" value=<?php echo $book[0]; ?>>
-                           <input type="hidden" name="b_name" value=<?php echo $books['b_name']; ?>>
-                           <button type="submit" class="books__columun">
-                              <div class="books__item item-book">
-                                 <div class="item-book__cover">
-                                    <a href="#"><img src=<?php echo $books['picture'] ?> alt="Обкладанка"
-                                          class="book__cover"></a>
-                                 </div>
-                                 <div class="item-book__stars">
-                                    <?php
-                                 $rating = floor($books['rating']);
-                                 for ($j = 1; $j <= $rating; $j++) { ?>
-                                    <img class="star" src="img/star.svg" height="18px" alt="Зірка">
-                                    <?php }
-                                 if ($books['rating'] > $rating) { ?>
-                                    <img src="img/star-half.svg" height="18px" alt="Зірка">
-                                    <?php } ?>
-                                 </div>
-                                 <a href="#">
-                                    <h3 class="item-book__name">
-                                       <?php
-                                 if (strlen($books['b_name']) <= 15) {
-                                    echo $books['b_name'];
-                                 } else {
-                                    echo wholeWordTruncate($books['b_name'], 15) . "...";
-                                 }
-                                       ?>
-                                    </h3>
-                                 </a>
-                                 <a href="#">
-                                    <h3 class="item-book__author">
-                                       <?php echo $books['author'] ?>
-                                    </h3>
-                                 </a>
-                              </div>
-                           </button>
-                        </form>
-                        <?php $i++;
+                                 ?>
+                                 <form action="book_page.php" method="post" style="width: 16.66666%;">
+                                    <input type="hidden" name="id_book" value=<?php echo $book[0]; ?>>
+                                    <input type="hidden" name="b_name" value=<?php echo $books['b_name']; ?>>
+                                    <button type="submit" class="books__columun">
+                                       <div class="books__item item-book">
+                                          <div class="item-book__cover">
+                                             <a href="#"><img src=<?php echo $books['picture'] ?> alt="Обкладанка"
+                                                   class="book__cover"></a>
+                                          </div>
+                                          <div class="item-book__stars">
+                                             <?php
+                                             $rating = floor($books['rating']);
+                                             for ($j = 1; $j <= $rating; $j++) { ?>
+                                                <img class="star" src="img/star.svg" height="18px" alt="Зірка">
+                                             <?php }
+                                             if ($books['rating'] > $rating) { ?>
+                                                <img src="img/star-half.svg" height="18px" alt="Зірка">
+                                             <?php } ?>
+                                          </div>
+                                          <a href="#">
+                                             <h3 class="item-book__name">
+                                                <?php
+                                                if (strlen($books['b_name']) <= 15) {
+                                                   echo $books['b_name'];
+                                                } else {
+                                                   echo wholeWordTruncate($books['b_name'], 15) . "...";
+                                                }
+                                                ?>
+                                             </h3>
+                                          </a>
+                                          <a href="#">
+                                             <h3 class="item-book__author">
+                                                <?php echo $books['author'] ?>
+                                             </h3>
+                                          </a>
+                                       </div>
+                                    </button>
+                                 </form>
+                                 <?php $i++;
                               }
                            }
                         } ?>
@@ -384,14 +396,6 @@ function wholeWordTruncate($s, $characterCount)
                   <li><a href="about_project.php">Що таке Itslibro?</a></li>
                </ul>
             </div>
-            <div class="footer__column">
-               <h5>Підписка</h5>
-               <ul>
-                  <li><a href="">Оформити підписку</a></li>
-                  <li><a href="">Ввести промокод</a></li>
-               </ul>
-            </div>
-
             <div class="footer__column">
                <h5>Служба підтримки</h5>
                <ul>

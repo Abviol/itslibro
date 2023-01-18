@@ -8,8 +8,8 @@ include 'create_avatar.php';
 $email = $_POST['email'];
 $nick = $_POST['nick'];
 $age = $_POST['age'];
-$pwd = $_POST['pwd'];
-$pwd_conf = $_POST['pwd_conf'];
+$pwd = md5($_POST['pwd']);
+$pwd_conf = md5($_POST['pwd']);
 
 $_SESSION['email'] = $_POST['email'];
 $_SESSION['nick'] = $_POST['nick'];
@@ -22,7 +22,6 @@ if ($nick == "" || $pwd == "" || $age == "" || $email == "" || $pwd_conf == "") 
 } else {
 
    $check_user = mysqli_query($link, "SELECT * FROM users WHERE email = '$email'");
-
    if (mysqli_num_rows($check_user) > 0) {
       $_SESSION['message'] = 'Такий e-mail вже використувується!';
       header('Location: register.php');
