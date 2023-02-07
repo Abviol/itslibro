@@ -46,7 +46,7 @@ if ($nick == "" || $pwd == "" || $age == "" || $email == "" || $pwd_conf == "") 
 
 
 
-                  $q = "INSERT INTO users (nick, email, age, u_password, u_status) VALUES ('" . $nick . "', '" . $email . "', '" . $age . "', '" . $pwd . "', 'user')";
+                  $q = "INSERT INTO users (nick, email, age, u_password, u_status, about_user) VALUES ('" . $nick . "', '" . $email . "', '" . $age . "', '" . $pwd . "', 'user', 'Читач сайту Itslibro')";
                   mysqli_query($link, $q);
 
                   $q = "SELECT * FROM users ORDER BY id_user DESC LIMIT 1";

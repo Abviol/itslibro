@@ -1,4 +1,5 @@
-Оноре де Бальзак
+
+ <blockquote class="cita" style='text-align:left'><p>Оноре де Бальзак
 
 Гобсек
 Баронові Баршу де Пеноен.

@@ -5,8 +5,8 @@ include 'db_connect.php';
 
 $nick = $_POST['nick'];
 $age = $_POST['age'];
-$pwd = $_POST['pwd'];
-$new_pwd = $_POST['new_pwd'];
+$pwd = md5($_POST['pwd']);
+$new_pwd = md5($_POST['new_pwd']);
 $id_user = $_SESSION['id_user'];
 $about_user = $_POST['about_user'];
 
@@ -29,7 +29,7 @@ if ($age == "") {
 
          $check_pwd = mysqli_query($link, "SELECT * FROM users WHERE u_password = '$pwd' AND id_user = '$id_user'");
          if (mysqli_num_rows($check_pwd) > 0) {
-            if (empty($new_pwd)) {
+            if ($new_pwd == "d41d8cd98f00b204e9800998ecf8427e") {
                $q = "UPDATE users SET nick = '$nick', age = '$age', about_user = '$about_user' WHERE id_user = '$id_user'";
                mysqli_query($link, $q);
             } else if ($pwd == $new_pwd) {
