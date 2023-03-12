@@ -5,18 +5,18 @@ include 'db_connect.php';
 
 
 $nick = $_POST['nick'];
-$pwd = $_POST['pwd'];
+$pwd = md5($_POST['pwd']);
 $_SESSION['delete_nick'] = $nick;
 
 $check_user = mysqli_query($link, "SELECT * FROM users WHERE (email = '$nick' OR nick = '$nick')");
-echo mysqli_num_rows($check_user) . "</br>";
+/* echo mysqli_num_rows($check_user) . "</br>";
 echo "$nick" . "</br>";
-echo "$pwd";
+echo "$pwd"; */
 
-if ($nick == "" || $pwd == "") {
+if ($nick == "" || $pwd == "7215ee9c7d9dc229d2921a40e899ec5f") {
 
-   $_SESSION['message'] = 'Всі поля повинно бути заповнено!';
-   header('Location: add_admin.php');
+   $_SESSION['message'] = 'Всі поля повинно бути заповнено';
+   header('Location: delete_admin.php');
 
 } else {
    if (mysqli_num_rows($check_user) > 0) {
@@ -28,12 +28,12 @@ if ($nick == "" || $pwd == "") {
          $check_is_admin = mysqli_query($link, "SELECT * FROM users WHERE (email = '$nick' OR nick = '$nick') AND u_status='user'");
 
          if (mysqli_num_rows($check_is_admin) > 0) {
-            $_SESSION['message'] = 'Не можна позбавити прав aдміністратора того, хто їх не має!';
+            $_SESSION['message'] = 'Не можна позбавити прав aдміністратора того, хто їх не має';
             header('Location: add_admin.php');
          } else {
             $q = "UPDATE users SET u_status = 'user' WHERE nick='" . $nick . "'";
             mysqli_query($link, $q);
-            $_SESSION['message'] = 'Успішно видалено адміністратора!';
+            $_SESSION['message'] = 'Успішно видалено адміністратора';
             unset($_SESSION['delete_nick']);
             header('Location: admin_page.php');
 
@@ -41,13 +41,13 @@ if ($nick == "" || $pwd == "") {
 
       } else {
          $_SESSION['message'] = 'Невірно введено пароль!';
-         header('Location: add_admin.php');
+         header('Location: delete_admin.php');
       }
 
    } else {
 
-      $_SESSION['message'] = 'Такого користувачаа не існує!';
-      header('Location: add_admin.php');
+      $_SESSION['message'] = 'Такого користувачаа не існує';
+      header('Location: delete_admin.php');
 
    }
 }

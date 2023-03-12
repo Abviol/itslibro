@@ -94,34 +94,34 @@ if ($_POST['sorting_option'] == 'newest') {
                   <?php include 'db_connect.php';
 
                   if (!empty($_SESSION['nick'])) { ?>
-                     <li class="menu__item">
-                        <a href="my_books.php" class="menu__link">Мої книжки</a>
-                     </li>
+                  <li class="menu__item">
+                     <a href="my_books.php" class="menu__link">Мої книжки</a>
+                  </li>
                   <?php } ?>
                   <li class="menu__item">
                      <?php if (empty($_SESSION['nick'])) { ?>
-                        <a href="login.php" class="menu__link">Увійти</a>
+                     <a href="login.php" class="menu__link">Увійти</a>
                      <?php } else { ?>
-                        <a class="menu__link menu__login">
-                           <?php echo $_SESSION['nick']; ?>
-                        </a>
-                        <span class="menu__arrow"></span>
-                        <ul class="menu__sub-list">
-                           <li>
-                              <a href="profile.php" class="menu__sub-link">Профіль</a>
-                           </li>
-                           <li>
-                              <a href="my_books.php" class="menu__sub-link">Мої книжки</a>
-                           </li>
-                           <?php if ($_SESSION['u_status'] == 'adm') { ?>
-                              <li>
-                                 <a href="admin_page.php" class="menu__sub-link">Панель адміністратора</a>
-                              </li>
-                           <?php } ?>
-                           <li>
-                              <a href="logout.php" class="menu__sub-link">Вийти з акаунту</a>
-                           </li>
-                        </ul>
+                     <a class="menu__link menu__login">
+                        <?php echo $_SESSION['nick']; ?>
+                     </a>
+                     <span class="menu__arrow"></span>
+                     <ul class="menu__sub-list">
+                        <li>
+                           <a href="profile.php" class="menu__sub-link">Профіль</a>
+                        </li>
+                        <li>
+                           <a href="my_books.php" class="menu__sub-link">Мої книжки</a>
+                        </li>
+                        <?php if ($_SESSION['u_status'] == 'adm') { ?>
+                        <li>
+                           <a href="admin_page.php" class="menu__sub-link">Панель адміністратора</a>
+                        </li>
+                        <?php } ?>
+                        <li>
+                           <a href="logout.php" class="menu__sub-link">Вийти з акаунту</a>
+                        </li>
+                     </ul>
                      <?php } ?>
                   </li>
                </ul>
@@ -225,31 +225,31 @@ if ($_POST['sorting_option'] == 'newest') {
                         $age_user = $current_user['age'];
                         if ($age_user >= $age_limit) {
                            ?>
-                           <div class="all-books__book">
-                              <div class="cover__container">
-                                 <img src=<?php echo $books['picture'] ?> alt="Обкладанка" height="150" width="100"
-                                    style="border-radius: 10px;">
-                                 <form action="book_page.php" method="post">
-                                    <input type="hidden" name="id_book" value=<?php echo $book[0]; ?>>
-                                    <input type="hidden" name="b_name" value=<?php echo $books['b_name']; ?>>
-                                    <input class="learn-more" type="submit" value="Детальніше" style="width: 100px;">
-                                 </form>
-                              </div>
-                              <div class="all-books__book__info">
-                                 <h3 class="info__name">
-                                    <?php echo $books['b_name'] ?>
-                                 </h3>
-                                 <h3 class="info__author">
-                                    <?php echo $books['author'] ?>
-                                 </h3>
-                                 <div class="info__rating">
-                                    <img src="img/star.svg" alt="" height="16" style="margin-right: 4px">
-                                    <p>
-                                       <?php echo $books['rating'] ?>
-                                    </p>
-                                 </div>
-                                 <h3 class="info__about">
-                                    <?php
+               <div class="all-books__book">
+                  <div class="cover__container">
+                     <img src=<?php echo $books['picture'] ?> alt="Обкладанка" height="150" width="100"
+                        style="border-radius: 10px;">
+                     <form action="book_page.php" method="post">
+                        <input type="hidden" name="id_book" value=<?php echo $book[0]; ?>>
+                        <input type="hidden" name="b_name" value=<?php echo $books['b_name']; ?>>
+                        <input class="learn-more" type="submit" value="Детальніше" style="width: 100px;">
+                     </form>
+                  </div>
+                  <div class="all-books__book__info">
+                     <h3 class="info__name">
+                        <?php echo $books['b_name'] ?>
+                     </h3>
+                     <h3 class="info__author">
+                        <?php echo $books['author'] ?>
+                     </h3>
+                     <div class="info__rating">
+                        <img src="img/star.svg" alt="" height="16" style="margin-right: 4px">
+                        <p>
+                           <?php echo $books['rating'] ?>
+                        </p>
+                     </div>
+                     <h3 class="info__about">
+                        <?php
                                     $desc = $books['b_description'];
                                     if (strlen($desc) > 320) {
                                        echo wholeWordTruncate($books['b_description'], 320) . "...";
@@ -257,21 +257,21 @@ if ($_POST['sorting_option'] == 'newest') {
                                        echo $desc;
                                     }
                                     ?>
-                                 </h3>
-                              </div>
-                           </div>
-                           <?php
+                     </h3>
+                  </div>
+               </div>
+               <?php
                         }
                      }
                   }
                } else { ?>
-                  <div class="list-nothing">
-                     <p>У цьому списку пусто :'(</p>
-                  </div>
+               <div class="list-nothing">
+                  <p>У цьому списку пусто :'(</p>
+               </div>
                <?php } ?>
             </div>
             <div class="sort-books">
-               <h3 class="sort-text">Сортировка</h3>
+               <h3 class="sort-text">Сортування</h3>
                <form class="sorting-options" action="my_books.php" method="post">
                   <label class="sorting-option">
                      <input type="radio" name="sorting_option" value="newest" <?php if (
@@ -335,9 +335,9 @@ if ($_POST['sorting_option'] == 'newest') {
    </div>
    <script src="js/script.js"></script>
    <script>
-      if (window.history.replaceState) {
-         window.history.replaceState(null, null, window.location.href);
-      }
+   if (window.history.replaceState) {
+      window.history.replaceState(null, null, window.location.href);
+   }
    </script>
 </body>
 

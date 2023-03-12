@@ -29,6 +29,8 @@ $q = "DELETE FROM books WHERE id_book = '$id_book'";
 echo $q . '</br>';
 mysqli_query($link, $q) or die(mysqli_error($link));
 
-/* header('Location: list_books.php'); */
+$_SESSION['message'] = 'Книгу успішно видалено';
+
+header('Location: list_books.php');
 
 ?>

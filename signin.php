@@ -8,16 +8,11 @@ $nick = $_POST['nick'];
 $pwd = md5($_POST['pwd']);
 
 $check_user = mysqli_query($link, "SELECT * FROM users WHERE (email = '$nick' OR nick = '$nick') AND u_password = '$pwd'");
-echo mysqli_num_rows($check_user) . "</br>";
-echo "$nick" . "</br>";
-echo "$pwd";
-
 if ($nick == "" || $pwd == "") {
    $_SESSION['message'] = 'Всі поля повинно бути заповнено!';
    header('Location: login.php');
 } else {
    if (mysqli_num_rows($check_user) > 0) {
-
       $user = mysqli_fetch_assoc($check_user);
       $_SESSION['id_user'] = $user['id_user'];
       $_SESSION['nick'] = $user['nick'];
@@ -27,9 +22,7 @@ if ($nick == "" || $pwd == "") {
       $_SESSION['about_user'] = $user['about_user'];
       $_SESSION['u_password'] = $user['u_password'];
       $_SESSION['avatar'] = $user['avatar'];
-
       header('Location: index.php');
-
    } else {
       $_SESSION['message'] = 'Невірно введено логін або пароль!';
       header('Location: login.php');

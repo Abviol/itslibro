@@ -55,13 +55,13 @@ $q3 = "CREATE TABLE IF NOT EXISTS `itslibro1`.`ratings` (
   CONSTRAINT `book_rate`
     FOREIGN KEY (`id_book`)
     REFERENCES `itslibro1`.`books` (`id_book`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `user_rate`
     FOREIGN KEY (`id_user`)
     REFERENCES `itslibro1`.`users` (`id_user`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB CHARACTER SET cp1251";
 
 $q4 = "CREATE TABLE IF NOT EXISTS `itslibro1`.`list_favorite` (
@@ -72,13 +72,13 @@ $q4 = "CREATE TABLE IF NOT EXISTS `itslibro1`.`list_favorite` (
   CONSTRAINT `book_fav`
     FOREIGN KEY (`id_book`)
     REFERENCES `itslibro1`.`books` (`id_book`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `user_fav`
     FOREIGN KEY (`id_user`)
     REFERENCES `itslibro1`.`users` (`id_user`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB CHARACTER SET cp1251";
 
 $q5 = "CREATE TABLE IF NOT EXISTS `itslibro1`.`list_reading` (
@@ -89,13 +89,13 @@ $q5 = "CREATE TABLE IF NOT EXISTS `itslibro1`.`list_reading` (
   CONSTRAINT `user_read`
     FOREIGN KEY (`id_user`)
     REFERENCES `itslibro1`.`users` (`id_user`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `book_read`
     FOREIGN KEY (`id_book`)
     REFERENCES `itslibro1`.`books` (`id_book`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB CHARACTER SET cp1251";
 
 $q6 = "CREATE TABLE IF NOT EXISTS `itslibro1`.`list_in_plans` (
@@ -106,13 +106,13 @@ $q6 = "CREATE TABLE IF NOT EXISTS `itslibro1`.`list_in_plans` (
   CONSTRAINT `user_plan`
     FOREIGN KEY (`id_user`)
     REFERENCES `itslibro1`.`users` (`id_user`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `book_plan`
     FOREIGN KEY (`id_book`)
     REFERENCES `itslibro1`.`books` (`id_book`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB CHARACTER SET cp1251";
 
 $q7 = "CREATE TABLE IF NOT EXISTS `itslibro1`.`list_readed` (
@@ -123,13 +123,13 @@ $q7 = "CREATE TABLE IF NOT EXISTS `itslibro1`.`list_readed` (
   CONSTRAINT `user_readed`
     FOREIGN KEY (`id_user`)
     REFERENCES `itslibro1`.`users` (`id_user`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `book_readed`
     FOREIGN KEY (`id_book`)
     REFERENCES `itslibro1`.`books` (`id_book`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB CHARACTER SET cp1251";
 
 $q8 = "CREATE TABLE IF NOT EXISTS `itslibro1`.`list_abandoned` (
@@ -140,13 +140,13 @@ $q8 = "CREATE TABLE IF NOT EXISTS `itslibro1`.`list_abandoned` (
   CONSTRAINT `user_abandoned`
     FOREIGN KEY (`id_user`)
     REFERENCES `itslibro1`.`users` (`id_user`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `book_abandoned`
     FOREIGN KEY (`id_book`)
     REFERENCES `itslibro1`.`books` (`id_book`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)   
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)   
 ENGINE = InnoDB CHARACTER SET cp1251";
 
 for ($i = 1; $i <= 8; $i++) {
