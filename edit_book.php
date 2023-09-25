@@ -150,7 +150,7 @@ $_SESSION['id_book'] = $id_book;
                <button class="action" type="submit">Оновити</button>
 
                <?php
-            if ($_SESSION['message']) {
+            if (!empty($_SESSION['message'])) {
                echo '<p class="msg">' . $_SESSION['message'] . '</p>';
             }
             unset($_SESSION['message']);
@@ -167,31 +167,33 @@ $_SESSION['id_book'] = $id_book;
       </main>
       <!------------------- FOOTER -------------------------->
       <footer class="footer">
-      <nav class="footer__container _container">
-         <div class="footer__column">
-            <h5>Про проект</h5>
-            <ul>
-               <li><a href="about_project.php">Що таке Itslibro?</a></li>
-            </ul>
-         </div>
-         <div class="footer__column">
-            <h5>Служба підтримки</h5>
-            <ul>
-               <li><a href="">+(38) 095 489 16 59</a></li>
-               <li><a href="">libhelp@gmail.com</a></li>
-            </ul>
-         </div>
-         <div class="footer__column">
-            <h5>Слідкуйте за новинами</h5>
-            <div class="footer__icons">
-               <a href="https://www.instagram.com/abviol999/"><img src="img/inst.svg" alt=""></a>
-               <a href="https://www.youtube.com/channel/UCC7NAPBjk0yZ4ee6WtH0ZCQ"><img src="img/yt.svg" alt=""></a>
-               <a href="https://t.me/abviol"><img src="img/tg.svg" alt=""></a>
-               <a href="https://www.facebook.com/profile.php?id=100059965062647"><img src="img/fb.svg" alt=""></a>
+         <nav class="footer__container _container">
+            <div class="footer__column">
+               <h5>Про проект</h5>
+               <ul>
+                  <li><a href="about_project.php">Що таке Itslibro?</a></li>
+               </ul>
             </div>
-         </div>
-      </nav>
-   </footer>
+            <div class="footer__column">
+               <h5>Служба підтримки</h5>
+               <ul>
+                  <li><a href="">+(38) 095 489 16 59</a></li>
+                  <li><a href="">libhelp@gmail.com</a></li>
+               </ul>
+            </div>
+            <div class="footer__column">
+               <h5>Слідкуйте за новинами</h5>
+               <div class="footer__icons">
+                  <a target="_blank" href="https://www.instagram.com/abviol999/"><img src="img/inst.svg" alt=""></a>
+                  <a target="_blank" href="https://www.youtube.com/channel/UCC7NAPBjk0yZ4ee6WtH0ZCQ"><img
+                        src="img/yt.svg" alt=""></a>
+                  <a target="_blank" href="https://t.me/kyselovn"><img src="img/tg.svg" alt=""></a>
+                  <a target="_blank" href="https://www.facebook.com/profile.php?id=61550906368344"><img src="img/fb.svg"
+                        alt=""></a>
+               </div>
+            </div>
+         </nav>
+      </footer>
    </div>
    <script src="js/script.js"></script>
 </body>

@@ -1,9 +1,12 @@
-﻿<meta charset="UTF-8">
-<?php
+﻿<?php
 include 'db_connect.php';
 $q = "CREATE DATABASE IF NOT EXISTS itslibro1";
 mysqli_query($link, $q);
 mysqli_select_db($link, "itslibro1");
+  echo mysqli_select_db($link, "itslibro1") . "1213";
+  if (mysqli_select_db($link, "itslibro1")) {
+    mysqli_select_db($link, "itslibro1");
+  }
 
 $q1 = "CREATE TABLE IF NOT EXISTS `itslibro1`.`users` (
   `id_user` INT NOT NULL AUTO_INCREMENT,

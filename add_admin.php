@@ -57,34 +57,34 @@ session_start();
                   <?php include 'db_connect.php';
 
                   if (!empty($_SESSION['nick'])) { ?>
-                     <li class="menu__item">
-                        <a href="my_books.php" class="menu__link">Мої книжки</a>
-                     </li>
+                  <li class="menu__item">
+                     <a href="my_books.php" class="menu__link">Мої книжки</a>
+                  </li>
                   <?php } ?>
                   <li class="menu__item">
                      <?php if (empty($_SESSION['nick'])) { ?>
-                        <a href="login.php" class="menu__link">Увійти</a>
+                     <a href="login.php" class="menu__link">Увійти</a>
                      <?php } else { ?>
-                        <a class="menu__link menu__login">
-                           <?php echo $_SESSION['nick']; ?>
-                        </a>
-                        <span class="menu__arrow"></span>
-                        <ul class="menu__sub-list">
-                           <li>
-                              <a href="profile.php" class="menu__sub-link">Профіль</a>
-                           </li>
-                           <li>
-                              <a href="my_books.php" class="menu__sub-link">Мої книжки</a>
-                           </li>
-                           <?php if ($_SESSION['u_status'] == 'adm') { ?>
-                              <li>
-                                 <a href="admin_page.php" class="menu__sub-link">Панель адміністратора</a>
-                              </li>
-                           <?php } ?>
-                           <li>
-                              <a href="logout.php" class="menu__sub-link">Вийти з акаунту</a>
-                           </li>
-                        </ul>
+                     <a class="menu__link menu__login">
+                        <?php echo $_SESSION['nick']; ?>
+                     </a>
+                     <span class="menu__arrow"></span>
+                     <ul class="menu__sub-list">
+                        <li>
+                           <a href="profile.php" class="menu__sub-link">Профіль</a>
+                        </li>
+                        <li>
+                           <a href="my_books.php" class="menu__sub-link">Мої книжки</a>
+                        </li>
+                        <?php if ($_SESSION['u_status'] == 'adm') { ?>
+                        <li>
+                           <a href="admin_page.php" class="menu__sub-link">Панель адміністратора</a>
+                        </li>
+                        <?php } ?>
+                        <li>
+                           <a href="logout.php" class="menu__sub-link">Вийти з акаунту</a>
+                        </li>
+                     </ul>
                      <?php } ?>
                   </li>
                </ul>
@@ -103,14 +103,14 @@ session_start();
             <form action="add_admin_handle.php" method="post" class="form__action">
 
                <input class="input_info" type="text" name="nick" placeholder="Введіть нікнейм чи e-mail"
-                  value="<?php echo $_SESSION['add_nick']; ?>">
+                  value="<?php if (!empty($_SESSION['add_nick'])) echo $_SESSION['add_nick']; ?>">
 
                <input class="input_info" type="password" name="pwd" placeholder="Вкажіть ВАШ пароль">
 
                <button class="action" type="submit">Додати</button>
 
                <?php
-               if ($_SESSION['message']) {
+               if (!empty($_SESSION['message'])) {
                   echo '<p class="msg">' . $_SESSION['message'] . '</p>';
                }
                unset($_SESSION['message']);
@@ -139,10 +139,12 @@ session_start();
             <div class="footer__column">
                <h5>Слідкуйте за новинами</h5>
                <div class="footer__icons">
-                  <a href="https://www.instagram.com/abviol999/"><img src="img/inst.svg" alt=""></a>
-                  <a href="https://www.youtube.com/channel/UCC7NAPBjk0yZ4ee6WtH0ZCQ"><img src="img/yt.svg" alt=""></a>
-                  <a href="https://t.me/abviol"><img src="img/tg.svg" alt=""></a>
-                  <a href="https://www.facebook.com/profile.php?id=100059965062647"><img src="img/fb.svg" alt=""></a>
+                  <a target="_blank" href="https://www.instagram.com/abviol999/"><img src="img/inst.svg" alt=""></a>
+                  <a target="_blank" href="https://www.youtube.com/channel/UCC7NAPBjk0yZ4ee6WtH0ZCQ"><img
+                        src="img/yt.svg" alt=""></a>
+                  <a target="_blank" href="https://t.me/kyselovn"><img src="img/tg.svg" alt=""></a>
+                  <a target="_blank" href="https://www.facebook.com/profile.php?id=61550906368344"><img src="img/fb.svg"
+                        alt=""></a>
                </div>
             </div>
          </nav>

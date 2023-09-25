@@ -103,28 +103,34 @@ session_start();
 
             <form action="add_book_handle.php" method="post" enctype="multipart/form-data" class="form__action">
 
-               <input class="input_info" type="text" name="b_name" value="<?php echo $_SESSION['b_name']; ?>"
+               <input class="input_info" type="text" name="b_name"
+                  value="<?php if (!empty($_SESSION['b_name'])) echo $_SESSION['b_name']; ?>"
                   placeholder="Вкажіть назву книги українською мовою">
 
                <input class="input_info" type="text" name="original_name"
-                  value="<?php echo $_SESSION['original_name']; ?>" placeholder="Вкажіть оригінальну назву книги">
+                  value="<?php if (!empty($_SESSION['original_name'])) echo $_SESSION['original_name']; ?>"
+                  placeholder="Вкажіть оригінальну назву книги">
 
-               <input class="input_info" type="text" name="author" value="<?php echo $_SESSION['author']; ?>"
+               <input class="input_info" type="text" name="author"
+                  value="<?php if (!empty($_SESSION['author'])) echo $_SESSION['author']; ?>"
                   placeholder="Вкажіть ПІБ автора">
 
-               <input class="input_info" type="hidden" name="id_book" value="<?php echo $_SESSION['id_book'] ?>">
+               <input class="input_info" type="hidden" name="id_book"
+                  value="<?php if (!empty($_SESSION['id_book'])) echo $_SESSION['id_book'] ?>">
 
 
-               <input class="input_info" type="text" name="data_writed" value="<?php echo $_SESSION['data_writed']; ?>"
+               <input class="input_info" type="text" name="data_writed"
+                  value="<?php if (!empty($_SESSION['data_writed'])) echo $_SESSION['data_writed']; ?>"
                   placeholder="Вкажість рік, коли автор закінчив книгу">
 
-               <input class="input_info" type="text" name="genres" value="<?php echo $_SESSION['genres']; ?>"
+               <input class="input_info" type="text" name="genres"
+                  value="<?php if (!empty($_SESSION['genres'])) echo $_SESSION['genres']; ?>"
                   placeholder="Вкажіть жанри книги через кому">
 
                <textarea
                   style="width: 100%; resize: none; margin-bottom: 20px; padding: 10px 20px; border: unset; background-color: #f5f5f5; outline: none; font-family: Roboto; border-radius: 10px;"
                   name="b_description" id="b_description" cols="10" rows="5" placeholder="Коротко опишіть книгу"
-                  maxlength="1000"><?php echo $_SESSION['b_description']; ?></textarea>
+                  maxlength="1000"><?php if (!empty($_SESSION['b_description'])) echo $_SESSION['b_description']; ?></textarea>
 
                <label class="act_name">Категорія</label>
                <label class="option">
@@ -161,7 +167,7 @@ session_start();
                <button class="action" type="submit">Опублікувати</button>
 
                <?php
-               if ($_SESSION['message']) {
+               if (!empty($_SESSION['message'])) {
                   echo '<p class="msg">' . $_SESSION['message'] . '</p>';
                }
                unset($_SESSION['message']);
@@ -196,10 +202,12 @@ session_start();
             <div class="footer__column">
                <h5>Слідкуйте за новинами</h5>
                <div class="footer__icons">
-                  <a href="https://www.instagram.com/abviol999/"><img src="img/inst.svg" alt=""></a>
-                  <a href="https://www.youtube.com/channel/UCC7NAPBjk0yZ4ee6WtH0ZCQ"><img src="img/yt.svg" alt=""></a>
-                  <a href="https://t.me/abviol"><img src="img/tg.svg" alt=""></a>
-                  <a href="https://www.facebook.com/profile.php?id=100059965062647"><img src="img/fb.svg" alt=""></a>
+                  <a target="_blank" href="https://www.instagram.com/abviol999/"><img src="img/inst.svg" alt=""></a>
+                  <a target="_blank" href="https://www.youtube.com/channel/UCC7NAPBjk0yZ4ee6WtH0ZCQ"><img
+                        src="img/yt.svg" alt=""></a>
+                  <a target="_blank" href="https://t.me/kyselovn"><img src="img/tg.svg" alt=""></a>
+                  <a target="_blank" href="https://www.facebook.com/profile.php?id=61550906368344"><img src="img/fb.svg"
+                        alt=""></a>
                </div>
             </div>
          </nav>

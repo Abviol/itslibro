@@ -4,12 +4,19 @@ session_start();
 
 if (!empty($_POST['search_key'])) {
    $_SESSION['search_key'] = $_POST['search_key'];
+} else {
+   $_SESSION['search_key'] = '';
 }
-$search_key = $_SESSION['search_key'];
-$count = strlen($search_key);
-if ($search_key[$count] == "") {
-   $search_key = rtrim($search_key, ' ');
+if (!empty( $_SESSION['search_key'])) {
+   $search_key = $_SESSION['search_key'];
+   $count = strlen($search_key);
+   if (!empty($search_key[$count])) {
+      $search_key = rtrim($search_key, ' ');
+   }
+} else {
+   $search_key = '';
 }
+
 
 function wholeWordTruncate($s, $characterCount)
 {
@@ -22,16 +29,29 @@ function wholeWordTruncate($s, $characterCount)
 
 }
 
-$order = '`b_name`';
-if ($_POST['sorting_option'] == 'newest') {
+$order;
+$selected_option;
+
+if (!empty($_POST['sorting_option'])) {
+      if ($_POST['sorting_option'] == 'newest') {
+      $order = '`data_published`';
+      $selected_option = 'newest';
+   } else if ($_POST['sorting_option'] == 'popular') {
+      $order = '`views_count`';
+      $selected_option = 'popular';
+   } else if ($_POST['sorting_option'] == 'best') {
+      $order = '`rating`';
+      $selected_option = 'best';
+   } else if ($_POST['sorting_option'] == 'biggest') {
+      $order = '`words_count`';
+      $selected_option = 'biggest';
+   }
+} else {
+   // $order = '`b_name`';
    $order = '`data_published`';
-} else if ($_POST['sorting_option'] == 'popular') {
-   $order = '`views_count`';
-} else if ($_POST['sorting_option'] == 'best') {
-   $order = '`rating`';
-} else if ($_POST['sorting_option'] == 'biggest') {
-   $order = '`words_count`';
+   $selected_option = 'newest';
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -77,12 +97,14 @@ if ($_POST['sorting_option'] == 'newest') {
                      <a href="about_project.php" class="menu__link">Про сайт</a>
                   </li>
                   <?php include 'db_connect.php';
-                  $id_book = $_SESSION['id_book'];
-                  $q = "SELECT * FROM books WHERE id_book = '" . $id_book . "'";
-                  $book_q = mysqli_query($link, $q);
-                  $book = mysqli_fetch_assoc($book_q);
-                  $_SESSION['b_name'] = $book['b_name'];
-
+                  if (!empty($_SESSION['id_book'])) {
+                     $id_book = $_SESSION['id_book'];
+                     $q = "SELECT * FROM books WHERE id_book = '" . $id_book . "'";
+                     $book_q = mysqli_query($link, $q);
+                     $book = mysqli_fetch_assoc($book_q);
+                     $_SESSION['b_name'] = $book['b_name'];
+                  }  
+                  
                   if (!empty($_SESSION['nick'])) { ?>
                   <li class="menu__item">
                      <a href="my_books.php" class="menu__link">Мої книжки</a>
@@ -151,9 +173,10 @@ if ($_POST['sorting_option'] == 'newest') {
                } else {
                   $q = "SELECT * FROM books ORDER BY " . $order . " DESC";
                }
-               $book = mysqli_query($link, $q);
-               $book = mysqli_fetch_all($book);
-               foreach ($book as $book) {
+               $books = mysqli_query($link, $q);
+               $books = mysqli_fetch_all($books);
+               
+               foreach ($books as $book) {
                   $q1 = "SELECT * FROM books WHERE id_book=" . $book[0];
                   $y = mysqli_query($link, $q1);
                   $books = mysqli_fetch_assoc($y);
@@ -218,29 +241,28 @@ if ($_POST['sorting_option'] == 'newest') {
                <form class="sorting-options" action="all_books.php" method="post">
                   <label class="sorting-option">
                      <input type="radio" name="sorting_option" value="newest" <?php if (
-                        empty($_POST['sorting_option'])
-                        || $_POST['sorting_option'] == "newest"
+                       $selected_option == "newest"
                      )
                         echo "checked"; ?>>
                      <span class="radio"></span>за новизною
                   </label>
                   <label class="sorting-option">
                      <input type="radio" name="sorting_option" value="popular" <?php if (
-                        $_POST['sorting_option'] == "popular"
+                        $selected_option == "popular"
                      )
                         echo "checked"; ?>>
                      <span class="radio"></span>за популярністю
                   </label>
                   <label class="sorting-option">
                      <input type="radio" name="sorting_option" value="best" <?php if (
-                        $_POST['sorting_option'] == "best"
+                        $selected_option == "best"
                      )
                         echo "checked"; ?>>
                      <span class="radio"></span>за рейтингом
                   </label>
                   <label class="sorting-option">
                      <input type="radio" name="sorting_option" value="biggest" <?php if (
-                        $_POST['sorting_option'] == "biggest"
+                        $selected_option == "biggest"
                      )
                         echo "checked"; ?>>
                      <span class="radio"></span>за обсягом
@@ -269,10 +291,12 @@ if ($_POST['sorting_option'] == 'newest') {
             <div class="footer__column">
                <h5>Слідкуйте за новинами</h5>
                <div class="footer__icons">
-                  <a href="https://www.instagram.com/abviol999/"><img src="img/inst.svg" alt=""></a>
-                  <a href="https://www.youtube.com/channel/UCC7NAPBjk0yZ4ee6WtH0ZCQ"><img src="img/yt.svg" alt=""></a>
-                  <a href="https://t.me/abviol"><img src="img/tg.svg" alt=""></a>
-                  <a href="https://www.facebook.com/profile.php?id=100059965062647"><img src="img/fb.svg" alt=""></a>
+                  <a target="_blank" href="https://www.instagram.com/abviol999/"><img src="img/inst.svg" alt=""></a>
+                  <a target="_blank" href="https://www.youtube.com/channel/UCC7NAPBjk0yZ4ee6WtH0ZCQ"><img
+                        src="img/yt.svg" alt=""></a>
+                  <a target="_blank" href="https://t.me/kyselovn"><img src="img/tg.svg" alt=""></a>
+                  <a target="_blank" href="https://www.facebook.com/profile.php?id=61550906368344"><img src="img/fb.svg"
+                        alt=""></a>
                </div>
             </div>
          </nav>

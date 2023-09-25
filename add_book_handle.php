@@ -56,7 +56,7 @@ $category = $_POST['category'];
 $b_description = $_POST['b_description'];
 $cover = $_FILES['cover'];
 $text = $_FILES['text'];
-$date_published = date("d.m.20y");
+$date_published = date("Y-m-d");
 
 $_SESSION['b_name'] = $b_name;
 $_SESSION['original_name'] = $original_name;
