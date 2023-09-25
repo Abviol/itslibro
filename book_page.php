@@ -155,8 +155,13 @@ if (isset($_POST['b_name'])) {
                      </form>
                      <?php if (!empty($_SESSION['nick'])) { ?>
                      <li class="action">
+<<<<<<< HEAD
                         Додати до списку</a>
                         <ul class="action__ul">
+=======
+                        <a>Додати до списку</a>
+                        <ul>
+>>>>>>> parent of 81ceab9 (reserv)
                            <li>
                               <form action="add_book_to_list.php" method="post" class="form__action">
                                  <input type="hidden" name="list" value="list_reading">
@@ -179,6 +184,7 @@ if (isset($_POST['b_name'])) {
                                  <input class="btn" type="submit" value="Покинуто">
                               </form>
                               <?php
+<<<<<<< HEAD
                                  $delete = ['list_reading', 'list_favorite', 'list_in_plans', 'list_readed', 'list_abandoned'];
                                  $is_in_list = false;
                                  foreach ($delete as $delete_list) {
@@ -189,6 +195,18 @@ if (isset($_POST['b_name'])) {
                                  }
                                  if ($is_in_list) {
                                     ?>
+=======
+                        $delete = ['list_reading', 'list_favorite', 'list_in_plans', 'list_readed', 'list_abandoned'];
+                        $is_in_list = false;
+                        foreach ($delete as $delete_list) {
+                           $q = "SELECT * FROM " . $delete_list . " WHERE (id_user = '" . $_SESSION['id_user'] . "' AND id_book = '$id_book')";
+                           if (mysqli_num_rows(mysqli_query($link, $q)) > 0) {
+                              $is_in_list = true;
+                           }
+                        }
+                        if ($is_in_list) {
+                              ?>
+>>>>>>> parent of 81ceab9 (reserv)
                               <form action="add_book_to_list.php" method="post" class="form__action">
                                  <input type="hidden" name="list" value="delete">
                                  <input class="btn" style="color: #C10000;" type="submit" value="Видалити">
@@ -201,13 +219,21 @@ if (isset($_POST['b_name'])) {
                         $q = "SELECT * FROM ratings WHERE id_user = " . $_SESSION['id_user'] . " AND id_book = " . $_SESSION['id_book'];
                         if (mysqli_num_rows(mysqli_query($link, $q)) > 0) {
                         } else {
+<<<<<<< HEAD
                            ?>
+=======
+                     ?>
+>>>>>>> parent of 81ceab9 (reserv)
                      <li class="action">
                         <a>Оцінити</a>
                         <ul>
                            <li>
                               <?php
+<<<<<<< HEAD
                                     for ($i = 1; $i <= 5; $i++) { ?>
+=======
+                           for ($i = 1; $i <= 5; $i++) { ?>
+>>>>>>> parent of 81ceab9 (reserv)
                               <form action="rating.php" method="post" class="form__action">
                                  <input type="hidden" name="rating" value=<?php echo $i; ?>>
                                  <input style="color: #000;" class="btn" type="submit" value=<?php echo $i ?>>
@@ -290,6 +316,13 @@ if (isset($_POST['b_name'])) {
                </ul>
             </div>
             <div class="footer__column">
+               <h5>Підписка</h5>
+               <ul>
+                  <li><a href="">Оформити підписку</a></li>
+                  <li><a href="">Ввести промокод</a></li>
+               </ul>
+            </div>
+            <div class="footer__column">
                <h5>Служба підтримки</h5>
                <ul>
                   <li><a href="">+(38) 095 489 16 59</a></li>
@@ -308,7 +341,6 @@ if (isset($_POST['b_name'])) {
                </div>
             </div>
          </nav>
-      </footer>
       </footer>
    </div>
    <script src="js/script.js"></script>

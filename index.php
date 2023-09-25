@@ -155,15 +155,15 @@ function wholeWordTruncate($s, $characterCount)
                               } else if ($books['category'] == '18+') {
                                  $age_limit = 18;
                               }
-                              if (!empty($_SESSION['id_user'])) {
-                                 $q2 = "SELECT * FROM users WHERE id_user = '" . $_SESSION['id_user'] . "'";
-                                 $current_user = mysqli_fetch_assoc(mysqli_query($link, $q2));
-                                 $age_user = $current_user['age'];
-                              } else {
-                                 $age_user = 18;
-                              }
+                              $q2 = "SELECT * FROM users WHERE id_user = '" . $_SESSION['id_user'] . "'";
+                              $current_user = mysqli_fetch_assoc(mysqli_query($link, $q2));
+                              $age_user = $current_user['age'];
                               if ($age_user >= $age_limit) {
+<<<<<<< HEAD
                                  ?>
+=======
+                        ?>
+>>>>>>> parent of 81ceab9 (reserv)
                         <form action="book_page.php" method="post" style="width: 16.66666%;">
                            <input type="hidden" name="id_book" value=<?php echo $book[0]; ?>>
                            <input type="hidden" name="b_name" value=<?php echo $books['b_name']; ?>>
@@ -175,23 +175,40 @@ function wholeWordTruncate($s, $characterCount)
                                  </div>
                                  <div class="item-book__stars">
                                     <?php
+<<<<<<< HEAD
                                              $rating = floor($books['rating']);
                                              for ($j = 1; $j <= $rating; $j++) { ?>
                                     <img class="star" src="img/star.svg" height="18px" alt="Зірка">
                                     <?php }
                                              if ($books['rating'] > $rating) { ?>
+=======
+                                 $rating = floor($books['rating']);
+                                 for ($j = 1; $j <= $rating; $j++) { ?>
+                                    <img class="star" src="img/star.svg" height="18px" alt="Зірка">
+                                    <?php }
+                                 if ($books['rating'] > $rating) { ?>
+>>>>>>> parent of 81ceab9 (reserv)
                                     <img src="img/star-half.svg" height="18px" alt="Зірка">
                                     <?php } ?>
                                  </div>
                                  <a href="#">
                                     <h3 class="item-book__name">
                                        <?php
+<<<<<<< HEAD
                                                 if (strlen($books['b_name']) <= 15) {
                                                    echo $books['b_name'];
                                                 } else {
                                                    echo wholeWordTruncate($books['b_name'], 15) . "...";
                                                 }
                                                 ?>
+=======
+                                 if (strlen($books['b_name']) <= 15) {
+                                    echo $books['b_name'];
+                                 } else {
+                                    echo wholeWordTruncate($books['b_name'], 15) . "...";
+                                 }
+                                       ?>
+>>>>>>> parent of 81ceab9 (reserv)
                                     </h3>
                                  </a>
                                  <a href="#">
@@ -237,15 +254,15 @@ function wholeWordTruncate($s, $characterCount)
                               } else if ($books['category'] == '18+') {
                                  $age_limit = 18;
                               }
-                              if (!empty($_SESSION['id_user'])) {
-                                 $q2 = "SELECT * FROM users WHERE id_user = '" . $_SESSION['id_user'] . "'";
-                                 $current_user = mysqli_fetch_assoc(mysqli_query($link, $q2));
-                                 $age_user = $current_user['age'];
-                              } else {
-                                 $age_user = 18;
-                              }
+                              $q2 = "SELECT * FROM users WHERE id_user = '" . $_SESSION['id_user'] . "'";
+                              $current_user = mysqli_fetch_assoc(mysqli_query($link, $q2));
+                              $age_user = $current_user['age'];
                               if ($age_user >= $age_limit) {
+<<<<<<< HEAD
                                  ?>
+=======
+                        ?>
+>>>>>>> parent of 81ceab9 (reserv)
                         <form action="book_page.php" method="post" style="width: 16.66666%;">
                            <input type="hidden" name="id_book" value=<?php echo $book[0]; ?>>
                            <input type="hidden" name="b_name" value=<?php echo $books['b_name']; ?>>
@@ -257,23 +274,40 @@ function wholeWordTruncate($s, $characterCount)
                                  </div>
                                  <div class="item-book__stars">
                                     <?php
+<<<<<<< HEAD
                                              $rating = floor($books['rating']);
                                              for ($j = 1; $j <= $rating; $j++) { ?>
                                     <img class="star" src="img/star.svg" height="18px" alt="Зірка">
                                     <?php }
                                              if ($books['rating'] > $rating) { ?>
+=======
+                                 $rating = floor($books['rating']);
+                                 for ($j = 1; $j <= $rating; $j++) { ?>
+                                    <img class="star" src="img/star.svg" height="18px" alt="Зірка">
+                                    <?php }
+                                 if ($books['rating'] > $rating) { ?>
+>>>>>>> parent of 81ceab9 (reserv)
                                     <img src="img/star-half.svg" height="18px" alt="Зірка">
                                     <?php } ?>
                                  </div>
                                  <a href="#">
                                     <h3 class="item-book__name">
                                        <?php
+<<<<<<< HEAD
                                                 if (strlen($books['b_name']) <= 15) {
                                                    echo $books['b_name'];
                                                 } else {
                                                    echo wholeWordTruncate($books['b_name'], 15) . "...";
                                                 }
                                                 ?>
+=======
+                                 if (strlen($books['b_name']) <= 15) {
+                                    echo $books['b_name'];
+                                 } else {
+                                    echo wholeWordTruncate($books['b_name'], 15) . "...";
+                                 }
+                                       ?>
+>>>>>>> parent of 81ceab9 (reserv)
                                     </h3>
                                  </a>
                                  <a href="#">
@@ -319,15 +353,15 @@ function wholeWordTruncate($s, $characterCount)
                               } else if ($books['category'] == '18+') {
                                  $age_limit = 18;
                               }
-                              if (!empty($_SESSION['id_user'])) {
-                                 $q2 = "SELECT * FROM users WHERE id_user = '" . $_SESSION['id_user'] . "'";
-                                 $current_user = mysqli_fetch_assoc(mysqli_query($link, $q2));
-                                 $age_user = $current_user['age'];
-                              } else {
-                                 $age_user = 18;
-                              }
+                              $q2 = "SELECT * FROM users WHERE id_user = '" . $_SESSION['id_user'] . "'";
+                              $current_user = mysqli_fetch_assoc(mysqli_query($link, $q2));
+                              $age_user = $current_user['age'];
                               if ($age_user >= $age_limit) {
+<<<<<<< HEAD
                                  ?>
+=======
+                        ?>
+>>>>>>> parent of 81ceab9 (reserv)
                         <form action="book_page.php" method="post" style="width: 16.66666%;">
                            <input type="hidden" name="id_book" value=<?php echo $book[0]; ?>>
                            <input type="hidden" name="b_name" value=<?php echo $books['b_name']; ?>>
@@ -339,23 +373,40 @@ function wholeWordTruncate($s, $characterCount)
                                  </div>
                                  <div class="item-book__stars">
                                     <?php
+<<<<<<< HEAD
                                              $rating = floor($books['rating']);
                                              for ($j = 1; $j <= $rating; $j++) { ?>
                                     <img class="star" src="img/star.svg" height="18px" alt="Зірка">
                                     <?php }
                                              if ($books['rating'] > $rating) { ?>
+=======
+                                 $rating = floor($books['rating']);
+                                 for ($j = 1; $j <= $rating; $j++) { ?>
+                                    <img class="star" src="img/star.svg" height="18px" alt="Зірка">
+                                    <?php }
+                                 if ($books['rating'] > $rating) { ?>
+>>>>>>> parent of 81ceab9 (reserv)
                                     <img src="img/star-half.svg" height="18px" alt="Зірка">
                                     <?php } ?>
                                  </div>
                                  <a href="#">
                                     <h3 class="item-book__name">
                                        <?php
+<<<<<<< HEAD
                                                 if (strlen($books['b_name']) <= 15) {
                                                    echo $books['b_name'];
                                                 } else {
                                                    echo wholeWordTruncate($books['b_name'], 15) . "...";
                                                 }
                                                 ?>
+=======
+                                 if (strlen($books['b_name']) <= 15) {
+                                    echo $books['b_name'];
+                                 } else {
+                                    echo wholeWordTruncate($books['b_name'], 15) . "...";
+                                 }
+                                       ?>
+>>>>>>> parent of 81ceab9 (reserv)
                                     </h3>
                                  </a>
                                  <a href="#">
@@ -396,6 +447,14 @@ function wholeWordTruncate($s, $characterCount)
                   <li><a href="about_project.php">Що таке Itslibro?</a></li>
                </ul>
             </div>
+            <div class="footer__column">
+               <h5>Підписка</h5>
+               <ul>
+                  <li><a href="">Оформити підписку</a></li>
+                  <li><a href="">Ввести промокод</a></li>
+               </ul>
+            </div>
+
             <div class="footer__column">
                <h5>Служба підтримки</h5>
                <ul>

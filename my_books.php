@@ -158,7 +158,7 @@ if (!empty($_POST['sorting_option'])) {
             <h1 class="page__name-text">Мої книжки</h1>
          </div>
          <form class="lists" method="post" action="my_books.php">
-            <button <?php if ($_SESSION['selected_list'] == 'list_reading') {
+            <button <?php if ($_SESSION['selected_list']=='list_reading') {
                echo 'class="list_selected"';
             } else {
                echo
@@ -172,9 +172,8 @@ if (!empty($_POST['sorting_option'])) {
             } ?> name="selected_list" value="list_favorite" type="submit">Улюблене 😍</button>
             <button <?php if ($_SESSION['selected_list'] == 'list_in_plans') {
                echo 'class="list_selected"';
-            } else {
-               echo
-                  'class="list"';
+            } else { echo
+               'class="list"';
             } ?> name="selected_list" value="list_in_plans" type="submit">У планах 📅</button>
             <button <?php if ($_SESSION['selected_list'] == 'list_readed') {
                echo 'class="list_selected"';
@@ -237,7 +236,11 @@ if (!empty($_POST['sorting_option'])) {
                         $current_user = mysqli_fetch_assoc(mysqli_query($link, $q2));
                         $age_user = $current_user['age'];
                         if ($age_user >= $age_limit) {
+<<<<<<< HEAD
                            ?>
+=======
+               ?>
+>>>>>>> parent of 81ceab9 (reserv)
                <div class="all-books__book">
                   <div class="cover__container">
                      <img src=<?php echo $books['picture'] ?> alt="Обкладанка" height="150" width="100"
@@ -263,6 +266,7 @@ if (!empty($_POST['sorting_option'])) {
                      </div>
                      <h3 class="info__about">
                         <?php
+<<<<<<< HEAD
                                     $desc = $books['b_description'];
                                     if (strlen($desc) > 320) {
                                        echo wholeWordTruncate($books['b_description'], 320) . "...";
@@ -270,6 +274,15 @@ if (!empty($_POST['sorting_option'])) {
                                        echo $desc;
                                     }
                                     ?>
+=======
+                           $desc = $books['b_description'];
+                           if (strlen($desc) > 320) {
+                              echo wholeWordTruncate($books['b_description'], 320) . "...";
+                           } else {
+                              echo $desc;
+                           }
+                        ?>
+>>>>>>> parent of 81ceab9 (reserv)
                      </h3>
                   </div>
                </div>
@@ -301,10 +314,15 @@ if (!empty($_POST['sorting_option'])) {
                      <span class="radio"></span>за популярністю
                   </label>
                   <label class="sorting-option">
+<<<<<<< HEAD
                      <input type="radio" name="sorting_option" value="best" <?php if (
                         $selected_option == "best"
                      )
                         echo "checked"; ?>>
+=======
+                     <input type="radio" name="sorting_option" value="best" <?php if ($_POST['sorting_option'] == "best")
+                     echo "checked"; ?>>
+>>>>>>> parent of 81ceab9 (reserv)
                      <span class="radio"></span>за рейтингом
                   </label>
                   <label class="sorting-option">
@@ -326,6 +344,13 @@ if (!empty($_POST['sorting_option'])) {
                <h5>Про проект</h5>
                <ul>
                   <li><a href="about_project.php">Що таке Itslibro?</a></li>
+               </ul>
+            </div>
+            <div class="footer__column">
+               <h5>Підписка</h5>
+               <ul>
+                  <li><a href="">Оформити підписку</a></li>
+                  <li><a href="">Ввести промокод</a></li>
                </ul>
             </div>
             <div class="footer__column">

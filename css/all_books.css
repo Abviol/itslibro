@@ -447,18 +447,6 @@ body._touch .menu__list>li._active .menu__arrow {
    margin: 30px 0;
 }
 
-.footer__column:nth-child(even)>h5 {
-   text-align: center;
-}
-
-.footer__column:last-child>h5 {
-   text-align: right;
-}
-
-.footer__column:nth-child(even)>ul>li {
-   text-align: center;
-}
-
 .footer__column>h5 {
    font-weight: 600;
    font-size: 20px;
@@ -483,7 +471,7 @@ body._touch .menu__list>li._active .menu__arrow {
 
 .footer__icons {
    display: flex;
-   padding: 0 0 0 40%;
+   padding: 0 10%;
    width: 100%;
    justify-content: space-between;
 }

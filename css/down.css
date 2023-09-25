@@ -1,0 +1,144 @@
+﻿* {
+    margin: 0;
+    padding:  0;
+    box-sizing: border-box;
+    font-family: Roboto;
+    text-decoration:  none;
+}
+
+/*---------------------------------------------
+hat
+---------------------------------------------*/
+
+#hat {
+    position: fixed;
+    top:0;
+    width: 100%;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    background-color: #F5F5F5;
+    border-bottom: solid 2px rgba(204, 146, 58, 0.25);
+}
+
+#hat ul li .opening {
+    float: left;
+    width: 100px;
+    height: 30px;
+    border-left: solid 1px;
+    border-right: solid 1px;
+    text-align:center;
+}
+
+#hat ul li:hover ul {
+    display: block
+}
+
+#hat ul {
+    list-style-type: none;
+    cursor: default
+}
+
+#hat ul li ul {
+    display: none;
+    border: solid 1px;
+    width: 120px;
+    background: Yellow;
+    font-weight: normal;
+    padding: 0 0 0 3px;
+    position: relative; 
+    left:-2px;
+}
+
+.hat_content {
+    margin: auto;
+    width: 60%;
+}   
+
+.hat_button {
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+
+    background: #FFFFFF;
+    border: none;
+    border-radius: 10px;
+
+    margin-top: 15px;
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;   
+}
+
+.hat_tit {
+    margin: 0 auto;
+}
+
+.hat_td {
+    text-align: center;
+    padding-left: 30px;
+}
+
+.hat_td_1 {
+    text-align: center;
+}
+
+.hat_a {
+    font-size: 13pt;
+    color: #A96C25;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.hat_input {
+    box-sizing: border-box;
+
+    width: 210px;
+    height: 30px;
+    /*left: 144px;
+    top: 2.47px;*/
+
+    background: #FFFFFF;
+    opacity: 0.8;
+    border: 1px solid #CC923A;
+    border-radius: 8.35556px;
+}
+
+/*---------------------------------------------
+basement
+---------------------------------------------*/
+
+#basement {
+    position: fixed;
+    bottom:0;
+    width: 100%;
+    padding-top: 25px;
+    padding-bottom: 15px;
+    background-color: #FFF7E6;
+}
+
+.bott_content {
+
+    margin: 0 auto;
+    width: 60%;
+}
+
+.bott_th {
+    padding-bottom: 10px;
+    font-size: 15pt;
+}
+
+.bott_td {
+    text-align: center;
+    padding-bottom: 15px;
+    white-space: nowrap;
+}
+
+.ref {
+    color: #A96C25;
+}
+
+.bott_hd {
+    color: #000000;
+}

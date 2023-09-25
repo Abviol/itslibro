@@ -150,6 +150,13 @@ unset($_SESSION['b_description']);
                </ul>
             </div>
             <div class="footer__column">
+               <h5>Підписка</h5>
+               <ul>
+                  <li><a href="">Оформити підписку</a></li>
+                  <li><a href="">Ввести промокод</a></li>
+               </ul>
+            </div>
+            <div class="footer__column">
                <h5>Служба підтримки</h5>
                <ul>
                   <li><a href="">+(38) 095 489 16 59</a></li>

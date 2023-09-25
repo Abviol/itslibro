@@ -134,25 +134,19 @@ session_start();
 
                <label class="act_name">Категорія</label>
                <label class="option">
-                  <input type="radio" name="category" <?php if (
-                     isset($_SESSION['category']) &&
-                     $_SESSION['category'] == "Для будь-якого віку"
-                  )
-                     echo "checked"; ?> value="Для будь-якого віку">Для
+                  <input type="radio" name="category" <?php if (isset($_SESSION['category']) &&
+                     $_SESSION['category'] == "Для будь-якого віку")
+                        echo "checked"; ?> value="Для будь-якого віку">Для
                   <span class="radio"></span>будь-якого віку
                </label>
-               <label class="option"><input type="radio" name="category" <?php if (
-                  isset($_SESSION['category']) &&
-                  $_SESSION['category'] == "12+"
-               )
-                  echo "checked"; ?> value="12+">
+               <label class="option"><input type="radio" name="category" <?php if (isset($_SESSION['category']) &&
+                     $_SESSION['category']=="12+")
+                  echo    "checked"; ?> value="12+">
                   <span class="radio"></span>12+
                </label>
-               <label class="option" style="margin-bottom: 20px;"><input type="radio" name="category" <?php if (
-                  isset($_SESSION['category']) &&
-                  $_SESSION['category'] == "18+"
-               )
-                  echo "checked"; ?> value="18+">
+               <label class="option" style="margin-bottom: 20px;"><input type="radio" name="category" <?php if (isset($_SESSION['category']) &&
+                     $_SESSION['category']=="18+")
+                  echo    "checked"; ?> value="18+">
                   <span class="radio"></span>18+
                </label>
 
@@ -192,6 +186,14 @@ session_start();
                   <li><a href="about_project.php">Що таке Itslibro?</a></li>
                </ul>
             </div>
+            <div class="footer__column">
+               <h5>Підписка</h5>
+               <ul>
+                  <li><a href="">Оформити підписку</a></li>
+                  <li><a href="">Ввести промокод</a></li>
+               </ul>
+            </div>
+
             <div class="footer__column">
                <h5>Служба підтримки</h5>
                <ul>

@@ -44,25 +44,24 @@ function read_txt($path, $page_number, $rows_on_page) // читання .txt ф�
 {
    $f = fopen($path, 'r');
    $text = '';
-   $row_start = $rows_on_page * ($page_number - 1); // перший рядок сторінки
-   $row_end = $rows_on_page * $page_number; // останній рядок сторінки
-   $row_count = 1; // номер рядку на сторінці
+   $row_start = $rows_on_page * ($page_number - 1);
+   $row_end = $rows_on_page * $page_number;
+   $row_count = 1;
    while (!feof($f)) {
-      $str = fgets($f); // отримання рядку
+      $str = fgets($f); //получение строки
       if ($str != '') {
          $str_in = $str;
          $str_out = '';
          while ($str_in !== '') {
-            $match = wholeWordTruncate($str_in, 95); // читання до первших 95 символів без разриву слів
-            $i = iconv_strlen($match); // кількість символів у прочитаному рядку
+            $match = wholeWordTruncate($str_in, 105); // читання до первших 105 символів без разриву слів
+            $i = iconv_strlen($match); // к-ть символів у прочитаному рядку
             $str_in = mb_substr($str_in, $i); // видаляємо прочитаний рядок
-            if ($row_count <= $row_end && $row_count > $row_start) // перевірка на належність до вибраної сторінки
-               $str_out .= $match . '<br>'; // приєднання прочитаного рядка до змінного з усім параграфом
-            $row_count++; // пееходимо на наступний рядок
+            if ($row_count <= $row_end && $row_count > $row_start) // перевірка на належність вибраної сторінки
+               $str_out .= $match . '<br>'; // конкотенація прочитаного рядка до змінного з усім параграфом
+            $row_count++;
          }
          $str = str_replace('<b</p><p style="margin-bottom: 15px;">', '', $str);
-         $text .= '<p style="margin-bottom: 15px;">' . substr($str_out, 0, -4) . '</p>'; 
-         // огортаємо абзац у HTML-тег <p></p> з відступами для візуального виокремлення
+         $text .= '<p style="margin-bottom: 15px;">' . substr($str_out, 0, -4) . '</p>';
       }
    }
    fclose($f);
@@ -77,28 +76,27 @@ function check_row_count_txt($path) // получение количество �
       $str = fgets($f);
       if ($str !== '') {
          $str_in = $str;
+         $str_out = '';
          while ($str_in !== '') {
-            $match = wholeWordTruncate($str_in, 95);
+            $match = wholeWordTruncate($str_in, 105);
             $i = iconv_strlen($match);
             $str_in = mb_substr($str_in, $i);
             $row_count++;
-         }  
+         }
+         $str_out = str_replace('\n', '<br>', $str_out);
+         $text .= '<p style="margin-bottom: 15px;">' . substr($str_out, 0, -2) . '</p>';
       }
    }
    return $row_count;
 }
-
-
-$rows_on_page = 50;
+$rows_on_page = 100;
 
 $page_count = ceil(check_row_count_txt($path_txt) / $rows_on_page);
 if (isset($_GET['p'])) {
    if ($_GET['p'] > $page_count) {
       $page = $page_count;
-   } else if ($_GET['p'] < 1) {
-      $page = 1;
-   } else {
-      $page = $_GET['p'];
+   } else if ($_GET['p'] < $page_count) {
+   $page = 1;
    }
 } else {
    $page = 1;
@@ -241,8 +239,6 @@ if (isset($_GET['p'])) {
                   echo read_txt($path_txt, $page, $rows_on_page); 
                ?>
             </div>
-
-
             <div class="reading__bottom">
                <div class="pagination">
                   <?php
@@ -295,6 +291,13 @@ if (isset($_GET['p'])) {
             <h5>Про проект</h5>
             <ul>
                <li><a href="about_project.php">Що таке Itslibro?</a></li>
+            </ul>
+         </div>
+         <div class="footer__column">
+            <h5>Підписка</h5>
+            <ul>
+               <li><a href="">Оформити підписку</a></li>
+               <li><a href="">Ввести промокод</a></li>
             </ul>
          </div>
          <div class="footer__column">
