@@ -77,7 +77,7 @@ if (!empty($_POST['sorting_option'])) {
                <ul class="menu__search">
                   <li class="menu__item">
                      <input type="search" name="search_key" class="input__search" placeholder="Пошук..." value=<?php
-                        echo "\"" . $search_key . "\"" ?>\">
+                     echo "\"" . $search_key . "\"" ?>\">
                   </li>
                   <li class="menu__item">
                      <button style="background-color: rgba(0, 0, 0, 0); cursor: pointer   ;" type="submit"><img
@@ -186,15 +186,16 @@ if (!empty($_POST['sorting_option'])) {
                   } else if ($books['category'] == '18+') {
                      $age_limit = 18;
                   }
-                  $q2 = "SELECT * FROM users WHERE id_user = '" . $_SESSION['id_user'] . "'";
-                  $current_user = mysqli_fetch_assoc(mysqli_query($link, $q2));
-                  $age_user = $current_user['age'];
+                  if (!empty($_SESSION['id_user'])) {
+                     $q2 = "SELECT * FROM users WHERE id_user = '" . $_SESSION['id_user'] . "'";
+                     $current_user = mysqli_fetch_assoc(mysqli_query($link, $q2));
+                     $age_user = $current_user['age'];
+                  } else {
+                     $age_user = 18;
+                  }
+
                   if ($age_user >= $age_limit) {
-<<<<<<< HEAD
                      ?>
-=======
-               ?>
->>>>>>> parent of 81ceab9 (reserv)
                <div class="all-books__book">
                   <div class="cover__container">
                      <img src=<?php echo $books['picture'] ?> alt="Обкладанка" height="150" width="100"
@@ -220,7 +221,6 @@ if (!empty($_POST['sorting_option'])) {
                      </div>
                      <h3 class="info__about">
                         <?php
-<<<<<<< HEAD
                               $desc = $books['b_description'];
                               if (strlen($desc) > 320) {
                                  echo wholeWordTruncate($books['b_description'], 320) . "...";
@@ -228,15 +228,6 @@ if (!empty($_POST['sorting_option'])) {
                                  echo $desc;
                               }
                               ?>
-=======
-                     $desc = $books['b_description'];
-                     if (strlen($desc) > 320) {
-                        echo wholeWordTruncate($books['b_description'], 320) . "...";
-                     } else {
-                        echo $desc;
-                     }
-                        ?>
->>>>>>> parent of 81ceab9 (reserv)
                      </h3>
                   </div>
                </div>
@@ -249,20 +240,14 @@ if (!empty($_POST['sorting_option'])) {
                <h3 class="sort-text">Сортування</h3>
                <form class="sorting-options" action="all_books.php" method="post">
                   <label class="sorting-option">
-<<<<<<< HEAD
                      <input type="radio" name="sorting_option" value="newest" <?php if (
                        $selected_option == "newest"
                      )
                         echo "checked"; ?>>
-=======
-                     <input type="radio" name="sorting_option" value="newest" <?php if ( empty($_POST['sorting_option'])
-                        || $_POST['sorting_option']=="newest" ) echo "checked"; ?>>
->>>>>>> parent of 81ceab9 (reserv)
                      <span class="radio"></span>за новизною
                   </label>
                   <label class="sorting-option">
                      <input type="radio" name="sorting_option" value="popular" <?php if (
-<<<<<<< HEAD
                         $selected_option == "popular"
                      )
                         echo "checked"; ?>>
@@ -273,25 +258,13 @@ if (!empty($_POST['sorting_option'])) {
                         $selected_option == "best"
                      )
                         echo "checked"; ?>>
-=======
-                        $_POST['sorting_option']=="popular" ) echo "checked"; ?>>
-                     <span class="radio"></span>за популярністю
-                  </label>
-                  <label class="sorting-option">
-                     <input type="radio" name="sorting_option" value="best" <?php if ( $_POST['sorting_option']=="best"
-                        ) echo "checked"; ?>>
->>>>>>> parent of 81ceab9 (reserv)
                      <span class="radio"></span>за рейтингом
                   </label>
                   <label class="sorting-option">
                      <input type="radio" name="sorting_option" value="biggest" <?php if (
-<<<<<<< HEAD
                         $selected_option == "biggest"
                      )
                         echo "checked"; ?>>
-=======
-                        $_POST['sorting_option']=="biggest" ) echo "checked"; ?>>
->>>>>>> parent of 81ceab9 (reserv)
                      <span class="radio"></span>за обсягом
                   </label>
                   <input class="learn-more" type="submit" value="Сортувати" style="margin-top: 5px; font-size: 16px;">
@@ -306,13 +279,6 @@ if (!empty($_POST['sorting_option'])) {
                <h5>Про проект</h5>
                <ul>
                   <li><a href="about_project.php">Що таке Itslibro?</a></li>
-               </ul>
-            </div>
-            <div class="footer__column">
-               <h5>Підписка</h5>
-               <ul>
-                  <li><a href="">Оформити підписку</a></li>
-                  <li><a href="">Ввести промокод</a></li>
                </ul>
             </div>
             <div class="footer__column">

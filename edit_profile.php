@@ -103,7 +103,7 @@ $id_user = $_SESSION['id_user'];
                   name="about_user" id="about_user" cols="10" rows="5" placeholder="Про себе..."
                   maxlength="256"><?php echo $_SESSION['about_user']; ?></textarea>
 
-               <input class="input_info" type="password" name="pwd" placeholder="Введіть пароль">
+               <input class="input_info" type="password" name="pwd" placeholder="Введіть ваш пароль">
 
                <input class="input_info" type="password" name="new_pwd"
                   placeholder="Введіть новий пароль (за бажанням)">
@@ -115,13 +115,7 @@ $id_user = $_SESSION['id_user'];
                   echo '<p class="msg">' . $_SESSION['message'] . '</p>';
                }
                unset($_SESSION['message']);
-
-               /* unset($_SESSION['email']);
-               unset($_SESSION['nick']);
-               unset($_SESSION['age']); */
                ?>
-
-               <p>Не пам'ятаєте пароль? - <a href="login.php" class="act_link">змініть його!</a></p>
 
             </form>
          </div>
@@ -135,14 +129,6 @@ $id_user = $_SESSION['id_user'];
                   <li><a href="about_project.php">Що таке Itslibro?</a></li>
                </ul>
             </div>
-            <div class="footer__column">
-               <h5>Підписка</h5>
-               <ul>
-                  <li><a href="">Оформити підписку</a></li>
-                  <li><a href="">Ввести промокод</a></li>
-               </ul>
-            </div>
-
             <div class="footer__column">
                <h5>Служба підтримки</h5>
                <ul>

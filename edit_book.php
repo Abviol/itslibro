@@ -175,17 +175,6 @@ $_SESSION['id_book'] = $id_book;
                </ul>
             </div>
             <div class="footer__column">
-<<<<<<< HEAD
-=======
-               <h5>Підписка</h5>
-               <ul>
-                  <li><a href="">Оформити підписку</a></li>
-                  <li><a href="">Ввести промокод</a></li>
-               </ul>
-            </div>
-
-            <div class="footer__column">
->>>>>>> parent of 81ceab9 (reserv)
                <h5>Служба підтримки</h5>
                <ul>
                   <li><a href="">+(38) 095 489 16 59</a></li>
@@ -195,19 +184,12 @@ $_SESSION['id_book'] = $id_book;
             <div class="footer__column">
                <h5>Слідкуйте за новинами</h5>
                <div class="footer__icons">
-<<<<<<< HEAD
                   <a target="_blank" href="https://www.instagram.com/abviol999/"><img src="img/inst.svg" alt=""></a>
                   <a target="_blank" href="https://www.youtube.com/channel/UCC7NAPBjk0yZ4ee6WtH0ZCQ"><img
                         src="img/yt.svg" alt=""></a>
                   <a target="_blank" href="https://t.me/kyselovn"><img src="img/tg.svg" alt=""></a>
                   <a target="_blank" href="https://www.facebook.com/profile.php?id=61550906368344"><img src="img/fb.svg"
                         alt=""></a>
-=======
-                  <a href="https://www.instagram.com/abviol999/"><img src="img/inst.svg" alt=""></a>
-                  <a href="https://www.youtube.com/channel/UCC7NAPBjk0yZ4ee6WtH0ZCQ"><img src="img/yt.svg" alt=""></a>
-                  <a href="https://t.me/abviol"><img src="img/tg.svg" alt=""></a>
-                  <a href="https://www.facebook.com/profile.php?id=100059965062647"><img src="img/fb.svg" alt=""></a>
->>>>>>> parent of 81ceab9 (reserv)
                </div>
             </div>
          </nav>

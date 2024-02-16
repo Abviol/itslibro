@@ -5,7 +5,7 @@ include 'db_connect.php';
 
 
 $nick = $_POST['nick'];
-$pwd = $_POST['pwd'];
+$pwd = md5($_POST['pwd']);
 
 $check_user = mysqli_query($link, "SELECT * FROM users WHERE (email = '$nick' OR nick = '$nick') AND u_password = '$pwd'");
 if ($nick == "" || $pwd == "") {
