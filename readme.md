@@ -25,7 +25,7 @@ Not only can you just read books, but also save them, add new ones, edit them, c
 
 ## Installation and Running
 
-#### Install Apache and MySQL servers
+### Install Apache and MySQL servers
 
 1. Install [Open Server Panel](https://ospanel.io) (further OS Panel).
 
