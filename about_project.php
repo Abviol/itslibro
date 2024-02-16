@@ -25,8 +25,7 @@ session_start();
             <form action="all_books.php" method="post">
                <ul class="menu__search">
                   <li class="menu__item">
-                     <input type="search" name="search_key" class="input__search" placeholder="Пошук..." value=<?php
-                     echo "\"" . $search_key . "\"" ?>\">
+                     <input type="search" name="search_key" class="input__search" placeholder="Пошук...">
                   </li>
                   <li class="menu__item">
                      <button style="background-color: rgba(0, 0, 0, 0); cursor: pointer   ;" type="submit"><img
