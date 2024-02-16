@@ -1,8 +1,8 @@
 ﻿config/itslibro-af25a-firebase-adminsdk-l77mg-d0e02be64a.json
 
 #vs code
-.vscode/
-.vs/
+/.vscode
+/.vs
 
 #test info
 test_book_info/
